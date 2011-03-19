@@ -1,0 +1,909 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline" xmlns:Graphics="Microsoft.Xna.Framework.Graphics" xmlns:Processors="Microsoft.Xna.Framework.Content.Pipeline.Processors">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Models\p1_wedge.fbx</Source>
+      <Name>Models\p1_wedge</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\p1_wedge.xnb</Output>
+      <Time>2010-11-14T16:55:00-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\p1_wedge_0.xml</Key>
+        <Value>2011-03-19T09:50:58.4849318-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\textures\wedge_p1_diff_v1_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\box.fbx</Source>
+      <Name>Models\box</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\box.xnb</Output>
+      <Time>2010-11-14T18:11:44-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\box_0.xml</Key>
+        <Value>2011-03-19T09:50:58.7989498-03:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\monitorlcd.FBX</Source>
+      <Name>Models\monitorlcd</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\monitorlcd.xnb</Output>
+      <Time>2010-11-14T18:15:34-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\monitorlcd_0.xml</Key>
+        <Value>2011-03-19T09:51:02.106139-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\stlscrth_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\blkplstc_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\pccompleto.fbx</Source>
+      <Name>Models\pccompleto</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\pccompleto.xnb</Output>
+      <Time>2010-11-14T18:21:14-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\pccompleto_0.xml</Key>
+        <Value>2011-03-19T09:51:03.2362036-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\pccompleto\Material1_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\pccompleto\_CorrogateShiny_2_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\pccompleto\keyboard_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\alienware.fbx</Source>
+      <Name>Models\alienware</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\alienware.xnb</Output>
+      <Time>2010-11-14T18:25:46-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\alienware_0.xml</Key>
+        <Value>2011-03-19T09:51:03.8792404-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\alienware\AlienTex1_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\caseaberto.fbx</Source>
+      <Name>Models\caseaberto</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\caseaberto.xnb</Output>
+      <Time>2010-11-15T12:49:10-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\caseaberto_0.xml</Key>
+        <Value>2011-03-19T09:51:04.6512845-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\caseaberto\Cladding_Stucco_White_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\dvd.fbx</Source>
+      <Name>Models\dvd</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\dvd.xnb</Output>
+      <Time>2010-11-15T12:49:48-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\dvd_0.xml</Key>
+        <Value>2011-03-19T09:51:04.7872923-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\dvd\DVD_R_Back_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\dvd\DVD_R_Front_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\hd.fbx</Source>
+      <Name>Models\hd</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\hd.xnb</Output>
+      <Time>2010-11-15T12:47:18-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\hd_0.xml</Key>
+        <Value>2011-03-19T09:51:04.9943041-03:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\monitorc.fbx</Source>
+      <Name>Models\monitorc</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\monitorc.xnb</Output>
+      <Time>2010-11-15T12:47:18-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\monitorc_0.xml</Key>
+        <Value>2011-03-19T09:51:05.2033161-03:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\motherATX.fbx</Source>
+      <Name>Models\motherATX</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\motherATX.xnb</Output>
+      <Time>2010-11-15T12:50:40-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\motherATX_0.xml</Key>
+        <Value>2011-03-19T09:51:05.8623538-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU1_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU2_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU3_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU4_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Models\gabinete1.fbx</Source>
+      <Name>Models\gabinete1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Parameters>
+        <Data Key="GenerateMipmaps">False</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\gabinete1.xnb</Output>
+      <Time>2010-11-15T14:38:52-02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\gabinete1_0.xml</Key>
+        <Value>2011-03-19T09:51:06.4983902-03:00</Value>
+      </Dependency>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_2_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_2_1_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_1_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas1_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas8_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas3_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_2_2_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas2_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_3_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas4_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas7_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas6_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas5_0.xnb</Request>
+      <Request>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\placa_mae_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Textures\wedge_p1_diff_v1.tga</Source>
+      <Name>Textures\wedge_p1_diff_v1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\wedge_p1_diff_v1.xnb</Output>
+      <Time>2010-11-14T16:55:00-02:00</Time>
+    </Item>
+    <Item>
+      <Source>img.jpg</Source>
+      <Name>img</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\img.xnb</Output>
+      <Time>2010-11-14T17:05:28-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\aurora.jpg</Source>
+      <Name>Textures\aurora</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\aurora.xnb</Output>
+      <Time>2010-11-15T13:26:18-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\check.jpg</Source>
+      <Name>Textures\check</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\check.xnb</Output>
+      <Time>2010-11-15T15:11:58-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\white.jpg</Source>
+      <Name>Textures\white</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\white.xnb</Output>
+      <Time>2010-11-20T15:51:00-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\buttons\but1.png</Source>
+      <Name>Textures\buttons\but1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\buttons\but1.xnb</Output>
+      <Time>2010-11-15T16:18:14-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Gabinete\001.jpg</Source>
+      <Name>Textures\Gabinete\001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Gabinete\001.xnb</Output>
+      <Time>2010-11-15T22:49:50-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Monitor\001.jpg</Source>
+      <Name>Textures\Monitor\001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Monitor\001.xnb</Output>
+      <Time>2010-11-15T22:49:50-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\001.jpg</Source>
+      <Name>Textures\Motherboard\001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\001.xnb</Output>
+      <Time>2010-11-15T22:49:50-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Processador\001.jpg</Source>
+      <Name>Textures\Processador\001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Processador\001.xnb</Output>
+      <Time>2010-11-15T22:49:50-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\002.jpg</Source>
+      <Name>Textures\Motherboard\002</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\002.xnb</Output>
+      <Time>2010-11-23T20:26:12-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\003.jpg</Source>
+      <Name>Textures\Motherboard\003</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\003.xnb</Output>
+      <Time>2010-11-23T20:26:12-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\004.jpg</Source>
+      <Name>Textures\Motherboard\004</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\004.xnb</Output>
+      <Time>2010-11-23T20:26:12-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\005.jpg</Source>
+      <Name>Textures\Motherboard\005</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\005.xnb</Output>
+      <Time>2010-11-23T20:26:12-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Arial.spritefont</Source>
+      <Name>Arial</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Arial.xnb</Output>
+      <Time>2010-11-14T17:05:24-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\p1_wedge.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\p1_wedge_0.xml</Output>
+      <Time>2010-11-14T16:55:00-02:00</Time>
+    </Item>
+    <Item>
+      <Source>textures\wedge_p1_diff_v1.tga</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\textures\wedge_p1_diff_v1_0.xnb</Output>
+      <Time>2010-11-14T16:55:00-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\box.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\box_0.xml</Output>
+      <Time>2010-11-14T18:11:44-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\monitorlcd.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\monitorlcd_0.xml</Output>
+      <Time>2010-11-14T18:15:34-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\stlscrth.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\stlscrth_0.xnb</Output>
+      <Time>2010-11-14T18:15:34-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\blkplstc.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\blkplstc_0.xnb</Output>
+      <Time>2010-11-14T18:15:34-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\pccompleto.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\pccompleto_0.xml</Output>
+      <Time>2010-11-14T18:21:14-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\pccompleto\Material1.bmp</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\pccompleto\Material1_0.xnb</Output>
+      <Time>2010-11-28T22:07:22-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\pccompleto\_CorrogateShiny_2.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\pccompleto\_CorrogateShiny_2_0.xnb</Output>
+      <Time>2010-11-14T18:19:54-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\pccompleto\keyboard.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\pccompleto\keyboard_0.xnb</Output>
+      <Time>2010-11-28T22:09:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\alienware.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\alienware_0.xml</Output>
+      <Time>2010-11-14T18:25:46-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\alienware\AlienTex1.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\alienware\AlienTex1_0.xnb</Output>
+      <Time>2010-11-14T18:25:02-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\caseaberto.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\caseaberto_0.xml</Output>
+      <Time>2010-11-15T12:49:10-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\caseaberto\Cladding_Stucco_White.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\caseaberto\Cladding_Stucco_White_0.xnb</Output>
+      <Time>2010-11-28T22:09:42-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\dvd.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\dvd_0.xml</Output>
+      <Time>2010-11-15T12:49:48-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\dvd\DVD_R_Back.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\dvd\DVD_R_Back_0.xnb</Output>
+      <Time>2010-11-28T22:11:40-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\dvd\DVD_R_Front.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\dvd\DVD_R_Front_0.xnb</Output>
+      <Time>2010-11-28T22:12:40-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\hd.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\hd_0.xml</Output>
+      <Time>2010-11-15T12:47:18-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\monitorc.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\monitorc_0.xml</Output>
+      <Time>2010-11-15T12:47:18-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\motherATX.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\motherATX_0.xml</Output>
+      <Time>2010-11-15T12:50:40-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\motherATX\CPU.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU_0.xnb</Output>
+      <Time>2010-11-15T13:05:36-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\motherATX\CPU1.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU1_0.xnb</Output>
+      <Time>2010-11-15T13:06:24-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\motherATX\CPU2.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU2_0.xnb</Output>
+      <Time>2010-11-15T13:07:06-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\motherATX\CPU3.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU3_0.xnb</Output>
+      <Time>2010-11-15T13:07:30-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\motherATX\CPU4.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\motherATX\CPU4_0.xnb</Output>
+      <Time>2010-11-15T13:08:12-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Models\gabinete1.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\gabinete1_0.xml</Output>
+      <Time>2010-11-15T14:38:52-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas_2.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_2_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas_2_1.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_2_1_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas_1.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_1_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas1.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas1_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas8.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas8_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas3.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas3_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas_2_2.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_2_2_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas2.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas2_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas_3.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas_3_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas4.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas4_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas7.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas7_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas6.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas6_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\texturas5.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\texturas5_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\gabinete1\placa_mae.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">false</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\gabinete1\placa_mae_0.xnb</Output>
+      <Time>2010-11-15T14:37:16-02:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2008-10-10T16:42:32-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2008-10-10T16:43:28-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2008-10-10T16:43:18-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2008-10-10T16:48:18-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2008-10-10T16:48:50-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2010-11-14T14:02:32.6520194-02:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
