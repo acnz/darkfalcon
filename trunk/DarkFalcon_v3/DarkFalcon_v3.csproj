@@ -98,6 +98,7 @@
     <Compile Include="Classes3D\User32.cs" />
     <Compile Include="Classes3D\_3DObject.cs" />
     <Compile Include="ClassesComponente\dfCom.cs" />
+    <Compile Include="ClassesComponente\dfPC.cs" />
     <Compile Include="FrmInterface2.cs">
       <SubType>Form</SubType>
     </Compile>

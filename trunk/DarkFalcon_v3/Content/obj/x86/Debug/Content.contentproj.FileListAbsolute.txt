@@ -1,6 +1,0 @@
-C:\Users\André\Documents\Visual Studio 2008\Projects\DarkFalcon_v3\DarkFalcon_v3\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-H:\DarkFalcon_v3\DarkFalcon_v3\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-F:\DarkFalcon_v3\DarkFalcon_v3\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\DarkFalcon_v3\DarkFalcon_v3\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Administrador\Desktop\DarkFalcon_v3\DarkFalcon_v3\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\Content\obj\x86\Debug\ResolveAssemblyReference.cache

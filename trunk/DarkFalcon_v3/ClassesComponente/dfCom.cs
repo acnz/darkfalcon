@@ -11,6 +11,7 @@ namespace DarkFalcon_v3
         private string _id;
         private string _nome;
         private string _tipo;
+        private string _tags;
         private float _preco;
         public string _image2d;
         public string _image3d;
@@ -20,6 +21,11 @@ namespace DarkFalcon_v3
         {
             get{return _id;}
             set{_id=value;}
+        }
+        public string Tags
+        {
+            get { return _tags; }
+            set { _tags = value; }
         }
         public string Nome        {
             get{return _nome;}
@@ -65,6 +71,28 @@ namespace DarkFalcon_v3
         public dfCom()
         {
  
+        }
+        public dfCom(Nullable n)
+        {
+            ID = "?";
+            Nome = "?";
+            Tipo = "?";
+            Preco = 0f;
+
+            _image2d = "Textures//" + Tipo + "//" + ID;
+
+            _image3d = "Models//" + Tipo + "//" + ID;
+        }
+        public dfCom(Nullable n,string t)
+        {
+            ID = "?";
+            Nome = "?";
+            Tipo = t;
+            Preco = 0f;
+
+            _image2d = "Textures//" + Tipo + "//" + ID;
+
+            _image3d = "Models//" + Tipo + "//" + ID;
         }
         #endregion
     }
