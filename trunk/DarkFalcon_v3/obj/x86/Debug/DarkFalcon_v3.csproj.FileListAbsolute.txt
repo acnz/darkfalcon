@@ -1,0 +1,15 @@
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmInterface2.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmAssistente.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmInterface1.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmMain.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmTabs.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.splash.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.csproj.GenerateResource.Cache
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe.config
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.pdb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.exe
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.pdb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\splash.png

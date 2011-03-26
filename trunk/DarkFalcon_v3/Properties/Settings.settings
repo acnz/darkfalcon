@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Teste.mdb</Value>
     </Setting>
+    <Setting Name="CRoot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\DarkFalcon\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

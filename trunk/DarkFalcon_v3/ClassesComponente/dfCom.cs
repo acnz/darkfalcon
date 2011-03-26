@@ -7,22 +7,22 @@ namespace DarkFalcon_v3
 {
     public class dfCom
     {
-        #region Fields
+#region Fields
         private string _id;
         private string _nome;
         private string _tipo;
-        private string _tags;
+        private List<string> _tags;
         private float _preco;
         public string _image2d;
         public string _image3d;
         #endregion
-        #region Publicos
+#region Publicos
         public string ID
         {
             get{return _id;}
             set{_id=value;}
         }
-        public string Tags
+        public List<string> Tags
         {
             get { return _tags; }
             set { _tags = value; }
@@ -55,15 +55,15 @@ namespace DarkFalcon_v3
             set { _image3d = value + "//" + _id; }
         }
         #endregion
-        #region Inicializadores
+#region Inicializadores
 
-        public dfCom(string IDDoComponete ,string NomeDoComponente, string TipoDoComponente, float PrecoDoComponente)
+        public dfCom(string IDDoComponete ,string NomeDoComponente, string TipoDoComponente, float PrecoDoComponente,string TagsDoComponente)
         {
             ID = IDDoComponete;
             Nome = NomeDoComponente;
             Tipo = TipoDoComponente;
             Preco = PrecoDoComponente;
-
+            setTags(TagsDoComponente);
            _image2d = "Textures//" + Tipo + "//" + ID;
 
             _image3d = "Models//" + Tipo + "//" + ID;
@@ -72,7 +72,7 @@ namespace DarkFalcon_v3
         {
  
         }
-        public dfCom(Nullable n)
+        public dfCom(bool n)
         {
             ID = "?";
             Nome = "?";
@@ -83,7 +83,7 @@ namespace DarkFalcon_v3
 
             _image3d = "Models//" + Tipo + "//" + ID;
         }
-        public dfCom(Nullable n,string t)
+        public dfCom(bool n, string t)
         {
             ID = "?";
             Nome = "?";
@@ -95,5 +95,13 @@ namespace DarkFalcon_v3
             _image3d = "Models//" + Tipo + "//" + ID;
         }
         #endregion
+#region Funcs
+        public void setTags(string t)
+        {
+            t = t.ToLower();
+            List<string> r = t.Split(' ').ToList();
+            Tags = r;
+        }
+#endregion
     }
 }

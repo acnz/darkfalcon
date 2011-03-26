@@ -151,5 +151,20 @@ namespace DarkFalcon_v3
 
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void oleDbConnection1_InfoMessage(object sender, OleDbInfoMessageEventArgs e)
+        {
+
+        }
+
+        private void FrmInterface1_Load(object sender, EventArgs e)
+        {
+            oleDbConnection1.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot+"Base.dfdb";
+        }
+
     }
 }

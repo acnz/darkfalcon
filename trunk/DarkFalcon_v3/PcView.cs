@@ -53,7 +53,8 @@ namespace DarkFalcon_v3
             graphics = new GraphicsDeviceManager(this);
             actHook = new UserActivityHook();
             actHook.Start();
-            Content.RootDirectory = "Content";
+            string dir = Properties.Settings.Default.CRoot + "Data";
+            Content.RootDirectory = dir;
             fm = frm;
             this.drawSurface = drawSurface;
             graphics.PreferredBackBufferWidth = fm.PicPcView.Width;
@@ -144,10 +145,10 @@ namespace DarkFalcon_v3
             lista3D.Add(monitor);
             lista3D.Add(gabinete);
 
-            NovoComponente(new dfCom("001", "Mother001", "Motherboard", 10.00f));
-            NovoComponente(new dfCom("001", "Proce001", "Processador", 10.00f));
-            NovoComponente(new dfCom("001", "Mon001", "Monitor", 10.00f));
-            NovoComponente(new dfCom("001", "Gabin001", "Gabinete", 10.00f));
+            NovoComponente(new dfCom("001", "Mother001", "Motherboard", 10.00f, "a s"));
+            NovoComponente(new dfCom("001", "Proce001", "Processador", 10.00f, "a s"));
+            NovoComponente(new dfCom("001", "Mon001", "Monitor", 10.00f, "a s"));
+            NovoComponente(new dfCom("001", "Gabin001", "Gabinete", 10.00f, "a s"));
             cam.ResetCamera();
         }
 
@@ -182,7 +183,7 @@ namespace DarkFalcon_v3
             background = Content.Load<Texture2D>("Textures//aurora");
             white = Content.Load<Texture2D>("Textures//white");
             this.monitor = new _3DObject("monitorc", cam, this.Content, Vector3.Zero, Vector3.Zero, 3f);
-            this.gabinete = new _3DObject("gabinete1", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 3f);
+            this.gabinete = new _3DObject("monitorc", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 3f);
 
             createHUD();
 

@@ -32,5 +32,17 @@ namespace DarkFalcon_v3.Properties {
                 return ((string)(this["TesteConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\DarkFalcon\\")]
+        public string CRoot {
+            get {
+                return ((string)(this["CRoot"]));
+            }
+            set {
+                this["CRoot"] = value;
+            }
+        }
     }
 }

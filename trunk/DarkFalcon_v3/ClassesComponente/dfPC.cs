@@ -29,7 +29,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "Motherboard")
                     _mobo = value;
                 else
-                    _mobo = new dfCom(null, "Motherboard");
+                    _mobo = new dfCom(true, "Motherboard");
                 }
         }
         public dfCom Processador
@@ -40,7 +40,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "Processador")
                     _pro = value;
                 else
-                    _pro = new dfCom(null, "Processador");
+                    _pro = new dfCom(true, "Processador");
             }
         }
         public dfCom Memoria
@@ -51,7 +51,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "Memoria")
                     _mem = value;
                 else
-                    _mem = new dfCom(null, "Memoria");
+                    _mem = new dfCom(true, "Memoria");
             }
         }
         public dfCom Fonte
@@ -62,7 +62,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "Fonte")
                     _fonte = value;
                 else
-                    _fonte = new dfCom(null, "Fonte");
+                    _fonte = new dfCom(true, "Fonte");
             }
         }
         public dfCom HD
@@ -73,7 +73,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "HD")
                     _hd = value;
                 else
-                    _hd = new dfCom(null, "HD");
+                    _hd = new dfCom(true, "HD");
             }
         }
         public dfCom Monitor
@@ -84,7 +84,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "Monitor")
                     _monitor = value;
                 else
-                    _monitor = new dfCom(null, "Monitor");
+                    _monitor = new dfCom(true, "Monitor");
             }
         }
         public dfCom Video
@@ -95,7 +95,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (value.Tipo == "Video")
                     _video = value;
                 else
-                    _video = new dfCom(null, "Video");
+                    _video = new dfCom(true, "Video");
             }
         }
         public dfCom Peri1
@@ -106,7 +106,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (!Tperi(value.Tipo))
                     _p1 = value;
                 else
-                    _p1 = new dfCom(null);
+                    _p1 = new dfCom(true);
             }
         }
         public dfCom Peri2
@@ -117,7 +117,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (!Tperi(value.Tipo))
                     _p2 = value;
                 else
-                    _p2 = new dfCom(null);
+                    _p2 = new dfCom(true);
             }
         }
         public dfCom Peri3
@@ -128,7 +128,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (!Tperi(value.Tipo))
                     _p3 = value;
                 else
-                    _p3 = new dfCom(null);
+                    _p3 = new dfCom(true);
             }
         }
         public dfCom Peri4
@@ -139,7 +139,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (!Tperi(value.Tipo))
                     _p4 = value;
                 else
-                    _p4 = new dfCom(null);
+                    _p4 = new dfCom(true);
             }
         }
         public dfCom Peri5
@@ -150,7 +150,7 @@ namespace DarkFalcon_v3.ClassesComponente
                 if (!Tperi(value.Tipo))
                     _p5 = value;
                 else
-                    _p5 = new dfCom(null);
+                    _p5 = new dfCom(true);
             }
         }
 
@@ -164,7 +164,7 @@ namespace DarkFalcon_v3.ClassesComponente
         public dfPC()
         {
         }
-        public dfPC(Nullable n)
+        public dfPC(bool n)
         {
 
         }

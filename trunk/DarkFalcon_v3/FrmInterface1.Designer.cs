@@ -39,18 +39,17 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
             this.oleDbSelectCommand1 = new System.Data.OleDb.OleDbCommand();
-            this.oleDbConnection1 = new System.Data.OleDb.OleDbConnection();
             this.oleDbInsertCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDataAdapter1 = new System.Data.OleDb.OleDbDataAdapter();
             this.dataSet2 = new System.Data.DataSet();
             this.oleDbSelectCommand2 = new System.Data.OleDb.OleDbCommand();
-            this.oleDbConnection2 = new System.Data.OleDb.OleDbConnection();
             this.oleDbInsertCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDataAdapter2 = new System.Data.OleDb.OleDbDataAdapter();
+            this.oleDbConnection1 = new System.Data.OleDb.OleDbConnection();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -72,6 +71,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(195, 466);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // groupBox1
             // 
@@ -156,10 +156,6 @@
             this.oleDbSelectCommand1.CommandText = "SELECT        cod, nome, fab, socket, tags\r\nFROM            tabMotherboard";
             this.oleDbSelectCommand1.Connection = this.oleDbConnection1;
             // 
-            // oleDbConnection1
-            // 
-            this.oleDbConnection1.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Teste.mdb";
-            // 
             // oleDbInsertCommand1
             // 
             this.oleDbInsertCommand1.CommandText = "INSERT INTO `tabMotherboard` (`cod`, `nome`, `fab`, `socket`, `tags`) VALUES (?, " +
@@ -228,17 +224,13 @@
             // oleDbSelectCommand2
             // 
             this.oleDbSelectCommand2.CommandText = "SELECT        cod, nome, fab, socket, tags\r\nFROM            tabMotherboard";
-            this.oleDbSelectCommand2.Connection = this.oleDbConnection2;
-            // 
-            // oleDbConnection2
-            // 
-            this.oleDbConnection2.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Teste.mdb";
+            this.oleDbSelectCommand2.Connection = this.oleDbConnection1;
             // 
             // oleDbInsertCommand2
             // 
             this.oleDbInsertCommand2.CommandText = "INSERT INTO `tabMotherboard` (`cod`, `nome`, `fab`, `socket`, `tags`) VALUES (?, " +
                 "?, ?, ?, ?)";
-            this.oleDbInsertCommand2.Connection = this.oleDbConnection2;
+            this.oleDbInsertCommand2.Connection = this.oleDbConnection1;
             this.oleDbInsertCommand2.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
             new System.Data.OleDb.OleDbParameter("cod", System.Data.OleDb.OleDbType.VarWChar, 0, "cod"),
             new System.Data.OleDb.OleDbParameter("nome", System.Data.OleDb.OleDbType.VarWChar, 0, "nome"),
@@ -249,7 +241,7 @@
             // oleDbUpdateCommand2
             // 
             this.oleDbUpdateCommand2.CommandText = resources.GetString("oleDbUpdateCommand2.CommandText");
-            this.oleDbUpdateCommand2.Connection = this.oleDbConnection2;
+            this.oleDbUpdateCommand2.Connection = this.oleDbConnection1;
             this.oleDbUpdateCommand2.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
             new System.Data.OleDb.OleDbParameter("cod", System.Data.OleDb.OleDbType.VarWChar, 0, "cod"),
             new System.Data.OleDb.OleDbParameter("nome", System.Data.OleDb.OleDbType.VarWChar, 0, "nome"),
@@ -269,7 +261,7 @@
             // oleDbDeleteCommand2
             // 
             this.oleDbDeleteCommand2.CommandText = resources.GetString("oleDbDeleteCommand2.CommandText");
-            this.oleDbDeleteCommand2.Connection = this.oleDbConnection2;
+            this.oleDbDeleteCommand2.Connection = this.oleDbConnection1;
             this.oleDbDeleteCommand2.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
             new System.Data.OleDb.OleDbParameter("Original_cod", System.Data.OleDb.OleDbType.VarWChar, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "cod", System.Data.DataRowVersion.Original, null),
             new System.Data.OleDb.OleDbParameter("IsNull_nome", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nome", System.Data.DataRowVersion.Original, true, null),
@@ -295,6 +287,10 @@
                         new System.Data.Common.DataColumnMapping("tags", "tags")})});
             this.oleDbDataAdapter2.UpdateCommand = this.oleDbUpdateCommand2;
             // 
+            // oleDbConnection1
+            // 
+            this.oleDbConnection1.InfoMessage += new System.Data.OleDb.OleDbInfoMessageEventHandler(this.oleDbConnection1_InfoMessage);
+            // 
             // FrmInterface1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,6 +303,7 @@
             this.Name = "FrmInterface1";
             this.Text = "Form1";
             this.TransparencyKey = System.Drawing.Color.Lime;
+            this.Load += new System.EventHandler(this.FrmInterface1_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
@@ -326,18 +323,17 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Data.DataSet dataSet1;
         private System.Data.OleDb.OleDbCommand oleDbSelectCommand1;
-        private System.Data.OleDb.OleDbConnection oleDbConnection1;
         private System.Data.OleDb.OleDbCommand oleDbInsertCommand1;
         private System.Data.OleDb.OleDbCommand oleDbUpdateCommand1;
         private System.Data.OleDb.OleDbCommand oleDbDeleteCommand1;
         private System.Data.OleDb.OleDbDataAdapter oleDbDataAdapter1;
         private System.Data.DataSet dataSet2;
         private System.Data.OleDb.OleDbCommand oleDbSelectCommand2;
-        private System.Data.OleDb.OleDbConnection oleDbConnection2;
         private System.Data.OleDb.OleDbCommand oleDbInsertCommand2;
         private System.Data.OleDb.OleDbCommand oleDbUpdateCommand2;
         private System.Data.OleDb.OleDbCommand oleDbDeleteCommand2;
         private System.Data.OleDb.OleDbDataAdapter oleDbDataAdapter2;
         public System.Windows.Forms.ListBox listBox1;
+        private System.Data.OleDb.OleDbConnection oleDbConnection1;
     }
 }

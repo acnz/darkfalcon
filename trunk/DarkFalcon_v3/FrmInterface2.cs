@@ -83,7 +83,7 @@ namespace DarkFalcon_v3
             {
                 frm1.listBox1.Items[0]=listBoxC.Items[i];
                 Console.Out.WriteLine(data.Tables[0].TableName.Substring(data.Tables[0].TableName.LastIndexOf("tab") + 3));
-                pc.NovoComponente(new dfCom(data.Tables[0].Rows[i][0].ToString(), data.Tables[0].Rows[i][1].ToString(), data.Tables[0].TableName.Substring(data.Tables[0].TableName.LastIndexOf("tab") + 3), 10.10f));
+                pc.NovoComponente(new dfCom(data.Tables[0].Rows[i][0].ToString(), data.Tables[0].Rows[i][1].ToString(), data.Tables[0].TableName.Substring(data.Tables[0].TableName.LastIndexOf("tab") + 3), 10.10f,"a s"));
             }
         }
 
