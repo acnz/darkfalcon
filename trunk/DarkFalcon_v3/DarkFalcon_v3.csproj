@@ -16,6 +16,8 @@
     </ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <StartupObject>
+    </StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -99,6 +101,12 @@
     <Compile Include="Classes3D\_3DObject.cs" />
     <Compile Include="ClassesComponente\dfCom.cs" />
     <Compile Include="ClassesComponente\dfPC.cs" />
+    <Compile Include="FrmAdmDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdmDB.Designer.cs">
+      <DependentUpon>FrmAdmDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmInterface2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +209,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmAdmDB.resx">
+      <DependentUpon>FrmAdmDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmInterface2.resx">
       <DependentUpon>FrmInterface2.cs</DependentUpon>
     </EmbeddedResource>

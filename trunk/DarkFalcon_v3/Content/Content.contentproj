@@ -35,11 +35,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Textures\Fonte\2.jpg">
+      <Name>2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Textures\Gabinete\" />
-    <Folder Include="Textures\Monitor\" />
-    <Folder Include="Textures\Motherboard\" />
-    <Folder Include="Textures\Processador\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v3.0\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

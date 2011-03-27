@@ -1,2 +1,1 @@
 Content\Textures\Fonte\2.xnb
-splash.png

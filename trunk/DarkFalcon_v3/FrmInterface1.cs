@@ -163,7 +163,7 @@ namespace DarkFalcon_v3
 
         private void FrmInterface1_Load(object sender, EventArgs e)
         {
-            oleDbConnection1.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot+"Base.dfdb";
+            oleDbConnection1.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot+"Base.mdb";
         }
 
     }

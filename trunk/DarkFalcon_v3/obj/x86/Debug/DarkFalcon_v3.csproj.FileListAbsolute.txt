@@ -13,3 +13,5 @@ C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.exe
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.pdb
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\splash.png
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmAdmDB.resources
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Fonte\2.xnb

@@ -136,7 +136,8 @@ namespace DarkFalcon_v3
 
         private void testeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            FrmAdmDB frmA = new FrmAdmDB();
+            frmA.Show();
         }
 
         private void FrmMain_Activated(object sender, EventArgs e)
