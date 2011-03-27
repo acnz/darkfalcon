@@ -1,1 +1,17 @@
 Content\Textures\Fonte\2.xnb
+Content\Models\HD\2\barracudaseagate\Asphalt_New.xnb
+Content\Models\HD\2\barracudaseagate\bottom.xnb
+Content\Models\HD\2\barracudaseagate\connectors.xnb
+Content\Models\HD\2\barracudaseagate\Material1.xnb
+Content\Models\HD\2\barracudaseagate\plasticc.xnb
+Content\Models\Monitor\2\tetetf\_CorrogateShiny_.xnb
+Content\Models\Monitor\2\tetetf\_Metal_Panel_.xnb
+Content\Textures\Fonte\3.xnb
+Content\Textures\HD\2.xnb
+Content\Textures\Monitor\2.xnb
+Content\Textures\Motherboard\10.xnb
+Content\Textures\Motherboard\9.xnb
+Content\Models\HD\2\2.xnb
+Content\Models\Monitor\2\2.xnb
+Content\Models\Monitor\2\tetetf\_CorrogateShiny__0.xnb
+Content\Models\Monitor\2\tetetf\_Metal_Panel__0.xnb

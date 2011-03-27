@@ -183,7 +183,7 @@ namespace DarkFalcon_v3
             background = Content.Load<Texture2D>("Textures//aurora");
             white = Content.Load<Texture2D>("Textures//white");
             this.monitor = new _3DObject("monitorc", cam, this.Content, Vector3.Zero, Vector3.Zero, 3f);
-            this.gabinete = new _3DObject("monitorc", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 3f);
+            this.gabinete = new _3DObject("Monitor/2/2", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 30f);
 
             createHUD();
 

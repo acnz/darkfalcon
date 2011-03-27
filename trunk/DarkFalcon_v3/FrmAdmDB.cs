@@ -103,19 +103,28 @@ namespace DarkFalcon_v3
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Thread newThread = new Thread(new ThreadStart(AbrirArquivo));
+            Thread newThread = new Thread(new ThreadStart(AbrirImagem));
             newThread.SetApartmentState(ApartmentState.STA);
             newThread.Start();
             
         }
-        private void AbrirArquivo()
+        private void AbrirImagem()
         {
             OpenFileDialog o = new OpenFileDialog();
             o.Title = "Escolha uma imagem";
+            o.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
             o.ShowDialog();
+            
             if (tbImg.InvokeRequired)
 tbImg.BeginInvoke((MethodInvoker)delegate {
-    tbImg.Text = o.FileName;});
+    if(o.CheckFileExists){
+        tbImg.Text = o.FileName;
+    }
+                        else
+                    {
+                        MessageBox.Show("Arquivo nao existe");
+                    }
+ ;});
         }
 
         private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -154,23 +163,101 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
             DirectoryInfo model = f.CreateSubdirectory("Models");
             DirectoryInfo textures = f.CreateSubdirectory("Textures");
 
-           FileInfo imgF =  PadronizarIMG(tbImg.Text);
-
-
-            DirectoryInfo dir = textures.CreateSubdirectory(cbTipo.Text);
-            FileInfo file = imgF.CopyTo(dir.FullName+"\\"+tbCod.Text+".jpg",true);
-
-            try
+            if (tbImg.Text != "")
             {
-                pb1.Image.Dispose();
-                pb1.Image = null;
-                imgF.Delete();
+                FileInfo imgF = PadronizarIMG(tbImg.Text);
+
+
+                DirectoryInfo dir = textures.CreateSubdirectory(cbTipo.Text);
+                FileInfo file = imgF.CopyTo(dir.FullName + "\\" + tbCod.Text + ".jpg", true);
+
+                try
+                {
+                    pb1.Image.Dispose();
+                    pb1.Image = null;
+                    imgF.Delete();
+                }
+                catch (Exception casd) { }
+                if (file != null)
+                    pb1.Image = Image.FromFile(file.FullName);
             }
-            catch (Exception casd) { }
-            if (file != null)
-                pb1.Image = Image.FromFile(file.FullName);
+            else
+            {
+                MessageBox.Show("Sem Imagem"); 
+            }
+            if (tb3D.Text != "")
+            {
+                DirectoryInfo model3d = Padronizar3D(tb3D.Text);
+                DirectoryInfo dir2 = model.CreateSubdirectory(cbTipo.Text);
+                model3d.MoveTo(dir2.FullName + "\\" + tbCod.Text);
+                model3d.GetFiles()[0].MoveTo(model3d.FullName + "\\" + tbCod.Text + ".fbx");
+            }
+            else
+            {
+                MessageBox.Show("Sem Modelo"); 
+            }
 
+        }
 
+        private DirectoryInfo Padronizar3D(string p)
+        {
+            FileInfo mod = new FileInfo(p);
+
+            string modN = mod.Name.Replace(mod.Extension,""); 
+
+            DirectoryInfo dir = mod.Directory;
+
+            // Open a file for reading
+            StreamReader streamReader;
+            streamReader = File.OpenText(mod.FullName);
+            // Now, read the entire file into a strin
+            string contents = streamReader.ReadToEnd();
+            streamReader.Close();
+            string[] main = contents.Split(new string[]{"RelativeFilename:"}, StringSplitOptions.None);
+            string fbx = "";
+            fbx += main[0] + " RelativeFilename:";
+            for (int i = 1; i < main.Count(); i++)
+            {
+                if (i != main.Count() - 1)
+                {
+                    string[] x1 = main[i].Split(new string[] { "\\" + modN }, StringSplitOptions.None);
+                    fbx += " \"" + modN + x1[1] + " RelativeFilename:";
+                }
+                else
+                {
+                    string[] x1 = main[i].Split(new string[] { "\\" + modN }, StringSplitOptions.None);
+                    fbx += " \"" + modN + x1[1];
+                }
+            }
+            Random x = new Random();
+            DirectoryInfo r = Directory.CreateDirectory(appPath + "\\" + modN + x.Next(0,1031203810));
+            StreamWriter streamWriter = File.CreateText(r.FullName + "\\" + modN+".fbx");
+
+            streamWriter.Write(fbx);
+            streamWriter.Close();
+
+            copyDirectory(dir.FullName + "\\" + modN, r.FullName + "\\" + modN);
+            return r;
+        }
+        public static void copyDirectory(string Src, string Dst)
+        {
+            String[] Files;
+
+            if (Dst[Dst.Length - 1] != Path.DirectorySeparatorChar)
+                Dst += Path.DirectorySeparatorChar;
+            if (!Directory.Exists(Dst)) Directory.CreateDirectory(Dst);
+            Files = Directory.GetFileSystemEntries(Src);
+            foreach (string Element in Files)
+            {
+                // Sub directories
+
+                if (Directory.Exists(Element))
+                    copyDirectory(Element, Dst + Path.GetFileName(Element));
+                // Files in directory
+
+                else
+                    File.Copy(Element, Dst + Path.GetFileName(Element), true);
+            }
         }
 
         private FileInfo PadronizarIMG(string strFile)
@@ -256,8 +343,9 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
             grava.ExecuteNonQuery();
             con.Close();
             MessageBox.Show("alterado");
-
+            ApagaCont();
             fillF();
+            ExportarCont();
         }
 
         private void butRem_Click(object sender, EventArgs e)
@@ -270,7 +358,48 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
             MessageBox.Show("apagado");
             fillDS();
             iindex = ds.Tables[0].Rows.Count - 1;
+            ApagaCont();
             fillF();
+
+        }
+
+        private void ApagaCont()
+        {
+            DirectoryInfo d = new DirectoryInfo(appPath);
+            DirectoryInfo f = d.CreateSubdirectory("TempCont");
+            DirectoryInfo model = f.CreateSubdirectory("Models");
+            DirectoryInfo textures = f.CreateSubdirectory("Textures");
+
+
+            DirectoryInfo dir = textures.CreateSubdirectory(cbTipo.Text);
+            try
+            {
+                FileInfo file = new FileInfo(dir.FullName + "\\" + tbCod.Text + ".jpg");
+                try
+                {
+                    pb1.Image.Dispose();
+                    pb1.Image = null;
+                    imgF.Delete();
+                }
+                catch (Exception casd) { }
+                file.Delete();
+            }
+            catch
+            {
+                MessageBox.Show("Imagem nao encontrada");
+            }
+
+            DirectoryInfo dir2 = model.CreateSubdirectory(cbTipo.Text);
+            try
+            {
+                DirectoryInfo model3d = new DirectoryInfo(dir2.FullName + "\\" + tbCod.Text);
+                model3d.Delete(true);
+            }
+            catch
+            {
+                MessageBox.Show("Modelo nao encontrado");
+            }
+
         }
         private FileInfo imgF =  new FileInfo("omygodhowwiilputthisfilename.jpg");
         private void tbImg_TextChanged(object sender, EventArgs e)
@@ -285,6 +414,33 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
             imgF = PadronizarIMG(tbImg.Text);
             if (imgF != null)
                 pb1.Image = Image.FromFile(imgF.FullName);
+        }
+
+        private void but3d_Click(object sender, EventArgs e)
+        {
+            Thread newThread = new Thread(new ThreadStart(Abrir3D));
+            newThread.SetApartmentState(ApartmentState.STA);
+            newThread.Start();
+        }
+        private void Abrir3D()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Escolha uma Um modelo 3D";
+            op.Filter = "FBX files (*.fbx)|*.fbx";
+            op.ShowDialog();
+
+            if (tb3D.InvokeRequired)
+                tb3D.BeginInvoke((MethodInvoker)delegate
+                {
+                    if (op.CheckFileExists)
+                    {
+                        tb3D.Text = op.FileName;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Arquivo nao existe");
+                    }
+                });
         }
     }
 }

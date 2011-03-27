@@ -245,6 +245,7 @@
             this.but3d.TabIndex = 9;
             this.but3d.Text = "3D";
             this.but3d.UseVisualStyleBackColor = true;
+            this.but3d.Click += new System.EventHandler(this.but3d_Click);
             // 
             // butEdit
             // 
