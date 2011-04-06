@@ -31,3 +31,20 @@ C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Mod
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\Monitor\2\2.xnb
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\Monitor\2\tetetf\_CorrogateShiny__0.xnb
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Models\Monitor\2\tetetf\_Metal_Panel__0.xnb
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\bin\x86\Debug\splash.png
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe.config
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.pdb
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmAdmDB.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmInterface2.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmAssistente.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmInterface1.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmMain.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.FrmTabs.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.splash.resources
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.exe
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.pdb
+C:\Documents and Settings\Administrador\Desktop\dkf\trunk\DarkFalcon_v3\bin\x86\Debug\xWinFormsLib.dll

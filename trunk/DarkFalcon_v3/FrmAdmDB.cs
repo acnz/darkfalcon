@@ -134,7 +134,7 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
             {
                 fillF();
             }
-            catch (Exception exc)
+            catch
             {
             }
             tSelected = true;
@@ -177,7 +177,7 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
                     pb1.Image = null;
                     imgF.Delete();
                 }
-                catch (Exception casd) { }
+                catch { }
                 if (file != null)
                     pb1.Image = Image.FromFile(file.FullName);
             }
@@ -381,7 +381,7 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
                     pb1.Image = null;
                     imgF.Delete();
                 }
-                catch (Exception casd) { }
+                catch { }
                 file.Delete();
             }
             catch
@@ -410,7 +410,7 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
                 pb1.Image = null;
                 imgF.Delete();
             }
-            catch (Exception casd) { }
+            catch { }
             imgF = PadronizarIMG(tbImg.Text);
             if (imgF != null)
                 pb1.Image = Image.FromFile(imgF.FullName);

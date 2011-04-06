@@ -99,8 +99,9 @@
     <Compile Include="Classes3D\CameraTP.cs" />
     <Compile Include="Classes3D\User32.cs" />
     <Compile Include="Classes3D\_3DObject.cs" />
-    <Compile Include="ClassesComponente\dfCom.cs" />
-    <Compile Include="ClassesComponente\dfPC.cs" />
+    <Compile Include="df\dfTags.cs" />
+    <Compile Include="df\dfCom.cs" />
+    <Compile Include="df\dfPC.cs" />
     <Compile Include="FrmAdmDB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +160,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="xWinFormsLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
     <Content Include="splash.png">

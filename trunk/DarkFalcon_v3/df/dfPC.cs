@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DarkFalcon_v3.ClassesComponente
+namespace DarkFalcon_v3.df
 {
     class dfPC
     {
