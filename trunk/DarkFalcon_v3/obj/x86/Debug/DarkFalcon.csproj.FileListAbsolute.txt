@@ -32,3 +32,21 @@ C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\xWinFormsLi
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe.config
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.pdb
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\bin\x86\Debug\splash.png
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\bin\x86\Debug\xWinFormsLib.dll
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe.config
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.exe
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\bin\x86\Debug\DarkFalcon_v3.pdb
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FrmAdmDB.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FrmInterface2.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FrmAssistente.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FrmInterface1.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FrmMain.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FrmTabs.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.splash.resources
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.exe
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon_v3.pdb
+C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FormWeb.resources

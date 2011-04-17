@@ -39,6 +39,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
             this.oleDbSelectCommand1 = new System.Data.OleDb.OleDbCommand();
+            this.oleDbConnection1 = new System.Data.OleDb.OleDbConnection();
             this.oleDbInsertCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand1 = new System.Data.OleDb.OleDbCommand();
@@ -49,7 +50,8 @@
             this.oleDbUpdateCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDataAdapter2 = new System.Data.OleDb.OleDbDataAdapter();
-            this.oleDbConnection1 = new System.Data.OleDb.OleDbConnection();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -61,6 +63,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.comboBox4);
@@ -81,7 +85,7 @@
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Location = new System.Drawing.Point(11, 280);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(171, 174);
+            this.groupBox1.Size = new System.Drawing.Size(171, 157);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hardware Atual";
@@ -94,9 +98,9 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
             "Escolher Placa mãe..."});
-            this.listBox1.Location = new System.Drawing.Point(11, 19);
+            this.listBox1.Location = new System.Drawing.Point(11, 20);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(154, 147);
+            this.listBox1.Size = new System.Drawing.Size(154, 121);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -155,6 +159,10 @@
             // 
             this.oleDbSelectCommand1.CommandText = "SELECT        cod, nome, fab, socket, tags\r\nFROM            tabMotherboard";
             this.oleDbSelectCommand1.Connection = this.oleDbConnection1;
+            // 
+            // oleDbConnection1
+            // 
+            this.oleDbConnection1.InfoMessage += new System.Data.OleDb.OleDbInfoMessageEventHandler(this.oleDbConnection1_InfoMessage);
             // 
             // oleDbInsertCommand1
             // 
@@ -287,9 +295,26 @@
                         new System.Data.Common.DataColumnMapping("tags", "tags")})});
             this.oleDbDataAdapter2.UpdateCommand = this.oleDbUpdateCommand2;
             // 
-            // oleDbConnection1
+            // button2
             // 
-            this.oleDbConnection1.InfoMessage += new System.Data.OleDb.OleDbInfoMessageEventHandler(this.oleDbConnection1_InfoMessage);
+            this.button2.Location = new System.Drawing.Point(67, 440);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Próximo";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(11, 234);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "PRONTO";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // FrmInterface1
             // 
@@ -305,6 +330,7 @@
             this.TransparencyKey = System.Drawing.Color.Lime;
             this.Load += new System.EventHandler(this.FrmInterface1_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).EndInit();
@@ -335,5 +361,7 @@
         private System.Data.OleDb.OleDbDataAdapter oleDbDataAdapter2;
         public System.Windows.Forms.ListBox listBox1;
         private System.Data.OleDb.OleDbConnection oleDbConnection1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

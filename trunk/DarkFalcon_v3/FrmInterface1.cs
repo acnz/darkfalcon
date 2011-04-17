@@ -153,7 +153,8 @@ namespace DarkFalcon
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            button2.Enabled = false;
+            
         }
 
         private void oleDbConnection1_InfoMessage(object sender, OleDbInfoMessageEventArgs e)
@@ -164,6 +165,23 @@ namespace DarkFalcon
         private void FrmInterface1_Load(object sender, EventArgs e)
         {
             oleDbConnection1.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot+"Base.mdb";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FrmAssistente a = new FrmAssistente();
+            a.Show();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked == true){
+                button2.Enabled = true;
+            }
+            else{
+                button2.Enabled = false;
+            }
+            
         }
 
     }

@@ -166,7 +166,7 @@ namespace DarkFalcon
             this.gabinete = new _3DObject("Monitor/2/2", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 30f);
            // cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
             createHUD();
-
+          
             // TODO: use this.Content to load your game content here
         }
 

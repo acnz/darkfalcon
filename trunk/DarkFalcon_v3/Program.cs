@@ -26,7 +26,7 @@ namespace DarkFalcon
 
             FrmTabs frmTabs = new FrmTabs();
             frmTabs.MdiParent = frmMain;
-
+            //eh o assistente
             frmTabs.Show();
             frmTabs.Top += 188;
             
