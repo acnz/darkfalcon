@@ -29,6 +29,7 @@ namespace DarkFalcon
         Texture2D white;
         private string Out;
         CameraTP cam;
+        public bool focus;
 
         List<_3DObject> lista3D = new List<_3DObject>();
         _3DObject monitor;
@@ -163,7 +164,7 @@ namespace DarkFalcon
             white = Content.Load<Texture2D>("Textures//white");
             this.monitor = new _3DObject("monitorc", cam, this.Content, Vector3.Zero, Vector3.Zero, 3f);
             this.gabinete = new _3DObject("Monitor/2/2", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 30f);
-
+           // cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
             createHUD();
 
             // TODO: use this.Content to load your game content here
@@ -222,6 +223,8 @@ namespace DarkFalcon
             //myObject.Rotation += (float)gameTime.ElapsedGameTime.TotalMilliseconds/10 *
                 // TODO: Add your update logic here
             prevMouse = Mouse.GetState();
+            //Console.WriteLine(focus);
+            if (!focus) MouseWheel =0;
             cam.Update(Matrix.CreateTranslation(monitor.Position+new Vector3(5,0,-10)), MouseWheel);
             MouseWheel = 0;
             
@@ -255,9 +258,6 @@ namespace DarkFalcon
                                     break;
                                 case "Processador":
                                     ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Image = _pc.Processador.LocalImagem2D;
-                                    break;
-                                case "Monitor":
-                                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Image = _pc.Monitor.LocalImagem2D;
                                     break;
                                 case "Gabinete":
                                     ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Image = _pc.Gabinete.LocalImagem2D;
@@ -336,7 +336,7 @@ namespace DarkFalcon
             {
                 ob.Draw();
             }
-            
+
 
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
             spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));

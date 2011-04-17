@@ -89,7 +89,17 @@ namespace DarkFalcon.df
             Nome = "?";
             Tipo = tipado;
             Preco = 0f;
+            _image2d = "Textures//" + Tipo + "//" + ID;
 
+            _image3d = "Models//" + Tipo + "//" + ID;
+        }
+        public dfCom(string tipado,string tags)
+        {
+            ID = "?";
+            Nome = "?";
+            Tipo = tipado;
+            Preco = 0f;
+            Tags = new dfTags(tags);
             _image2d = "Textures//" + Tipo + "//" + ID;
 
             _image3d = "Models//" + Tipo + "//" + ID;

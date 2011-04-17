@@ -9,14 +9,13 @@ namespace DarkFalcon.df
     {
         #region Fields
         private dfMobo _mobo;
+        private dfMem _mem;
+        private dfPlaca _pl;
+        private dfDados _da;
+        private dfMon _monitor;
         private dfCom _pro;
         private dfCom _gab;
-        private dfMem _mem;
         private dfCom _fonte;
-        private dfCom _hd;
-        private dfCom _monitor;
-        private dfCom _video;
-        private dfCom _som;
         private dfCom _tec;
         private dfCom _mou;
      #endregion
@@ -27,8 +26,6 @@ namespace DarkFalcon.df
             set {
                 if (value.Tipo == "Motherboard")
                     _mobo = value;
-                else
-                    _mobo = new dfMobo(true);
                 }
         }
         public dfCom Processador
@@ -38,8 +35,6 @@ namespace DarkFalcon.df
             {
                 if (value.Tipo == "Processador")
                     _pro = value;
-                else
-                    _pro = new dfCom("Processador");
             }
         }
         public dfMem Memoria
@@ -57,41 +52,15 @@ namespace DarkFalcon.df
             {
                 if (value.Tipo == "Fonte")
                     _fonte = value;
-                else
-                    _fonte = new dfCom("Fonte");
             }
         }
         public dfCom HD
         {
-            get { return _hd; }
+            get { return _da.MasterHD; }
             set
             {
                 if (value.Tipo == "HD")
-                    _hd = value;
-                else
-                    _hd = new dfCom("HD");
-            }
-        }
-        public dfCom Monitor
-        {
-            get { return _monitor; }
-            set
-            {
-                if (value.Tipo == "Monitor")
-                    _monitor = value;
-                else
-                    _monitor = new dfCom("Monitor");
-            }
-        }
-        public dfCom Video
-        {
-            get { return _video; }
-            set
-            {
-                if (value.Tipo == "P.Video")
-                    _video = value;
-                else
-                    _video = new dfCom("P.Video");
+                    _da.MasterHD = value;
             }
         }
         public dfCom Gabinete
@@ -105,23 +74,7 @@ namespace DarkFalcon.df
                     _gab = new dfCom("Gabinete");
             }
         }
-        //public dfCom Peri1
-        //{
-        //    get { return _p1; }
-        //    set
-        //    {
-        //        if (!Tperi(value.Tipo))
-        //            _p1 = value;
-        //        else
-        //            _p1 = new dfCom(true);
-        //    }
-        //}
 
-        private bool Tperi(string p)
-        {
-            String[] t = {"Motherboard","Processador","Memoria","Fonte","HD","Monitor","Video"};
-            return t.Contains(p);
-        }
         #endregion
         #region Construtres
         public dfPC()
@@ -135,17 +88,20 @@ namespace DarkFalcon.df
             
                 _pro = new dfCom("Processador");
             
-                //_mem = new dfCom("Memoria");
+                _mem = new dfMem(_mobo.mem);
             
                 _fonte = new dfCom("Fonte");
         
-                _hd = new dfCom("HD");
-        
-                _monitor = new dfCom("Monitor");
-        
-                _video = new dfCom("P.Video");
+                _da = new dfDados(new dfCom("HD"),_mobo.ssata,_mobo.side);
+
+                _monitor = new dfMon(1);
         
                 _gab =new dfCom("Gabinete");
+
+                _pl = new dfPlaca(_mobo.spcie2, _mobo.spcie1, _mobo.spci, _mobo.svga);
+
+                _tec = new dfCom("Teclado");
+                _mou = new dfCom("Mouse");
             }
             else
             {
@@ -157,13 +113,6 @@ namespace DarkFalcon.df
         public List<dfIOb> getACom()
         {
             List<dfIOb> l = new List<dfIOb>();
-             l.Add(_mobo);
-        l.Add(_pro);
-         l.Add(_mem);
-        l.Add(_fonte);
-        l.Add(_hd);
-        l.Add(_monitor);
-         l.Add(_video);
          return l;
         }
         public List<dfCom> getVCom()

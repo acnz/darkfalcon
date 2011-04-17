@@ -9,9 +9,9 @@ namespace DarkFalcon.df
     {
         dfChecker() { }
         
-        public string vC(dfCom a,dfCom b){
+        public string v(dfCom a,dfCom b){
             string result = "";
-            bool isC = vC(a, b,true);
+            bool isC = v(a, b,true);
                 if (!isC)
                 {
                     switch (a.Tipo)
@@ -20,6 +20,14 @@ namespace DarkFalcon.df
                             switch (b.Tipo)
                             {
                                 case "Processador":
+                                    break;
+                                case "Gabinete":
+                                    break;
+                                case "Fonte":
+                                    break;
+                                case "Teclado":
+                                    break;
+                                case "Mouse":
                                     break;
                             }
                             break;
@@ -32,15 +40,15 @@ namespace DarkFalcon.df
                 }
                 return result;
         }
-        public bool vC(dfCom a, dfCom b,bool retBoolean)
+        public bool v(dfCom a, dfCom b,bool retBoolean)
         {
             if (retBoolean)
             {
                 bool isC = false;
-                foreach (string atag in a.Tags.aval)
-                    foreach (string btag in b.Tags.aval)
+                foreach (string atag in a.Tags.compat)
+                    foreach (string btag in b.Tags.compat)
                     {
-
+                        if (atag == btag) isC = true;
                     }
                 return isC;
             }

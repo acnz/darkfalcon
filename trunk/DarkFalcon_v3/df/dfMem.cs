@@ -11,12 +11,16 @@ namespace DarkFalcon.df
         public dfMem(int Qtd)
         {
             _mems = new dfCom[Qtd];
+            for (int i = 0; i < Qtd; i++)
+            {
+                add(new dfCom("Memoria"));
+            }
         }
         public dfCom[] Mems
         {
             get { return _mems; }
         }
-        public string addMem(dfCom m)
+        public string add(dfCom m)
         {
             if (m.Tipo == "Memoria")
             {

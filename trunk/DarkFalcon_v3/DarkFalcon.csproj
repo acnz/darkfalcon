@@ -99,10 +99,12 @@
     <Compile Include="Classes3D\CameraTP.cs" />
     <Compile Include="Classes3D\User32.cs" />
     <Compile Include="Classes3D\_3DObject.cs" />
+    <Compile Include="df\dfDados.cs" />
     <Compile Include="df\dfIOb.cs" />
     <Compile Include="df\dfMem.cs" />
     <Compile Include="df\dfMobo.cs" />
     <Compile Include="df\dfChecker.cs" />
+    <Compile Include="df\dfMon.cs" />
     <Compile Include="df\dfPlaca.cs" />
     <Compile Include="df\dfTags.cs" />
     <Compile Include="df\dfCom.cs" />

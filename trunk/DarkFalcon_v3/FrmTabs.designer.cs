@@ -83,8 +83,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DarkFalcon v3";
             this.TopMost = true;
+            this.Deactivate += new System.EventHandler(this.FrmTabs_Deactivate);
             this.Load += new System.EventHandler(this.FrmTabs_Load);
             this.SizeChanged += new System.EventHandler(this.FrmTabs_SizeChanged);
+            this.Activated += new System.EventHandler(this.FrmTabs_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmTabs_FormClosed);
             this.Move += new System.EventHandler(this.FrmTabs_Move_1);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTabs_FormClosing);

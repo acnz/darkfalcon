@@ -10,12 +10,13 @@ namespace DarkFalcon.df
        public List<string> info { get; set; }
         public List<string> compat { get; set; }
         public List<string> aval{get;set;}
-
+        public List<string> qtd { get; set; }
         public dfTags(string t)
         {
             info = new List<string>();
             compat = new List<string>();
             aval = new List<string>();
+            qtd = new List<string>();
             t = t.ToLower();
             List<string> r = t.Split(' ').ToList();
 
@@ -26,10 +27,17 @@ namespace DarkFalcon.df
 
                 if (f.StartsWith("$"))
                 {
+                    f = f.Replace("$","");
+                    compat.Add(f);
+                }
+                if (f.StartsWith("#"))
+                {
+                    f = f.Replace("#", "");
                     compat.Add(f);
                 }
                 else if (f.StartsWith("@"))
                 {
+                    f = f.Replace("@", "");
                     aval.Add(f);
                 }
                 else

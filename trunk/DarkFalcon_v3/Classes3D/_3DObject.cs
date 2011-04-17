@@ -29,6 +29,34 @@ namespace DarkFalcon
         bool isTextureEnabled;
         bool isPerPixelLightingEnabled;
         private BoundingSphere boundingSphere;
+
+        RenderTarget2D sceneTarget;
+        RenderTarget2D normalDepthAlphaTarget;
+
+        Effect renderEffect;
+        Effect postprocessEffect;
+
+        Texture2D lightIntensityTex;
+        Texture2D pencilTex;
+        Texture2D trooperTex;
+        Texture2D randNumbersTex;
+
+        Model trooper;
+
+        TimeSpan timeToChange;
+        double pencilVelocity;
+        float offset;
+        float vertexOffset;
+
+        int randDataSize;
+
+        Random random;
+
+        bool renderGeometryEdges;
+        bool renderEdgeDetection;
+        bool renderCelShading;
+
+        bool SM30Supported;
         #endregion
 
         #region Initialization
@@ -223,9 +251,6 @@ namespace DarkFalcon
         #endregion
 
         #region Draw
-        /// <summary>
-        /// Draws the spaceship model, using the current drawing parameters.
-        /// </summary>
         public void Draw()
         {
             Matrix[] modelTransforms = new Matrix[_model.Bones.Count];
@@ -236,13 +261,14 @@ namespace DarkFalcon
                 foreach (BasicEffect ef in mesh.Effects)
                 {
                     ef.EnableDefaultLighting();
-                    ef.PreferPerPixelLighting = true;
-                    ef.World = rotation * Matrix.CreateScale(_scale) * Matrix.CreateTranslation(_position)*modelTransforms[mesh.ParentBone.Index] ;
+                    //ef.PreferPerPixelLighting = true;
+                    ef.TextureEnabled = false;
+                    ef.World = rotation * Matrix.CreateScale(_scale) * Matrix.CreateTranslation(_position) * modelTransforms[mesh.ParentBone.Index];
                     ef.Projection = cam.projectionMatrix;
                     ef.View = cam.viewMatrix;
-
-                    SetEffectLights(ef, Lights);
-                    SetEffectPerPixelLightingEnabled(ef);
+                    ef.Alpha = 0.5f;
+                    //SetEffectLights(ef, Lights);
+                    //SetEffectPerPixelLightingEnabled(ef);
                 }
                 mesh.Draw();
             }

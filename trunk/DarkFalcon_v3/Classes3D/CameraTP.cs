@@ -55,6 +55,7 @@ namespace DarkFalcon
 
         public void Update(Matrix chasedObjectsWorld, int mW)
         {
+           
             HandleInput(mW);
             UpdateViewMatrix(chasedObjectsWorld);
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(POV), g.Viewport.AspectRatio, .5f, 5000000f);

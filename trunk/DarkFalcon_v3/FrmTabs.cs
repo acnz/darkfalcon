@@ -235,5 +235,15 @@ namespace DarkFalcon
             }
         }
 
+        private void FrmTabs_Activated(object sender, EventArgs e)
+        {
+            pc.focus = true;
+        }
+
+        private void FrmTabs_Deactivate(object sender, EventArgs e)
+        {
+            pc.focus = false;
+        }
+
     }
 }

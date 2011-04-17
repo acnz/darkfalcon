@@ -36,7 +36,7 @@ namespace DarkFalcon
         private void splash_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.frmMain.TopMost = true;
-            Program.frmMain.Visible = true;
+            Program.frmMain.Show();
 
         }
 
