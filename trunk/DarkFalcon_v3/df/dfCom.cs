@@ -72,6 +72,17 @@ namespace DarkFalcon.df
         {
  
         }
+        public dfCom(dfCom c)
+        {
+            ID = c.ID;
+            Nome = c.Nome;
+            Tipo =  c.Tipo;
+            Preco =  c.Preco;
+            Tags =  c.Tags;
+            _image2d = c.LocalImagem2D;
+
+            _image3d = c.LocalImagem3D;
+        }
         public dfCom(bool nulo)
         {
             ID = "?";

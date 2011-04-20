@@ -21,7 +21,7 @@ namespace DarkFalcon
         public List<string[]> labs = new List<string[]>();
         private DataSet ds = new DataSet();
         private int iindex = 0;
-        private OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Base.mdb");
+        private OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb");
         private OleDbDataAdapter da = new OleDbDataAdapter();
         string appPath = Path.GetDirectoryName(Application.ExecutablePath);
         public FrmAdmDB()
@@ -70,7 +70,7 @@ namespace DarkFalcon
         private void fillDS()
         {
             OleDbConnection con = new OleDbConnection();
-            con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Base.mdb";
+            con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
             da.SelectCommand = new OleDbCommand("Select * from tab" + cbTipo.Text);
             da.SelectCommand.Connection = con;
             ds.Reset();
@@ -103,28 +103,19 @@ namespace DarkFalcon
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Thread newThread = new Thread(new ThreadStart(AbrirImagem));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
-            
-        }
-        private void AbrirImagem()
-        {
             OpenFileDialog o = new OpenFileDialog();
             o.Title = "Escolha uma imagem";
             o.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
             o.ShowDialog();
+            if (o.CheckFileExists)
+            {
+                tbImg.Text = o.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Arquivo nao existe");
+            }
             
-            if (tbImg.InvokeRequired)
-tbImg.BeginInvoke((MethodInvoker)delegate {
-    if(o.CheckFileExists){
-        tbImg.Text = o.FileName;
-    }
-                        else
-                    {
-                        MessageBox.Show("Arquivo nao existe");
-                    }
- ;});
         }
 
         private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -262,52 +253,56 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
 
         private FileInfo PadronizarIMG(string strFile)
         {
-        FileInfo fiPicture = new FileInfo(strFile);
-        if (fiPicture.Exists)
-        {
-            Image newImage = Image.FromFile(strFile);
-
-            Bitmap pad = new Bitmap(300, 300);
-            int newW, newH, nx, ny = 0;
-           
-            if (newImage.Width > newImage.Height)
+            if (strFile != "")
             {
+                FileInfo fiPicture = new FileInfo(strFile);
+                if (fiPicture.Exists)
+                {
+                    Image newImage = Image.FromFile(strFile);
 
-                newW = 300;
-                newH = newImage.Height * 300 / newImage.Width;
+                    Bitmap pad = new Bitmap(300, 300);
+                    int newW, newH, nx, ny = 0;
 
-                nx = 0;
-                ny = (300 - newH) / 2;
+                    if (newImage.Width > newImage.Height)
+                    {
 
+                        newW = 300;
+                        newH = newImage.Height * 300 / newImage.Width;
+
+                        nx = 0;
+                        ny = (300 - newH) / 2;
+
+                    }
+                    else
+                    {
+                        newW = newImage.Width * 300 / newImage.Height;
+                        newH = 300;
+
+                        nx = (300 - newW) / 2;
+                        ny = 0;
+                    }
+                    Graphics g = Graphics.FromImage(pad);
+
+                    g.FillRectangle(new SolidBrush(Color.White), 0, 0, 300, 300);
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(newImage, new Rectangle(nx, ny, newW, newH));
+                    g.Dispose();
+
+
+
+                    Random x = new Random();
+                    String newpath = appPath + "\\" + x.Next(0, 1000000) + fiPicture.Name;
+                    FileStream s = new FileStream(newpath, FileMode.Create);
+                    pad.Save(s, ImageFormat.Jpeg);
+                    s.Close();
+                    FileInfo retPic = new FileInfo(newpath);
+
+                    return retPic;
+                }
+                else
+                    return null;
             }
-            else
-            {
-                newW = newImage.Width * 300 / newImage.Height;
-                newH = 300;
-
-                nx = (300 - newW) / 2;
-                ny = 0;
-            }
-            Graphics g = Graphics.FromImage(pad);
-
-            g.FillRectangle(new SolidBrush(Color.White), 0, 0, 300, 300);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(newImage, new Rectangle(nx, ny, newW, newH));
-            g.Dispose();
-
-
-
-            Random x = new Random();
-            String newpath = appPath + "\\" + x.Next(0, 1000000) + fiPicture.Name;
-            FileStream s = new FileStream(newpath,FileMode.Create);
-            pad.Save(s, ImageFormat.Jpeg);
-            s.Close();
-            FileInfo retPic = new FileInfo(newpath);
-
-            return retPic;
-        }else
-            return null;
-
+            else return null;
         }
 
         private void butthu_Click(object sender, EventArgs e)
@@ -418,29 +413,25 @@ tbImg.BeginInvoke((MethodInvoker)delegate {
 
         private void but3d_Click(object sender, EventArgs e)
         {
-            Thread newThread = new Thread(new ThreadStart(Abrir3D));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
-        }
-        private void Abrir3D()
-        {
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Escolha uma Um modelo 3D";
             op.Filter = "FBX files (*.fbx)|*.fbx";
             op.ShowDialog();
+            if (op.CheckFileExists)
+            {
+                tb3D.Text = op.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Arquivo nao existe");
+            }
+        }
+        
 
-            if (tb3D.InvokeRequired)
-                tb3D.BeginInvoke((MethodInvoker)delegate
-                {
-                    if (op.CheckFileExists)
-                    {
-                        tb3D.Text = op.FileName;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Arquivo nao existe");
-                    }
-                });
+        private void butLimpa_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in this.Controls)
+                if (c.Tag == "1") c.Text = "";
         }
     }
 }

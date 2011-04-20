@@ -33,7 +33,7 @@ namespace DarkFalcon.df
                 if (f.StartsWith("#"))
                 {
                     f = f.Replace("#", "");
-                    compat.Add(f);
+                    qtd.Add(f);
                 }
                 else if (f.StartsWith("@"))
                 {

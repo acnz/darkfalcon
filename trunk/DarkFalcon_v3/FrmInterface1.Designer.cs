@@ -39,6 +39,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
             this.oleDbSelectCommand1 = new System.Data.OleDb.OleDbCommand();
+            this.oleDbConnection1 = new System.Data.OleDb.OleDbConnection();
             this.oleDbInsertCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand1 = new System.Data.OleDb.OleDbCommand();
@@ -49,7 +50,6 @@
             this.oleDbUpdateCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDataAdapter2 = new System.Data.OleDb.OleDbDataAdapter();
-            this.oleDbConnection1 = new System.Data.OleDb.OleDbConnection();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
@@ -140,7 +140,18 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Motherboard"});
+            "Gabinete",
+            "Motherboard",
+            "Processador",
+            "Memoria",
+            "Fonte",
+            "HD",
+            "Leitor",
+            "Monitor",
+            "Placa de Video",
+            "Placa de Rede",
+            "Placa de Som",
+            "Outros"});
             this.comboBox1.Location = new System.Drawing.Point(22, 21);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(145, 21);
@@ -155,6 +166,10 @@
             // 
             this.oleDbSelectCommand1.CommandText = "SELECT        cod, nome, fab, socket, tags\r\nFROM            tabMotherboard";
             this.oleDbSelectCommand1.Connection = this.oleDbConnection1;
+            // 
+            // oleDbConnection1
+            // 
+            this.oleDbConnection1.InfoMessage += new System.Data.OleDb.OleDbInfoMessageEventHandler(this.oleDbConnection1_InfoMessage);
             // 
             // oleDbInsertCommand1
             // 
@@ -286,10 +301,6 @@
                         new System.Data.Common.DataColumnMapping("socket", "socket"),
                         new System.Data.Common.DataColumnMapping("tags", "tags")})});
             this.oleDbDataAdapter2.UpdateCommand = this.oleDbUpdateCommand2;
-            // 
-            // oleDbConnection1
-            // 
-            this.oleDbConnection1.InfoMessage += new System.Data.OleDb.OleDbInfoMessageEventHandler(this.oleDbConnection1_InfoMessage);
             // 
             // FrmInterface1
             // 

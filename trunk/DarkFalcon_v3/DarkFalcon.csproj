@@ -105,6 +105,7 @@
     <Compile Include="df\dfMobo.cs" />
     <Compile Include="df\dfChecker.cs" />
     <Compile Include="df\dfMon.cs" />
+    <Compile Include="df\dfPeri.cs" />
     <Compile Include="df\dfPlaca.cs" />
     <Compile Include="df\dfTags.cs" />
     <Compile Include="df\dfCom.cs" />

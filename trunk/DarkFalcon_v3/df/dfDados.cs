@@ -35,7 +35,7 @@ namespace DarkFalcon.df
         }
         public string add(dfCom m)
         {
-            if (m.Tipo == "HD" || m.Tipo == "Leitor")
+            if (m.Tipo == "HD" || m.Tipo.Contains("Leitor"))
             {
                 string ret = "";
                 foreach (string t in m.Tags.compat)
@@ -46,6 +46,8 @@ namespace DarkFalcon.df
                         foreach (dfCom d in _sata.ToList())
                             tl.Add(d);
                         tl.Add(m);
+                        dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                        if (nulled != null) tl.Remove(nulled);
                         if (tl.Count <= _sata.Count())
                         {
                             _sata = tl.ToArray();
@@ -53,7 +55,7 @@ namespace DarkFalcon.df
                         }
                         else
                         {
-                            ret = "Não há slots Sata Disponíveis!(Max: " + _sata.Count() + ")";
+                                ret = "Não há slots Sata Disponíveis!(Max: " + _sata.Count() + ")";
                         }
                     }
                     else
@@ -62,7 +64,9 @@ namespace DarkFalcon.df
                             List<dfCom> tl = new List<dfCom>();
                             foreach (dfCom d in _ide.ToList())
                                 tl.Add(d);
-                            tl.Add(m);
+                             tl.Add(m);
+                             dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                             if (nulled != null) tl.Remove(nulled);
                             if (tl.Count <= _ide.Count())
                             {
                                 _ide = tl.ToArray();
@@ -86,5 +90,63 @@ namespace DarkFalcon.df
             }
         }
 
+
+        internal void renew(int Qtd, int Qtd2)
+        {
+            int lQtd = _sata.Count();
+            List<dfCom> tl = new List<dfCom>();
+            for (int i = 0; i < lQtd; i++)
+            {
+                tl.Add(_sata[i]);
+            }
+            _sata = new dfCom[Qtd];
+            for (int i = 0; i < lQtd; i++)
+            {
+                _sata[i] = tl[i];
+            }
+            for (int i = lQtd; i < Qtd; i++)
+            {
+                _sata[i] = new dfCom("HD");
+            }
+
+
+            lQtd = _ide.Count();
+            tl = new List<dfCom>();
+            for (int i = 0; i < lQtd; i++)
+            {
+                tl.Add(_ide[i]);
+            }
+            _ide = new dfCom[Qtd2];
+            for (int i = 0; i < lQtd; i++)
+            {
+                _ide[i] = tl[i];
+            }
+            for (int i = lQtd; i < Qtd2; i++)
+            {
+                _ide[i] = new dfCom("Leitor");
+            }}
+            internal string replace(dfCom Obj, dfCom Target)
+        {
+            dfCom  a = GetAll().Find(i => i == Target);
+            if (a != null)
+            {
+                a = Obj;
+                return "ok";
+            }
+            else
+                return "fail";
+
+        }
+
+        public List<dfCom> GetAll()
+        {
+            List<dfCom> l = new List<dfCom>();
+            foreach (dfCom d in _ide)
+                l.Add(d);
+            foreach (dfCom d in _sata)
+                l.Add(d);
+            return l;
+        }
+        
     }
 }
