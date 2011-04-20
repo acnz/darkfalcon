@@ -14,29 +14,47 @@ namespace DarkFalcon.df
             bool isC = v(a, b,true);
                 if (!isC)
                 {
-                    switch (a.Tipo)
-                    {
-                        case "Motherboard":
-                            switch (b.Tipo)
-                            {
-                                case "Processador":
-                                    break;
-                                case "Gabinete":
-                                    break;
-                                case "Fonte":
-                                    break;
-                                case "Teclado":
-                                    break;
-                                case "Mouse":
-                                    break;
-                            }
-                            break;
+                    result = a.Tipo + " \"" +a.Nome+ "\" é incompatível com "+b.Tipo + " \"" +b.Nome+ "\"";
+                    //switch (a.Tipo)
+                    //{
+                    //    case "Motherboard":
+                    //        //switch (b.Tipo)
+                    //        //{
+                    //        //    case "Processador":
+                    //        //        break;
+                    //        //    case "Gabinete":
+                    //        //        break;
+                    //        //    case "Fonte":
+                    //        //        break;
+                    //        //    case "Teclado":
+                    //        //        break;
+                    //        //    case "Mouse":
+                    //        //        break;
+                    //        //    case "Monitor":
+                    //        //        break;
+                    //        //    case "HD":
+                    //        //        break;
+                    //        //    case "Memoria":
+                    //        //        break;
+                    //        //    default:
+                    //        //        if (b.Tipo.Contains("Pla"))
+                    //        //        {
+                    //        //        }else
+                    //        //            if (b.Tipo.Contains("Leitor"))
+                    //        //            {
+                    //        //            }
+                    //        //            else
+                    //        //            {
+                    //        //            }
+                    //        //        break;
+                    //        //}
+                    //        break;
 
-                    }
+                   // }
                 }
                 else
                 {
-                    result = "Nenhum erro de compatibilidade";
+                    result = "Nenhum problema de compatibilidade";
                 }
                 return result;
         }

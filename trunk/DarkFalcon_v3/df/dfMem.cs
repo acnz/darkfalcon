@@ -13,7 +13,7 @@ namespace DarkFalcon.df
             _mems = new dfCom[Qtd];
             for (int i = 0; i < Qtd; i++)
             {
-                add(new dfCom("Memoria"));
+                _mems[i] = new dfCom("Memoria");
             }
         }
         public dfCom[] Mems
@@ -28,6 +28,8 @@ namespace DarkFalcon.df
                 foreach (dfCom d in _mems.ToList())
                     tl.Add(d);
                 tl.Add(m);
+                dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                if (nulled != null) tl.Remove(nulled);
                 if (tl.Count <= _mems.Count())
                 {
                     _mems = tl.ToArray();
@@ -44,5 +46,45 @@ namespace DarkFalcon.df
             }
         }
 
+
+        internal void renew(int Qtd)
+        {
+            int lQtd = _mems.Count();
+            List<dfCom> tl = new List<dfCom>();
+            for (int i = 0; i < lQtd; i++)
+            {
+                tl.Add(_mems[i]);
+            }
+            _mems = new dfCom[Qtd];
+            for (int i = 0; i < lQtd; i++)
+            {
+                _mems[i] = tl[i];
+            }
+            for (int i = lQtd; i < Qtd; i++)
+            {
+                _mems[i] = new dfCom("Memoria");
+            }
+        }
+
+        internal string replace(dfCom Obj, dfCom Target)
+        {
+            dfCom  a = GetAll().Find(i => i == Target);
+            if (a != null)
+            {
+                a = Obj;
+                return "ok";
+            }
+            else
+                return "fail";
+
+        }
+
+        public List<dfCom> GetAll()
+        {
+            List<dfCom> l = new List<dfCom>();
+            foreach (dfCom d in _mems)
+                l.Add(d);
+            return l;
+        }
     }
 }

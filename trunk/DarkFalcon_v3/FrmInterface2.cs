@@ -76,15 +76,21 @@ namespace DarkFalcon
         {
       // Unbox the sender
             PcView pc = ((FrmTabs)MdiParent.MdiChildren[2]).pc;
-            DataSet data = frm1.getDataSetAtual();
+            DataSet data = frm1.getFullDataSetAtual();
             listBoxC = (ListBox)sender;
             int i = listBoxC.SelectedIndex;
             DialogResult result= MessageBox.Show("Deseja adicionar a peça "+listBoxC.Items[i]+" ao seu Coputador?","Adicionar Peça",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1);
             if (result == DialogResult.Yes)
             {
-                frm1.listBox1.Items[0]=listBoxC.Items[i];
-                Console.Out.WriteLine(data.Tables[0].TableName.Substring(data.Tables[0].TableName.LastIndexOf("tab") + 3));
-               // pc.NovoComponente(new dfCom(data.Tables[0].Rows[i][0].ToString(), data.Tables[0].Rows[i][1].ToString(), data.Tables[0].TableName.Substring(data.Tables[0].TableName.LastIndexOf("tab") + 3), 10.10f,"a s"));
+                string Tipo = data.Tables[0].TableName.Substring(data.Tables[0].TableName.LastIndexOf("tab") + 3);
+                string r="";
+                if(Tipo != "Outros"){
+                    r=frm1.myPc.add(new dfCom(data.Tables[0].Rows[i][0].ToString(), data.Tables[0].Rows[i][1].ToString(), Tipo, float.Parse(data.Tables[0].Rows[i][6].ToString()), data.Tables[0].Rows[i][4].ToString()));
+                }else{
+                    r = frm1.myPc.add(new dfCom(data.Tables[0].Rows[i][0].ToString(), data.Tables[0].Rows[i][1].ToString(), data.Tables[0].Rows[i][2].ToString(), float.Parse(data.Tables[0].Rows[i][6].ToString()), data.Tables[0].Rows[i][4].ToString()));
+                 }
+                Console.Out.WriteLine(r);
+                frm1.listar();
             }
         }
 
