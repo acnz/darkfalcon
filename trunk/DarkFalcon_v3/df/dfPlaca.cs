@@ -17,10 +17,10 @@ namespace DarkFalcon.df
                 get
                 {
                     int i=0;
-                    dfCom current =  new dfCom("?","?","P.Video",0.0f,"#0");
+                    dfCom current =  new dfCom("?","?","PlaVideo",0.0f,"#0");
                     foreach (dfCom d in getAllP())
                     {
-                        if (d.Tipo == "P.Video")
+                        if (d.Tipo == "PlaVideo")
                         {
                             if (current == d)
                             {
@@ -45,10 +45,10 @@ namespace DarkFalcon.df
                 get
                 {
                     int i = 0;
-                    dfCom current = new dfCom("?", "?", "P.Som", 0.0f, "#0");
+                    dfCom current = new dfCom("?", "?", "PlaSom", 0.0f, "#0");
                     foreach (dfCom d in getAllP())
                     {
-                        if (d.Tipo == "P.Som")
+                        if (d.Tipo == "PlaSom")
                         {
                             if (current == d)
                             {
@@ -73,10 +73,10 @@ namespace DarkFalcon.df
                 get
                 {
                     int i = 0;
-                    dfCom current = new dfCom("?", "?", "P.Rede", 0.0f, "#0");
+                    dfCom current = new dfCom("?", "?", "PlaRede", 0.0f, "#0");
                     foreach (dfCom d in getAllP())
                     {
-                        if (d.Tipo == "P.Rede")
+                        if (d.Tipo == "PlaRede")
                         {
                             if (current == d)
                             {
@@ -119,19 +119,19 @@ namespace DarkFalcon.df
                 _vga = new dfCom[Qtdv];
                 for (int i = 0; i < Qtdp2; i++)
                 {
-                   _pcie2[i]=new dfCom("P.");
+                   _pcie2[i]=new dfCom("Pla");
                 }
                 for (int i = 0; i < Qtdp1; i++)
                 {
-                    _pcie1[i] = new dfCom("P.");
+                    _pcie1[i] = new dfCom("Pla");
                 }
                 for (int i = 0; i < Qtdp; i++)
                 {
-                    _pci[i] = new dfCom("P.");
+                    _pci[i] = new dfCom("Pla");
                 }
                 for (int i = 0; i < Qtdv; i++)
                 {
-                    _vga[i] = new dfCom("P.");
+                    _vga[i] = new dfCom("Pla");
                 }
             }
 
@@ -153,7 +153,7 @@ namespace DarkFalcon.df
             }
             public string add(dfCom m)
             {
-                if (m.Tipo.Contains("P."))
+                if (m.Tipo.Contains("Pla"))
                 {
                     string ret="";
                     foreach (string t in m.Tags.compat)
@@ -164,6 +164,8 @@ namespace DarkFalcon.df
                             foreach (dfCom d in _pcie2.ToList())
                                 tl.Add(d);
                             tl.Add(m);
+                            dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                            if (nulled != null) tl.Remove(nulled);
                             if (tl.Count <= _pcie2.Count())
                             {
                                 _pcie2 = tl.ToArray();
@@ -181,6 +183,8 @@ namespace DarkFalcon.df
                                 foreach (dfCom d in _pcie1.ToList())
                                     tl.Add(d);
                                 tl.Add(m);
+                                dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                                if (nulled != null) tl.Remove(nulled);
                                 if (tl.Count <= _pcie1.Count())
                                 {
                                     _pcie1 = tl.ToArray();
@@ -198,9 +202,11 @@ namespace DarkFalcon.df
                                     foreach (dfCom d in _pci.ToList())
                                         tl.Add(d);
                                     tl.Add(m);
+                                    dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                                    if (nulled != null) tl.Remove(nulled);
                                     if (tl.Count <= _pci.Count())
                                     {
-                                        _pcie1 = tl.ToArray();
+                                        _pci = tl.ToArray();
                                         ret = "ok";
                                     }
                                     else
@@ -215,19 +221,17 @@ namespace DarkFalcon.df
                                         foreach (dfCom d in _vga.ToList())
                                             tl.Add(d);
                                         tl.Add(m);
+                                        dfCom nulled = tl.ToList().Find(item => item.Nome == "?");
+                                        if (nulled != null) tl.Remove(nulled);
                                         if (tl.Count <= _vga.Count())
                                         {
-                                            _pcie1 = tl.ToArray();
+                                            _vga = tl.ToArray();
                                             ret = "ok";
                                         }
                                         else
                                         {
                                           ret = "Não há slots Vga Disponíveis!(Max: " + _vga.Count() + ")";
                                         }
-                                    }
-                                    else
-                                    {
-                                        ret = "A Motherboard não possui o tipo de slot necessário!";
                                     }
                       
                     }
@@ -239,6 +243,99 @@ namespace DarkFalcon.df
                 }
             }
 
+
+            internal void renew(int p, int p_2, int p_3, int p_4)
+            {
+                int lQtd = _pcie2.Count();
+                List<dfCom> tl = new List<dfCom>();
+                for (int i = 0; i < lQtd; i++)
+                {
+                    tl.Add(_pcie2[i]);
+                }
+                _pcie2 = new dfCom[p];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _pcie2[i] = tl[i];
+                }
+                for (int i = lQtd; i < p; i++)
+                {
+                    _pcie2[i] = new dfCom("Pla");
+                }
+
+                lQtd = _pcie1.Count();
+                tl = new List<dfCom>();
+                for (int i = 0; i < lQtd; i++)
+                {
+                    tl.Add(_pcie1[i]);
+                }
+                _pcie1 = new dfCom[p_2];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _pcie1[i] = tl[i];
+                }
+                for (int i = lQtd; i < p_2; i++)
+                {
+                    _pcie1[i] = new dfCom("Pla");
+                }
+
+                lQtd = _pci.Count();
+                tl = new List<dfCom>();
+                for (int i = 0; i < lQtd; i++)
+                {
+                    tl.Add(_pci[i]);
+                }
+                _pci = new dfCom[p_3];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _pci[i] = tl[i];
+                }
+                for (int i = lQtd; i < p_3; i++)
+                {
+                    _pci[i] = new dfCom("Pla");
+                }
+
+                lQtd = _vga.Count();
+                tl = new List<dfCom>();
+                for (int i = 0; i < lQtd; i++)
+                {
+                    tl.Add(_vga[i]);
+                }
+                _vga = new dfCom[p_4];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _vga[i] = tl[i];
+                }
+                for (int i = lQtd; i < p_4; i++)
+                {
+                    _vga[i] = new dfCom("Pla");
+                }
+            }
+            internal string replace(dfCom Obj, dfCom Target)
+            {
+                dfCom a = GetAll().Find(i => i == Target);
+                if (a != null)
+                {
+                    a = Obj;
+                    return "ok";
+                }
+                else
+                    return "fail";
+
+            }
+
+            public List<dfCom> GetAll()
+            {
+                List<dfCom> l = new List<dfCom>();
+                foreach (dfCom d in _pcie2)
+                    l.Add(d);
+                foreach (dfCom d in _pcie1)
+                    l.Add(d);
+                foreach (dfCom d in _pci)
+                    l.Add(d);
+                foreach (dfCom d in _vga)
+                    l.Add(d);
+                return l;
+            }
         }
     
 }

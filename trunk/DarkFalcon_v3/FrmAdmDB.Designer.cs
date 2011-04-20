@@ -104,18 +104,23 @@
             // 
             this.cbTipo.FormattingEnabled = true;
             this.cbTipo.Items.AddRange(new object[] {
+            "Gabinete",
             "Motherboard",
             "Processador",
             "Memoria",
             "Fonte",
             "HD",
+            "Leitor",
             "Monitor",
-            "Video",
+            "PlaVideo",
+            "PlaRede",
+            "PlaSom",
             "Outros"});
             this.cbTipo.Location = new System.Drawing.Point(30, 62);
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(389, 21);
             this.cbTipo.TabIndex = 1;
+            this.cbTipo.Tag = "1";
             this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
             // 
             // tbi1
@@ -124,6 +129,7 @@
             this.tbi1.Name = "tbi1";
             this.tbi1.Size = new System.Drawing.Size(177, 20);
             this.tbi1.TabIndex = 2;
+            this.tbi1.Tag = "1";
             // 
             // tbi2
             // 
@@ -131,6 +137,7 @@
             this.tbi2.Name = "tbi2";
             this.tbi2.Size = new System.Drawing.Size(177, 20);
             this.tbi2.TabIndex = 2;
+            this.tbi2.Tag = "1";
             this.tbi2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // tbsite
@@ -139,6 +146,7 @@
             this.tbsite.Name = "tbsite";
             this.tbsite.Size = new System.Drawing.Size(389, 20);
             this.tbsite.TabIndex = 2;
+            this.tbsite.Tag = "1";
             // 
             // tbtag
             // 
@@ -146,6 +154,7 @@
             this.tbtag.Name = "tbtag";
             this.tbtag.Size = new System.Drawing.Size(389, 20);
             this.tbtag.TabIndex = 3;
+            this.tbtag.Tag = "1";
             // 
             // label1
             // 
@@ -172,7 +181,7 @@
             this.labI2.Name = "labI2";
             this.labI2.Size = new System.Drawing.Size(31, 13);
             this.labI2.TabIndex = 5;
-            this.labI2.Text = "Info1";
+            this.labI2.Text = "Info2";
             this.labI2.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
@@ -218,6 +227,7 @@
             this.tbImg.Name = "tbImg";
             this.tbImg.Size = new System.Drawing.Size(331, 20);
             this.tbImg.TabIndex = 7;
+            this.tbImg.Tag = "1";
             this.tbImg.TextChanged += new System.EventHandler(this.tbImg_TextChanged);
             // 
             // butAdd
@@ -236,6 +246,7 @@
             this.tb3D.Name = "tb3D";
             this.tb3D.Size = new System.Drawing.Size(331, 20);
             this.tb3D.TabIndex = 10;
+            this.tb3D.Tag = "1";
             // 
             // but3d
             // 
@@ -265,6 +276,7 @@
             this.butLimpa.TabIndex = 8;
             this.butLimpa.Text = "Limpar";
             this.butLimpa.UseVisualStyleBackColor = true;
+            this.butLimpa.Click += new System.EventHandler(this.butLimpa_Click);
             // 
             // label2
             // 
@@ -281,6 +293,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(177, 20);
             this.tbNome.TabIndex = 11;
+            this.tbNome.Tag = "1";
             // 
             // tbPreco
             // 
@@ -288,6 +301,7 @@
             this.tbPreco.Name = "tbPreco";
             this.tbPreco.Size = new System.Drawing.Size(177, 20);
             this.tbPreco.TabIndex = 11;
+            this.tbPreco.Tag = "1";
             // 
             // label3
             // 
@@ -304,6 +318,7 @@
             this.tbCod.Name = "tbCod";
             this.tbCod.Size = new System.Drawing.Size(100, 20);
             this.tbCod.TabIndex = 13;
+            this.tbCod.Tag = "2";
             // 
             // butRem
             // 

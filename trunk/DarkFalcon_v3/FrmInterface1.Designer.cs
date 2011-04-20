@@ -144,7 +144,18 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Motherboard"});
+            "Gabinete",
+            "Motherboard",
+            "Processador",
+            "Memoria",
+            "Fonte",
+            "HD",
+            "Leitor",
+            "Monitor",
+            "Placa de Video",
+            "Placa de Rede",
+            "Placa de Som",
+            "Outros"});
             this.comboBox1.Location = new System.Drawing.Point(22, 21);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(145, 21);
@@ -296,6 +307,13 @@
             this.oleDbDataAdapter2.UpdateCommand = this.oleDbUpdateCommand2;
             // 
             // button2
+            this.button2.Location = new System.Drawing.Point(67, 440);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Próximo";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             this.button2.Location = new System.Drawing.Point(67, 440);
             this.button2.Name = "button2";
@@ -316,6 +334,14 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(11, 234);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "PRONTO";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // FrmInterface1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
