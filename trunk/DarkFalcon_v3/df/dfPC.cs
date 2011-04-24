@@ -127,7 +127,9 @@ namespace DarkFalcon.df
                         if (_mem.replace(Obj, Target) == "ok")
                         {
                             return Obj.Tipo;
+
                         }else{
+                            if (Obj.Tipo == "Memoria")
                             return "Não foi possivel substitir "+Target.Nome+ " por "+ Obj.Nome;
                         }
                        
@@ -137,6 +139,7 @@ namespace DarkFalcon.df
                             }
                             else
                             {
+                                if (Obj.Tags.compat.Contains("usb") || Obj.Tags.compat.Contains("ps2"))
                                 return "Não foi possivel substitir " + Target.Nome + " por " + Obj.Nome;
                             }
                         if (_monitor.replace(Obj, Target) == "ok")
@@ -145,6 +148,7 @@ namespace DarkFalcon.df
                         }
                         else
                         {
+                            if (Obj.Tipo == "Monitor")
                             return "Não foi possivel substitir " + Target.Nome + " por " + Obj.Nome;
                         }
                         if (_da.replace(Obj, Target) == "ok")
@@ -153,6 +157,7 @@ namespace DarkFalcon.df
                         }
                         else
                         {
+                            if (Obj.Tipo == "HD" || Obj.Tipo == "Leitor")
                             return "Não foi possivel substitir " + Target.Nome + " por " + Obj.Nome;
                         }
                         if (_pl.replace(Obj, Target) == "ok")
@@ -165,6 +170,7 @@ namespace DarkFalcon.df
                         }
                         else
                         {
+                            if (Obj.Tipo.Contains("Pla"))
                             return "Não foi possivel substitir " + Target.Nome + " por " + Obj.Nome;
                         }
                         return ("Não é um Componente aceito.");

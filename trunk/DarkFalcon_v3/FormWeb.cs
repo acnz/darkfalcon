@@ -14,12 +14,17 @@ namespace DarkFalcon
         public FormWeb()
         {
             InitializeComponent();
-            webBrowser1.Navigate("c:\\youtube.html");
+            webBrowser1.Navigate(Properties.Settings.Default.CRoot+"youtube.html");
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             
+        }
+
+        private void FormWeb_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -30,33 +30,6 @@ namespace DarkFalcon
         bool isPerPixelLightingEnabled;
         private BoundingSphere boundingSphere;
 
-        RenderTarget2D sceneTarget;
-        RenderTarget2D normalDepthAlphaTarget;
-
-        Effect renderEffect;
-        Effect postprocessEffect;
-
-        Texture2D lightIntensityTex;
-        Texture2D pencilTex;
-        Texture2D trooperTex;
-        Texture2D randNumbersTex;
-
-        Model trooper;
-
-        TimeSpan timeToChange;
-        double pencilVelocity;
-        float offset;
-        float vertexOffset;
-
-        int randDataSize;
-
-        Random random;
-
-        bool renderGeometryEdges;
-        bool renderEdgeDetection;
-        bool renderCelShading;
-
-        bool SM30Supported;
         #endregion
 
         #region Initialization

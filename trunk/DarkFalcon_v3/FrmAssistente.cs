@@ -36,7 +36,7 @@ namespace DarkFalcon
 
             if (comboBox1.SelectedIndex == 0)
             {
-                FileStream youtube = File.Create("c:\\youtube.html");
+                FileStream youtube = File.Create(Properties.Settings.Default.CRoot+"youtube.html");
                 using (StreamWriter writer = new StreamWriter(youtube))
                 {
                     writer.Write("<html>");
@@ -50,7 +50,7 @@ namespace DarkFalcon
             }
             else if (comboBox1.SelectedIndex == 1)
             {
-                FileStream youtube = File.Create("c:\\youtube.html");
+                FileStream youtube = File.Create(Properties.Settings.Default.CRoot + "youtube.html");
                 using (StreamWriter writer = new StreamWriter(youtube))
                 {
                     writer.Write("<html>");
@@ -70,6 +70,11 @@ namespace DarkFalcon
 
             FormWeb b = new FormWeb();
             b.Show();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
         }
             
         }
