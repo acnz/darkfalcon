@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Storage;
 using gma.System.Windows;
 using System.Windows.Forms;
 using DarkFalcon.df;
+using DarkFalcon.gui;
 
 namespace DarkFalcon
 {
@@ -23,7 +24,7 @@ namespace DarkFalcon
     {
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        public SpriteFont font;
+        SpriteFont font;
         public Texture2D background;
         public bool noTabs;
         Texture2D white;
@@ -37,14 +38,16 @@ namespace DarkFalcon
 
         dfPC _pc;
 
-        List<_3DClickable> listaHUD = new List<_3DClickable>();
-        public List<_3DClickable> listaMenu = new List<_3DClickable>();
-        public List<_3DCheckbox> groupM = new List<_3DCheckbox>();
+        hud _hud;
+        public SpriteFont hudf;
+        List<_Control> listaHUD = new List<_Control>();
+        public List<_Control> listaMenu = new List<_Control>();
+        public List<_Checkbox> groupM = new List<_Checkbox>();
 
         private IntPtr drawSurface;
         FrmTabs fm;
         private int MouseWheel;
-        MouseState prevMouse;
+        public MouseState prevMouse;
         UserActivityHook actHook;
 
          public PcView(IntPtr drawSurface, FrmTabs frm)
@@ -146,7 +149,12 @@ namespace DarkFalcon
 
             _pc = new dfPC(true);
             cam.ResetCamera();
-        
+
+            _hud = new hud(this);
+            _hud.Initialize(Content, graphics.GraphicsDevice);
+
+            createHUD();
+
 
         }
 
@@ -160,47 +168,59 @@ namespace DarkFalcon
             spriteBatch = new SpriteBatch(GraphicsDevice);
             this.cam = new CameraTP(GraphicsDevice, lista3D);
             font = Content.Load<SpriteFont>("Arial");
+            hudf = Content.Load<SpriteFont>("hudf");
             background = Content.Load<Texture2D>("Textures//aurora");
             white = Content.Load<Texture2D>("Textures//white");
             this.monitor = new _3DObject("monitorc", cam, this.Content, Vector3.Zero, Vector3.Zero, 3f);
             this.gabinete = new _3DObject("Monitor/2/2", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 30f);
            // cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
-            createHUD();
+            
           
             // TODO: use this.Content to load your game content here
         }
 
         void createHUD()
         {
-            _3DCheckbox cbMenu = new _3DCheckbox(this, "Menu", new Vector2(10, 0), false);
+            
+            _Menubar mbMenu = new _Menubar(_hud);
 
+            _Button but1 = new _Button(_hud, "Imagens","wow", new Vector2(300, 40));
+            _Button but2 = new _Button(_hud, "Imagens","teste", new Rectangle(10, 40,20,200),"default");
 
-            _3DCheckbox cbMother = new _3DCheckbox(this, "Motherboard", new Vector2(30, 40), false);
-            _3DCheckbox cbPro = new _3DCheckbox(this, "Processador", new Vector2(30, 80), false);
-            _3DCheckbox cbMon = new _3DCheckbox(this, "Monitor", new Vector2(30, 120), false);
-            _3DCheckbox cbGab = new _3DCheckbox(this, "Gabinete", new Vector2(30, 160), false);
-
-            _3DButton butImg = new _3DButton(this, "Imagens", new Vector2(300, 40));
-            _3DImageBox Img = new _3DImageBox(this, "check", new Vector2(400, 40));
-
-            listaHUD.Add(cbMenu);
-            groupM.Add(cbMother);
-            groupM.Add(cbMon);
-            groupM.Add(cbPro);
-            groupM.Add(cbGab);
-            listaMenu.Add(butImg);
-            foreach (_3DCheckbox cb in groupM)
-            {
-                cb.modoRadio();
-                listaHUD.Add(cb);
-            }
-            foreach (_3DClickable ob in listaMenu)
-            {
-                listaHUD.Add(ob);
-            }
-            listaHUD.Add(Img);
+            but1.OnMouseOut = new EventHandler(but1_out);
+            but1.OnPress = new EventHandler(but1_press);
+            but1.OnMouseOver = new EventHandler(but1_in);
+            but1.OnRelease = new EventHandler(but1_release);
+            but2.OnMouseOut = new EventHandler(but1_out);
+            but2.OnPress = new EventHandler(but1_press);
+            but2.OnMouseOver = new EventHandler(but1_in);
+            but2.OnRelease = new EventHandler(but1_release);
+            _hud.add(but1);
+            _hud.add(but2);
 
         }
+
+        #region events
+
+        public void but1_out(object sender, EventArgs e)
+        {
+            Console.WriteLine(((_Button)sender).Name + " out");
+        }
+        public void but1_press(object sender, EventArgs e)
+        {
+            Console.WriteLine(((_Button)sender).Name + " pressed");
+        }
+        public void but1_in(object sender, EventArgs e)
+        {
+            Console.WriteLine(((_Button)sender).Name + " in");
+        }
+        public void but1_release(object sender, EventArgs e)
+        {
+            Console.WriteLine(((_Button)sender).Name + " released");
+        }
+
+        #endregion
+
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -215,99 +235,24 @@ namespace DarkFalcon
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-       bool nenhum = true;
         protected override void Update(GameTime gameTime)
         {
-           
-            // Allows the game to exit
-            //myObject.Rotation += (float)gameTime.ElapsedGameTime.TotalMilliseconds/10 *
-                // TODO: Add your update logic here
-            prevMouse = Mouse.GetState();
-            //Console.WriteLine(focus);
             if (!focus) MouseWheel =0;
             cam.Update(Matrix.CreateTranslation(monitor.Position+new Vector3(5,0,-10)), MouseWheel);
             MouseWheel = 0;
+
+            _hud.Update();
             
+
 
             foreach (_3DObject ob in lista3D)
             {
                 ob.Update();
             }
-            foreach (_3DClickable ob in listaHUD)
-            {
-                ob.Update();
-            }
-
-            if (((_3DCheckbox)this.listaHUD[0]).IsChecked)
-            {
-                if (alpha <= 0.7f)
-                    alpha += 0.05f;
-                if (alpha > 0.6f)
-                {
-                    nenhum = true;
-                    foreach (_3DCheckbox cb in groupM)
-                    {
-                        cb.On = true;
-
-                        if (cb.IsChecked)
-                        {
-                            switch (cb.Nome)
-                            {
-                                case "Motherboard":
-                                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Image = _pc.Motherboard.LocalImagem2D;
-                                    break;
-                                case "Processador":
-                                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Image = _pc.Processador.LocalImagem2D;
-                                    break;
-                                case "Gabinete":
-                                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Image = _pc.Gabinete.LocalImagem2D;
-                                    break;
-
-                            }
-                            nenhum = false;
-                            foreach (_3DClickable ob in listaMenu)
-                            {
-
-                                ob.On = true;
-                            }
-                        }
-                        else
-                        {
-                            if (nenhum)
-                                foreach (_3DClickable ob in listaMenu)
-                                {
-                                    ob.On = false;
-                                }
-                        }
-                    }
-
-                }
-
-                if (((_3DButton)listaMenu[0]).Clicked)
-                {
-                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).On = true;
-                }
-                if (((_3DImageBox)listaHUD[listaHUD.Count-1]).Clicked)
-                {
-                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).On = false;
-                    ((_3DImageBox)listaHUD[listaHUD.Count - 1]).Clicked = false;
-                }
-            }
-            else
-            {
-                if (alpha >= 0.0f)
-                    alpha -= 0.05f;
-
-                foreach (_3DClickable ob in listaHUD)
-                {
-                    listaHUD[0].On = true;
-                    ob.On = false;
-                }
-
-            }
-
+          
 
             base.Update(gameTime);
+            prevMouse = Mouse.GetState();
         }
 
         /// <summary>
@@ -342,10 +287,9 @@ namespace DarkFalcon
             spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));
             spriteBatch.End();
 
-            foreach (_3DClickable ob in listaHUD)
-            {
-                ob.Draw();
-            }
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+            _hud.Draw();
+            spriteBatch.End();
 
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
             //spriteBatch.DrawString(font, Out, new Vector2(0, graphics.PreferredBackBufferHeight - 40), Color.White);

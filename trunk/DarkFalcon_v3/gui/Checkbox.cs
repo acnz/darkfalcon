@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
-namespace DarkFalcon
+namespace DarkFalcon.gui
 {
     /// <summary>
     /// A game component, inherits to Clickable.
@@ -18,13 +18,12 @@ namespace DarkFalcon
     /// Has a state of IsChecked that is switched by click.
     /// Draws content according to state.
     /// </summary>
-    public class _3DCheckbox : _3DClickable
+    public class _Checkbox : _Control
     {
         #region Fields
         string asset;
        // Texture2D textureOn;
         bool isChecked;
-        bool radioMode = false;
 
         #region Public accessors
         public bool IsChecked { get { return isChecked; } set { isChecked = value; } }
@@ -40,13 +39,9 @@ namespace DarkFalcon
         /// <param name="textureName">Texture name</param>
         /// <param name="targetRectangle">Position of the component on the screen</param>
         /// <param name="isChecked">Initial state of the checkbox</param>
-        public _3DCheckbox(PcView game, string textureName, Vector2 Location, bool isChecked)
+        public _Checkbox(hud game)
             : base(game)
         {
-            Rectangle rec = new Rectangle((int)Location.X, (int)Location.Y, (int)Game.font.MeasureString(textureName).X, (int)Game.font.MeasureString(textureName).Y);
-            Rectangle = rec;
-            asset = textureName;
-            this.isChecked = isChecked;
         }
 
         /// <summary>
@@ -61,19 +56,7 @@ namespace DarkFalcon
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update()
         {
-            if(On)
-            HandleInput();
-
-            isChecked = IsClicked ? !isChecked : isChecked;
-            if (radioMode)
-            {
-                if (isChecked)
-                {
-                    foreach (_3DCheckbox ob in Game.groupM)
-                        ob.IsChecked = false;
-                    this.IsChecked = true;
-                }
-            }
+           
         }
 
         /// <summary>
@@ -84,15 +67,8 @@ namespace DarkFalcon
 
         public override void Draw()
         {
-            Game.spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            Game.spriteBatch.DrawString(Game.font, asset , new Vector2(Rectangle.X, Rectangle.Y),
-                IsChecked ? new Color(Color.Red, alpha) : new Color(Color.White, alpha));
-            Game.spriteBatch.End();
         }
 
-        public void modoRadio(){
-            radioMode = true;
-        }
         #endregion
     }
 }

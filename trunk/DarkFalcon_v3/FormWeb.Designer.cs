@@ -49,6 +49,7 @@
             this.Controls.Add(this.webBrowser1);
             this.Name = "FormWeb";
             this.Text = "FormWeb";
+            this.Load += new System.EventHandler(this.FormWeb_Load);
             this.ResumeLayout(false);
 
         }

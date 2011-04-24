@@ -16,7 +16,8 @@
     </ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <StartupObject>DarkFalcon.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -91,13 +92,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gui\Checkbox.cs" />
-    <Compile Include="gui\hud.cs" />
-    <Compile Include="gui\iControl.cs" />
-    <Compile Include="gui\Menubar.cs" />
-    <Compile Include="gui\Control.cs" />
-    <Compile Include="gui\Button.cs" />
-    <Compile Include="gui\Imagebox.cs" />
+    <Compile Include="Classes3D\Buttons\Checkbox.cs" />
+    <Compile Include="Classes3D\Buttons\Clickable.cs" />
+    <Compile Include="Classes3D\Buttons\Button.cs" />
+    <Compile Include="Classes3D\Buttons\Imagebox.cs" />
     <Compile Include="Classes3D\CameraTP.cs" />
     <Compile Include="Classes3D\User32.cs" />
     <Compile Include="Classes3D\_3DObject.cs" />
@@ -112,12 +110,6 @@
     <Compile Include="df\dfTags.cs" />
     <Compile Include="df\dfCom.cs" />
     <Compile Include="df\dfPC.cs" />
-    <Compile Include="FormWeb.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormWeb.Designer.cs">
-      <DependentUpon>FormWeb.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmAdmDB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,10 +221,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormWeb.resx">
-      <DependentUpon>FormWeb.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmAdmDB.resx">
       <DependentUpon>FrmAdmDB.cs</DependentUpon>
     </EmbeddedResource>

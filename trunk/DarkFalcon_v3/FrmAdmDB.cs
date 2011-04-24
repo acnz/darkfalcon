@@ -431,7 +431,7 @@ namespace DarkFalcon
         private void butLimpa_Click(object sender, EventArgs e)
         {
             foreach (Control c in this.Controls)
-                if (c.Tag == "1") c.Text = "";
+                if ((string)c.Tag == "1") c.Text = "";
         }
     }
 }

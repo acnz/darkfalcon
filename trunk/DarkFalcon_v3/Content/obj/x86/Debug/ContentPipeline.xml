@@ -6,15 +6,15 @@
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-04-17T13:38:34.015625-03:00</Value>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2010-11-14T14:02:32.6520194-02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
