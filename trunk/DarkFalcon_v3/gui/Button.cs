@@ -25,10 +25,7 @@ namespace DarkFalcon.gui
         Texture2D[] textures;
         string texturePath = @"gui\button\";
         bool ct = false;
-        SpriteFont Font;
 
-        MouseState mNew;
-        MouseState mOld;
 
         Vector2 textPos;
         Vector2 textSize;
@@ -40,6 +37,8 @@ namespace DarkFalcon.gui
 
         bool bMouseOver = false;
         bool bMouseDown = false;
+
+        public SpriteEffects Effect { get; set;  }
 
         #endregion
 
@@ -110,6 +109,7 @@ namespace DarkFalcon.gui
 
         public override void Initialize(ContentManager content, GraphicsDevice graphics)
         {
+            base.Initialize(content, graphics);
             if (ct)
             {
                 texture = Texture2D.FromFile(graphics, texturePath + "base.png");
@@ -141,7 +141,7 @@ namespace DarkFalcon.gui
                
 
             }
-            Font = Game.hudf;
+            
 
             if (Text != string.Empty)
                 textSize = Font.MeasureString(Text);
@@ -150,7 +150,8 @@ namespace DarkFalcon.gui
             area.Y = (int)(Position.Y);
             area.Width = (int)Size.X;
             area.Height = (int)Size.Y;
-            base.Initialize(content, graphics);
+            Effect = SpriteEffects.None;
+            if (scale == 0f) scale = 1f;
         }
 
         public override void Dispose()
@@ -169,28 +170,15 @@ namespace DarkFalcon.gui
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update()
         {
-
+            base.Update();
                 area.X = (int)(Position.X);
                 area.Y = (int)(Position.Y);
            
-            mNew = Mouse.GetState();
-            mOld = Owner.Game.prevMouse;
+
             UpdateEvents();
         }
             private void UpdateEvents()
         {
-            bool a1 = Owner.area.Contains(area);
-            bool a2 = area.Contains(mNew.X, mNew.Y);
-            bool wasPressed = false;
-            if ((mNew.LeftButton == ButtonState.Pressed) && (mOld.LeftButton == ButtonState.Released))
-                wasPressed = true;
-            else
-                wasPressed = false;
-            bool wasReleased = false;
-            if ((mNew.LeftButton == ButtonState.Released) && (mOld.LeftButton == ButtonState.Pressed))
-                wasReleased = true;
-            else
-                wasReleased = false;
 
 
             if (Owner != null && a1 && a2)
@@ -206,7 +194,10 @@ namespace DarkFalcon.gui
                 {
                     bMouseDown = true;
                     if (OnPress != null)
+                    {
                         OnPress(this, null);
+                        Owner.focus = this;
+                    }
                 }
                 else if (bMouseDown && wasReleased)
                 {
@@ -230,8 +221,6 @@ namespace DarkFalcon.gui
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
             public override void Draw()
             {
-
-                SpriteBatch spriteBatch = Game.spriteBatch;
                 if (Text != string.Empty)
                 {
                     textPos.X = (int)(area.X + (Size.X - textSize.X) / 2f);
@@ -244,22 +233,22 @@ namespace DarkFalcon.gui
                     {
                         if (bMouseDown)
                         {
-                            spriteBatch.Draw(texture, area, Color.DimGray);
+                            spriteBatch.Draw(texture, new Vector2(area.X, area.Y), new Rectangle(0, 0, area.Width, area.Height), Color.DimGray, 0f, Vector2.Zero, scale, Effect, 0f);
                             if (Text != string.Empty)
-                                spriteBatch.DrawString(Font, Text, textPos, Color.DimGray);
+                                spriteBatch.DrawString(Font, Text, textPos, Color.DimGray, 0f, Vector2.Zero, scale, Effect, 0f);
                         }
                         else
                         {
-                            spriteBatch.Draw(texture, area, Color.White);
+                            spriteBatch.Draw(texture, new Vector2(area.X, area.Y), new Rectangle(0, 0, area.Width, area.Height), Color.White, 0f, Vector2.Zero, scale, Effect, 0f);
                             if (Text != string.Empty)
-                                spriteBatch.DrawString(Font, Text, textPos, Color.White);
+                                spriteBatch.DrawString(Font, Text, textPos, Color.White, 0f, Vector2.Zero, scale, Effect, 0f);
                         }
                     }
                     else
                     {
-                        spriteBatch.Draw(texture, area, new Color(Color.White.ToVector3() * 0.85f));
+                        spriteBatch.Draw(texture, new Vector2(area.X,area.Y), new Rectangle(0,0,area.Width,area.Height), new Color(Color.White.ToVector3() * 0.85f), 0f, Vector2.Zero, scale, Effect, 0f);
                         if (Text != string.Empty)
-                            spriteBatch.DrawString(Font, Text, textPos, Color.White);
+                            spriteBatch.DrawString(Font, Text, textPos, Color.White, 0f, Vector2.Zero, scale, Effect, 0f);
                     }
                 }
                 else

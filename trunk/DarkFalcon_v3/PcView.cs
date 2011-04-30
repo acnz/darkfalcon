@@ -105,6 +105,7 @@ namespace DarkFalcon
          void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
          {
              e.GraphicsDeviceInformation.PresentationParameters.DeviceWindowHandle = drawSurface;
+             e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
          }
 
          public void resize(FrmTabs frm)
@@ -183,20 +184,26 @@ namespace DarkFalcon
         {
             
             _Menubar mbMenu = new _Menubar(_hud);
-
-            _Button but1 = new _Button(_hud, "Imagens","wow", new Vector2(300, 40));
-            _Button but2 = new _Button(_hud, "Imagens","teste", new Rectangle(10, 40,20,200),"default");
-
-            but1.OnMouseOut = new EventHandler(but1_out);
-            but1.OnPress = new EventHandler(but1_press);
-            but1.OnMouseOver = new EventHandler(but1_in);
-            but1.OnRelease = new EventHandler(but1_release);
+            _Label lab1 = new _Label(_hud, "lab1", new Vector2(300, 40), "Label1234", 50, _Label.Align.Left);
+            _Textbox tb1 = new _Textbox(_hud, "tb1", new Vector2(400, 40), "textBox1234", 50);
+            _Button but1 = new _Button(_hud, "b1","wow", new Vector2(110, 40));
+            _Button but2 = new _Button(_hud, "b2", "teste", new Rectangle(10, 40, 20, 200), "default");
+            _ComboBox cb1 = new _ComboBox(_hud,"cb1", new Vector2(500, 50),150, new string[] { "gogo", "toto","coco","fofo","lolo","hoho", "toto","coco","fofo","lolo","hoho", "toto","coco","fofo","lolo","hoho"});
+            _Listbox lb1 = new _Listbox(_hud, "lb1", new Vector2(200, 100), 200, 60, new string[] { "gogo", "toto", "yoydddddddddddddddddddddddddo"});
+            tb1.OnMouseOut = new EventHandler(but1_out);
+            tb1.OnPress = new EventHandler(but1_press);
+            tb1.OnMouseOver = new EventHandler(but1_in);
+            tb1.OnRelease = new EventHandler(but1_release);
             but2.OnMouseOut = new EventHandler(but1_out);
             but2.OnPress = new EventHandler(but1_press);
             but2.OnMouseOver = new EventHandler(but1_in);
             but2.OnRelease = new EventHandler(but1_release);
             _hud.add(but1);
             _hud.add(but2);
+            _hud.add(lab1);
+           _hud.add(tb1);
+            _hud.add(lb1);
+            _hud.add(cb1);
 
         }
 
@@ -204,19 +211,19 @@ namespace DarkFalcon
 
         public void but1_out(object sender, EventArgs e)
         {
-            Console.WriteLine(((_Button)sender).Name + " out");
+            Console.WriteLine(((_Control)sender).Name + " out");
         }
         public void but1_press(object sender, EventArgs e)
         {
-            Console.WriteLine(((_Button)sender).Name + " pressed");
+            Console.WriteLine(((_Control)sender).Name + " pressed");
         }
         public void but1_in(object sender, EventArgs e)
         {
-            Console.WriteLine(((_Button)sender).Name + " in");
+            Console.WriteLine(((_Control)sender).Name + " in");
         }
         public void but1_release(object sender, EventArgs e)
         {
-            Console.WriteLine(((_Button)sender).Name + " released");
+            Console.WriteLine(((_Control)sender).Name + " released");
         }
 
         #endregion

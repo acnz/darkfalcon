@@ -12,17 +12,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DarkFalcon.gui
 {
-    /// <summary>
-    /// A game component, inherits to Clickable.
-    /// Has associated On and Off content.
-    /// Has a state of IsChecked that is switched by click.
-    /// Draws content according to state.
-    /// </summary>
     public class _Imagebox : _Control
     {
         #region Fields
         string asset;
-        Vector2 Location;
         private bool _clicked = false;
         public bool Clicked
         {
@@ -60,7 +53,7 @@ namespace DarkFalcon.gui
         private void Load()
         {
             textureOn = Game.Content.Load<Texture2D>("Textures//" + asset);
-            rec = new Rectangle((int)Location.X,(int)Location.Y,(int)textureOn.Width,(int)textureOn.Height);
+            //rec = new Rectangle((int)Location.X,(int)Location.Y,(int)textureOn.Width,(int)textureOn.Height);
         }
 
 

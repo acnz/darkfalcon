@@ -13,9 +13,10 @@ namespace DarkFalcon.gui
         PcView _game;
         public PcView Game { get { return _game; } }
         List<_Control> _controls;
-        ContentManager con;
-        GraphicsDevice gra;
+        public ContentManager con;
+        public GraphicsDevice gra;
         public Rectangle area;
+        public _Control focus;
 
         public hud(PcView g)
         {
