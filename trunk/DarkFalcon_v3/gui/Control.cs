@@ -14,6 +14,7 @@ namespace DarkFalcon.gui
     /// Has a state of IsTouching and IsClicked.
     /// </summary>
     public class _Control : i_Control
+
     {
 
         #region Fields
@@ -28,7 +29,11 @@ namespace DarkFalcon.gui
         bool isDisposed=true;
         PcView _game;
         hud owner;
-       
+        internal MouseState mNew;
+        internal MouseState mOld;
+        internal SpriteBatch spriteBatch;
+        internal SpriteFont Font;
+        internal bool a1, a2, wasPressed, wasReleased;
 
         public Rectangle area = Rectangle.Empty;
 
@@ -101,6 +106,7 @@ namespace DarkFalcon.gui
         public _Control(hud pai) { 
             this._game = pai.Game;
         this.owner = pai;
+
         }
         public _Control(hud pai,string name)
         {
@@ -119,7 +125,11 @@ namespace DarkFalcon.gui
         virtual public void Initialize(ContentManager content, GraphicsDevice graphics)
         {
             isDisposed = false;
-            this.owner.add(this);
+            //this.owner.add(this);
+            spriteBatch = Game.spriteBatch;
+            Font = Game.hudf;
+            area.X = (int)(Position.X);
+            area.Y = (int)(Position.Y);
         }
         virtual public void Dispose()
         {
@@ -129,10 +139,23 @@ namespace DarkFalcon.gui
         #endregion
 
         #region Input handling
-
+        
         virtual public void Update()
         {
-
+            mNew = Mouse.GetState();
+            mOld = Owner.Game.prevMouse;
+            a1 = Owner.area.Contains(area);
+            a2 = area.Contains(mNew.X, mNew.Y);
+            wasPressed = false;
+            if ((mNew.LeftButton == ButtonState.Pressed) && (mOld.LeftButton == ButtonState.Released))
+                wasPressed = true;
+            else
+                wasPressed = false;
+            wasReleased = false;
+            if ((mNew.LeftButton == ButtonState.Released) && (mOld.LeftButton == ButtonState.Pressed))
+                wasReleased = true;
+            else
+                wasReleased = false;
 
 
        }

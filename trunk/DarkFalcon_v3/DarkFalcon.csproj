@@ -89,11 +89,26 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
       <Private>False</Private>
     </Reference>
+    <Reference Include="XNATweener, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\XNATweener.dll</HintPath>
+    </Reference>
+    <Reference Include="xWinFormsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\xWinFormsLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gui\Checkbox.cs" />
+    <Compile Include="gui\ComboBox.cs" />
+    <Compile Include="gui\help\HScrollbar.cs" />
+    <Compile Include="gui\help\KeyboardHelper.cs" />
+    <Compile Include="gui\help\Scrollbar.cs" />
+    <Compile Include="gui\help\VScrollbar.cs" />
     <Compile Include="gui\hud.cs" />
     <Compile Include="gui\iControl.cs" />
+    <Compile Include="gui\Label.cs" />
+    <Compile Include="gui\Listbox.cs" />
     <Compile Include="gui\Menubar.cs" />
     <Compile Include="gui\Control.cs" />
     <Compile Include="gui\Button.cs" />
@@ -154,6 +169,7 @@
     <Compile Include="FrmTabs.designer.cs">
       <DependentUpon>FrmTabs.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\Textbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PcView.cs" />

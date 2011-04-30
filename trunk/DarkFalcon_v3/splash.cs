@@ -29,7 +29,7 @@ namespace DarkFalcon
 
         private void splash_Load_1(object sender, EventArgs e)
         {
-            pictureBox1.Load("splash.png");
+            //pictureBox1.Load("splash.png");
             timer1.Enabled = true;
         }
 
