@@ -84,9 +84,10 @@ namespace DarkFalcon.gui
             cursorMiddle = new Rectangle(0, 3, cursorTex.Width, 1);
             cursorBottom = new Rectangle(0, cursorTex.Height - 3, cursorTex.Width, 3);
             cursorMidDest = new Rectangle(0, 0, cursorTex.Width, 1);
-
-
-            //area = new Rectangle(
+            backArea.X = (int)Position.X + 4;
+            backArea.Y = (int)Position.Y + 2;
+            backArea.Width = 4;
+            backArea.Height = (int)Height - 8;
         }
 
 
@@ -143,6 +144,7 @@ namespace DarkFalcon.gui
                 cursorPos.Y = Position.Y + Height - cursorArea.Height-2;
 
             float y = cursorPos.Y - backArea.Y;
+
             int value = 0;
 
             if (!inverted)
@@ -165,16 +167,14 @@ namespace DarkFalcon.gui
 
         public override void Draw()
         {
-            DrawBackground();            
+            DrawBackground();
+            
             DrawCursor();
         }
 
         private void DrawBackground()
         {
-            backArea.X = (int)Position.X+4;
-            backArea.Y = (int)Position.Y + 2;
-            backArea.Width = 4;
-            backArea.Height = (int)Height-8;
+           
             spriteBatch.Draw(background, backArea, Color.White);
         }
 

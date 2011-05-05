@@ -48,11 +48,12 @@ namespace DarkFalcon.gui
         public int Step { get { return step; } set { step = value; } }
 
         bool isScrolling = false;
+        bool isAutoScrolling = false;
         bool inverted = false;
         public bool Inverted { get { return inverted; } set { inverted = value; } }
 
         Texture2D cursorTex;
-        Rectangle cursorArea, cursorLeft, cursorRight, cursorMiddle, cursorMidDest;
+        Rectangle cursorArea, cursorLeft, cursorRight, cursorMiddle, cursorMidDest, masterArea;
         Vector2 cursorPos, cursorOffset;
 
         public EventHandler OnChangeValue = null;
@@ -63,22 +64,26 @@ namespace DarkFalcon.gui
             set { base.Width = value; if (!IsDisposed) Redraw(); }
         }
 
-        public _HScrollbar(hud pai,Vector2 position, float width):base(pai)
+        public _HScrollbar(hud pai, Vector2 position, float width, Rectangle masterarea)
+            : base(pai)
         {
             this.Position = position;
             this.Width = width;
             this.Height = 12;
+            this.masterArea = masterarea;
         }
 
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)
         {
-            btLeft = new _Button(Owner,"btLeft","", Position,"hscrollbar_button");
+            base.Initialize(content, graphics);
+
+            btLeft = new _Button(Owner,"btLeft","", Position,"hscrollbar");
             btLeft.OnPress = btUp_OnPress;
             btLeft.Initialize(content, graphics);
 
-            background = Texture2D.FromFile(graphics, @"scrollbar\hscrollbar_back.png");
+            background = Texture2D.FromFile(graphics, @"gui\scrollbar\hscrollbar_back.png");
 
-            cursorTex = Texture2D.FromFile(graphics, @"scrollbar\hscrollbar_cursor.png");
+            cursorTex = Texture2D.FromFile(graphics, @"gui\scrollbar\hscrollbar_cursor.png");
             cursorLeft = new Rectangle(0, 0, 3, cursorTex.Height);
             cursorMiddle = new Rectangle(3, 0, 1, cursorTex.Height);
             cursorRight = new Rectangle(cursorTex.Width - 3, 0, 3, cursorTex.Height);
@@ -86,17 +91,17 @@ namespace DarkFalcon.gui
 
             Redraw();
 
-            base.Initialize(content, graphics);
+            
         }
 
         private void Redraw()
         {
-            backArea.X = (int)Position.X + 12;
-            backArea.Y = (int)Position.Y;
-            backArea.Width = (int)Width - 24;
+            backArea.X = (int)Position.X + 4;
+            backArea.Y = (int)Position.Y + 2;
+            backArea.Width = (int)Width - 8;
             backArea.Height = 12;
 
-            btRight = new _Button(Owner,"btRight","", new Vector2(Position.X + Width - 12f, Position.Y), "hscrollbar_button");
+            btRight = new _Button(Owner,"btRight","", new Vector2(Position.X + Width - 12f, Position.Y), "hscrollbar");
             btRight.Effect = SpriteEffects.FlipHorizontally;
             btRight.OnPress = btDown_OnPress;
             btRight.Initialize(Owner.con, Owner.gra);
@@ -163,12 +168,29 @@ namespace DarkFalcon.gui
             {
                 if (wasPressed)
                 {
-                    isScrolling = true;
-                    cursorOffset = new Vector2(mNew.X, mNew.Y) - new Vector2(cursorArea.X, cursorArea.Y);
+                    if (cursorArea.Contains(mNew.X, mNew.Y))
+                    {
+                        isScrolling = true;
+                        cursorOffset = new Vector2(mNew.X, mNew.Y) - new Vector2(cursorArea.X, cursorArea.Y);
+                    }
+                    else if (btLeft.a2 || btRight.a2)
+                    {
+
+                    }else
+                    {
+                        isAutoScrolling = true;
+                    }
                 }
             }
 
-            if (isScrolling)
+            if (isAutoScrolling)
+            {
+                cursorOffset = new Vector2(0, 10);
+                UpdateScrolling();
+                isAutoScrolling = false;
+
+            }
+            else if (isScrolling)
                 if (mNew.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     UpdateScrolling();
                 else if (mNew.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released)
@@ -222,14 +244,15 @@ namespace DarkFalcon.gui
         }
 
         private void DrawBackground()
-        {            
+        {
+            
             spriteBatch.Draw(background, backArea, Color.White);
         }
 
         private void DrawCursor()
         {
-            cursorArea.Width = System.Math.Max(20, backArea.Width - System.Math.Max(20, max / 4));
-            cursorArea.Height = 12;
+            cursorArea.Width = System.Math.Max(20, backArea.Width/4);
+            cursorArea.Height = 8;
 
             cursorPos.Y = Position.Y;
             if (!isScrolling)

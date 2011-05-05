@@ -127,10 +127,10 @@ namespace DarkFalcon.gui
             this.Name = name;
             this.type = type;
 
-            if (type == Type.Horizontal)           
-                hscrollbar = new _HScrollbar(pai,position, size);            
+            if (type == Type.Horizontal)
+            hscrollbar = new _HScrollbar(pai, position, size, ma);            
             else if (type == Type.Vertical)
-                vscrollbar = new _VScrollbar(pai,position, size,ma);
+                vscrollbar = new _VScrollbar(pai, position, size, ma);
         }
 
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)

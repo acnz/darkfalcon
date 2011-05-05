@@ -128,11 +128,11 @@ namespace DarkFalcon
 
         private void FrmMain_ResizeEnd(object sender, EventArgs e)
         {
-            s = this.Size;
-            frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
-            frmI1.Left = s.Width - (frmI1.Size.Width + 20);
-            if (frmI1.Left < 745)
-                frmI1.Left = 745;
+            //s = this.Size;
+            //frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
+            //frmI1.Left = s.Width - (frmI1.Size.Width + 20);
+            //if (frmI1.Left < 745)
+            //    frmI1.Left = 745;
         }
 
         private void testeToolStripMenuItem_Click(object sender, EventArgs e)

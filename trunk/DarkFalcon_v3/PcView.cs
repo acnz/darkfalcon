@@ -124,7 +124,7 @@ namespace DarkFalcon
 
          public void FixPosition()
          {
-             User32.SetWindowPos((uint)this.Window.Handle, 0, fm.MdiParent.Location.X + fm.Location.X + 15, fm.MdiParent.Location.Y + fm.Location.Y + 105,
+             User32.SetWindowPos((uint)this.Window.Handle, 0, fm.MdiParent.Location.X + fm.Location.X+10, fm.MdiParent.Location.Y + fm.Location.Y+52,
  graphics.PreferredBackBufferWidth,
  graphics.PreferredBackBufferHeight, 0);
 
@@ -189,7 +189,8 @@ namespace DarkFalcon
             _Button but1 = new _Button(_hud, "b1","wow", new Vector2(110, 40));
             _Button but2 = new _Button(_hud, "b2", "teste", new Rectangle(10, 40, 20, 200), "default");
             _ComboBox cb1 = new _ComboBox(_hud,"cb1", new Vector2(500, 50),150, new string[] { "gogo", "toto","coco","fofo","lolo","hoho", "toto","coco","fofo","lolo","hoho", "toto","coco","fofo","lolo","hoho"});
-            _Listbox lb1 = new _Listbox(_hud, "lb1", new Vector2(200, 100), 200, 60, new string[] { "gogo", "toto", "yoydddddddddddddddddddddddddo"});
+            _Listbox lb1 = new _Listbox(_hud, "lb1", new Vector2(150, 180), 300, 80, new string[] { "gogo", "toto", "toto","coco","fofo","lolo","hoho", "yoydddddddddddddddddddddddddo"});
+           _Listflow lf1 = new _Listflow(_hud, "lf1", new Vector2(100, 300), 500, new dfCom[] { });
             tb1.OnMouseOut = new EventHandler(but1_out);
             tb1.OnPress = new EventHandler(but1_press);
             tb1.OnMouseOver = new EventHandler(but1_in);
@@ -204,6 +205,7 @@ namespace DarkFalcon
            _hud.add(tb1);
             _hud.add(lb1);
             _hud.add(cb1);
+            _hud.add(lf1);
 
         }
 

@@ -34,6 +34,7 @@ namespace DarkFalcon.gui
         internal SpriteBatch spriteBatch;
         internal SpriteFont Font;
         internal bool a1, a2, wasPressed, wasReleased;
+        internal Color[] c;
 
         public Rectangle area = Rectangle.Empty;
 
@@ -125,7 +126,7 @@ namespace DarkFalcon.gui
         virtual public void Initialize(ContentManager content, GraphicsDevice graphics)
         {
             isDisposed = false;
-            //this.owner.add(this);
+            c = new Color[] { new Color(230, 230, 230, 1), Color.White, Color.DimGray };
             spriteBatch = Game.spriteBatch;
             Font = Game.hudf;
             area.X = (int)(Position.X);

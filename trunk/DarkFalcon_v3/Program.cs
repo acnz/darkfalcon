@@ -28,9 +28,9 @@ namespace DarkFalcon
             frmTabs.MdiParent = frmMain;
             //eh o assistente
             frmTabs.Show();
-            frmTabs.Top += 188;
+            //frmTabs.Top += 188;
             
-            frmTabs.Size = new Size(745, frmTabs.MdiParent.MdiChildren[0].Size.Height - 188);
+            frmTabs.Size = new Size(1030, 792/*frmTabs.MdiParent.MdiChildren[0].Size.Height - 188*/);
 
             PcView game = new PcView(frmTabs.getDrawSurface(), frmTabs);
             frmTabs.getPcView(game);
