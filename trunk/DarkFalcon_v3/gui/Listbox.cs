@@ -121,8 +121,7 @@ namespace DarkFalcon.gui
 
             textOffset = new Vector2(5f, (int)((texture.Height - Font.LineSpacing) / 2f));
 
-            area.Width = (int)Width;
-            area.Height = (int)Height;
+
 
             #region Create Background Rectangles
             srcRect = new Rectangle[9];
@@ -155,11 +154,14 @@ namespace DarkFalcon.gui
            
 
             visibleItems = (int)System.Math.Ceiling(Height / Font.LineSpacing);
-            Height = visibleItems * Font.LineSpacing;
+            //Height = visibleItems * Font.LineSpacing - 8;
+
+            area.Width = (int)Width;
+            area.Height = (int)Height;
 
             selectionRect = new Rectangle(0, 0, (int)Width - 8, Font.LineSpacing - 2);
 
-            UpdateHScrollbar();
+            //UpdateHScrollbar();
             InitScrollbars(content, graphics);
 
             if (sorted)
@@ -178,7 +180,7 @@ namespace DarkFalcon.gui
                 hscrollbar.Dispose();
 
             #region initialize Horizontal scrollbar
-            if (HorizontalScrollbar)
+            if (!HorizontalScrollbar)
             {
                 if (items.Count > visibleItems)
                     hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 14, this.area);
@@ -192,7 +194,7 @@ namespace DarkFalcon.gui
 
             int vScrollbarHeight = 0;
             if (HorizontalScrollbar && hscrollbar.Visible && hscrollbar.Max > 0)
-                vScrollbarHeight = (int)Height - 14;
+                vScrollbarHeight = (int)Height - 12;
             else
                 vScrollbarHeight = (int)Height - 2;
 
@@ -239,8 +241,6 @@ namespace DarkFalcon.gui
                     if (selectedIndex != previousIndex && OnChangeSelection != null)
                         OnChangeSelection(items[selectedIndex], null);
                 }
-                if (new Rectangle((int)vscrollbar.Position.X, (int)vscrollbar.Position.Y, (int)vscrollbar.Width, (int)vscrollbar.Height).Contains(mNew.X, mNew.Y)) 
-                    vsa = true; else vsa = false;
                 if (area.Contains(mNew.X,mNew.Y))
                 {
                     if (!bMouseOver)

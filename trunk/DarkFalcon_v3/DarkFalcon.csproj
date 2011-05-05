@@ -103,12 +103,14 @@
     <Compile Include="gui\ComboBox.cs" />
     <Compile Include="gui\help\HScrollbar.cs" />
     <Compile Include="gui\help\KeyboardHelper.cs" />
+    <Compile Include="gui\help\Quad.cs" />
     <Compile Include="gui\help\Scrollbar.cs" />
     <Compile Include="gui\help\VScrollbar.cs" />
     <Compile Include="gui\hud.cs" />
     <Compile Include="gui\iControl.cs" />
     <Compile Include="gui\Label.cs" />
     <Compile Include="gui\Listbox.cs" />
+    <Compile Include="gui\Listflow.cs" />
     <Compile Include="gui\Menubar.cs" />
     <Compile Include="gui\Control.cs" />
     <Compile Include="gui\Button.cs" />

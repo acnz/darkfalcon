@@ -52,3 +52,4 @@ C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\D
 C:\Documents and Settings\Administrador\Desktop\hg\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FormWeb.resources
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.FormWeb.resources
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\XNATweener.dll
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Effects\reflect.xnb
