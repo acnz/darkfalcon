@@ -1,6 +1,6 @@
 ﻿namespace DarkFalcon
 {
-    partial class FrmTabs
+    partial class Frm3D
     {
         /// <summary>
         /// Required designer variable.
@@ -70,16 +70,16 @@
             this.TabPcs.TabIndexChanged += new System.EventHandler(this.TabPcs_TabIndexChanged);
             this.TabPcs.SelectedIndexChanged += new System.EventHandler(this.TabPcs_TabIndexChanged);
             // 
-            // FrmTabs
+            // Frm3D
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(930, 439);
             this.Controls.Add(this.PicPcView);
             this.Controls.Add(this.TabPcs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Name = "FrmTabs";
+            this.MaximizeBox = false;
+            this.Name = "Frm3D";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DarkFalcon v3";
             this.TopMost = true;
@@ -87,7 +87,9 @@
             this.Load += new System.EventHandler(this.FrmTabs_Load);
             this.SizeChanged += new System.EventHandler(this.FrmTabs_SizeChanged);
             this.Activated += new System.EventHandler(this.FrmTabs_Activated);
+            this.Enter += new System.EventHandler(this.FrmTabs_Enter);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmTabs_FormClosed);
+            this.Leave += new System.EventHandler(this.FrmTabs_Leave);
             this.Move += new System.EventHandler(this.FrmTabs_Move_1);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTabs_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmTabs_KeyDown);

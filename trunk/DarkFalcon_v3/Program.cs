@@ -18,19 +18,22 @@ namespace DarkFalcon
         static void Main(string[] args)
         {
             splash sp = new splash();
+            sp.StartPosition = FormStartPosition.Manual;
             sp.Show();
+            sp.Location = new Point(1000, 800);
             
             frmMain.IsMdiContainer = true;
             frmMain.Show();
+            frmMain.WindowState = FormWindowState.Maximized;
             frmMain.Visible = false;
 
-            FrmTabs frmTabs = new FrmTabs();
+            Frm3D frmTabs = new Frm3D();
             frmTabs.MdiParent = frmMain;
             //eh o assistente
             frmTabs.Show();
             //frmTabs.Top += 188;
             
-            frmTabs.Size = new Size(1030, 792/*frmTabs.MdiParent.MdiChildren[0].Size.Height - 188*/);
+            frmTabs.Size = new Size(1016, 674);
 
             PcView game = new PcView(frmTabs.getDrawSurface(), frmTabs);
             frmTabs.getPcView(game);

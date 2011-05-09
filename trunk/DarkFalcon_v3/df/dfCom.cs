@@ -40,19 +40,19 @@ namespace DarkFalcon.df
             set{_preco=value;}
         }
         public string LocalImagem2D  {
-            get { return (_image2d+"//"+_id); }
+            get { return (_image2d); }
             /// <summary>
             /// Digite somente o local(o nome da imagem é incluido automaticamente)
             /// </summary>
-            set { _image2d = value + "//" + _id; }
+            set { _image2d = value ; }
         }
         public string LocalImagem3D
         {
-            get { return (_image3d + "//" + _id); }
+            get { return (_image3d); }
             /// <summary>
             /// Digite somente o local(o nome da imagem é incluido automaticamente)
             /// </summary>
-            set { _image3d = value + "//" + _id; }
+            set { _image3d = value; }
         }
         #endregion
 #region Inicializadores
@@ -67,6 +67,17 @@ namespace DarkFalcon.df
            _image2d = "Textures//" + Tipo + "//" + ID;
 
             _image3d = "Models//" + Tipo + "//" + ID;
+        }
+        public dfCom(string IDDoComponete, string NomeDoComponente, string TipoDoComponente, float PrecoDoComponente, string TagsDoComponente,bool outros)
+        {
+            ID = IDDoComponete;
+            Nome = NomeDoComponente;
+            Tipo = TipoDoComponente;
+            Preco = PrecoDoComponente;
+            Tags = new dfTags(TagsDoComponente);
+            _image2d = "Textures//Outros//" + ID;
+
+            _image3d = "Models//Outros//" + ID;
         }
         public dfCom()
         {
@@ -85,28 +96,29 @@ namespace DarkFalcon.df
         }
         public dfCom(bool nulo)
         {
-            ID = "?";
+            ID = "x";
             Nome = "?";
-            Tipo = "?";
+            Tipo = "x";
             Preco = 0f;
-
+            Tags = new dfTags("");
             _image2d = "Textures//" + Tipo + "//" + ID;
 
             _image3d = "Models//" + Tipo + "//" + ID;
         }
         public dfCom(string tipado)
         {
-            ID = "?";
+            ID = "x";
             Nome = "?";
             Tipo = tipado;
             Preco = 0f;
+            Tags = new dfTags("");
             _image2d = "Textures//" + Tipo + "//" + ID;
 
             _image3d = "Models//" + Tipo + "//" + ID;
         }
         public dfCom(string tipado,string tags)
         {
-            ID = "?";
+            ID = "x";
             Nome = "?";
             Tipo = tipado;
             Preco = 0f;
@@ -114,6 +126,17 @@ namespace DarkFalcon.df
             _image2d = "Textures//" + Tipo + "//" + ID;
 
             _image3d = "Models//" + Tipo + "//" + ID;
+        }
+        public dfCom(string tipado, string tags,bool outros)
+        {
+            ID = "x";
+            Nome = "?";
+            Tipo = tipado;
+            Preco = 0f;
+            Tags = new dfTags(tags);
+            _image2d = "Textures//Outros//" + ID;
+
+            _image3d = "Models//Outros//" + ID;
         }
         #endregion
 #region Funcs

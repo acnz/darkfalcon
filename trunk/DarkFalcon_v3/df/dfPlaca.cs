@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DarkFalcon.df
 {
-        public class dfPlaca : dfIOb
+        public class dfPlaca : dfIObG
         {
             dfCom[] _pcie2;
             dfCom[] _pcie1;
@@ -312,10 +312,21 @@ namespace DarkFalcon.df
             }
             internal string replace(dfCom Obj, dfCom Target)
             {
-                dfCom a = GetAll().Find(i => i == Target);
-                if (a != null)
+                dfCom[] found = new dfCom[]{};
+                int a = -1;
+                int index = -1;
+                a = _pcie2.ToList().FindIndex(i => i == Target);
+                if (a != -1) {found = _pcie2;index = a; }
+                a = _pcie1.ToList().FindIndex(i => i == Target);
+                if (a != -1) {found = _pcie1;index = a; }
+                a = _pci.ToList().FindIndex(i => i == Target);
+                if (a != -1) { found = _pci; index = a; }
+                a = _vga.ToList().FindIndex(i => i == Target);
+                if (a != -1) {found = _vga;index = a; }
+
+                if (index != -1)
                 {
-                    a = Obj;
+                    found[index] = Obj;
                     return "ok";
                 }
                 else

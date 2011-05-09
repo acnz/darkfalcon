@@ -14,8 +14,8 @@ namespace DarkFalcon
     public partial class FrmMain : Form
     {
         public bool CanClose = false;
-        FrmInterface1 frmI1;
-        FrmInterface2 frmI2;
+        public bool wasMoving = false;
+        Frm3D frm1;
         //FrmAssistente frmAss;
         
         Size s;
@@ -32,29 +32,18 @@ namespace DarkFalcon
         {
 
 
-            s = this.Size; 
-            frmI1 = new FrmInterface1();
-            frmI1.MdiParent = this;
-            frmI1.StartPosition = FormStartPosition.Manual;
-            frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
-            frmI1.Left = s.Width - (frmI1.Size.Width+20);
-            frmI1.Show();
+            s = this.Size;
 
-            frmI2 = new FrmInterface2();
-            frmI2.MdiParent = this;
-            frmI2.StartPosition = FormStartPosition.Manual;
-            frmI2.Size = new Size(frmI1.Left, frmI2.Size.Height);
-            frmI2.Show();
 
-            frmI1.getInter2(this.frmI2);
-            frmI2.getInter1(this.frmI1);
+            frm1 = (Frm3D)this.MdiChildren[0];
+            //frmI2.getInter1(this.frmI1);
 
         }
 
 
         private void novoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((FrmTabs)this.MdiChildren[2]).NovaAba();
+            //((FrmTabs)this.MdiChildren[2]).NovaAba();
         }
 
         public bool Salvar(string nome, dfCom[] pc)
@@ -80,14 +69,8 @@ namespace DarkFalcon
         {
             CanClose = true;
 
-                if (((FrmTabs)this.MdiChildren[2]).TabPcs.TabCount == 0)
-            {
-                Application.Exit();
-            }
-            else
-            {
 
-                if (!((FrmTabs)this.MdiChildren[2]).closeAll())
+                if (!((Frm3D)this.MdiChildren[0]).closeAll())
                 {
                     e.Cancel = true;
                 }
@@ -96,7 +79,7 @@ namespace DarkFalcon
                     
                     Application.Exit();
                 }
-            }
+            
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -113,7 +96,9 @@ namespace DarkFalcon
         {
             try
             {
-                ((FrmTabs)this.MdiChildren[2]).FixPosition();
+                ((Frm3D)this.MdiChildren[0]).FixPosition();
+                ((Frm3D)this.MdiChildren[0]).pc.active = false;
+                wasMoving = true;
             }
             catch (Exception exc)
             {
@@ -128,7 +113,7 @@ namespace DarkFalcon
 
         private void FrmMain_ResizeEnd(object sender, EventArgs e)
         {
-            //s = this.Size;
+            s = this.Size;
             //frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
             //frmI1.Left = s.Width - (frmI1.Size.Width + 20);
             //if (frmI1.Left < 745)
@@ -148,24 +133,34 @@ namespace DarkFalcon
 
         private void FrmMain_SizeChanged(object sender, EventArgs e)
         {
-            try
+            int desk = Screen.PrimaryScreen.Bounds.Width;
+
+            if (desk <= 1024)
             {
-                s = this.Size;
-                FrmTabs frmTabs = (FrmTabs)this.MdiChildren[2];
-
-                frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
-                frmI1.Left = s.Width - (frmI1.Size.Width + 20);
-                if (frmI1.Left < 745)
-                    frmI1.Left = 745;
-                if (frmI1.Size.Height < 614)
-                    frmI1.Size = new Size(frmI1.Size.Width, 614);
-
-                frmTabs.Size = new Size(frmI1.Left, frmI1.Size.Height - 188);
-
-                frmI2.Size = new Size(frmTabs.Size.Width, frmI2.Size.Height);
-
+                this.WindowState = FormWindowState.Maximized;
             }
-            catch (Exception) { }
+            else
+            {
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+            }
+            //try
+            //{
+                s = this.Size;
+            //    FrmTabs frmTabs = (FrmTabs)this.MdiChildren[2];
+
+            //    frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
+            //    frmI1.Left = s.Width - (frmI1.Size.Width + 20);
+            //    if (frmI1.Left < 745)
+            //        frmI1.Left = 745;
+            //    if (frmI1.Size.Height < 614)
+            //        frmI1.Size = new Size(frmI1.Size.Width, 614);
+
+            //    frmTabs.Size = new Size(frmI1.Left, frmI1.Size.Height - 188);
+
+            //    frmI2.Size = new Size(frmTabs.Size.Width, frmI2.Size.Height);
+
+            //}
+            //catch (Exception) { }
         }
 
         private void FrmMain_MouseCaptureChanged(object sender, EventArgs e)
@@ -175,20 +170,11 @@ namespace DarkFalcon
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-
-            Thread newThread = new Thread(new ThreadStart(AbrirArquivo));
-        newThread.SetApartmentState(ApartmentState.STA);
-        newThread.Start();     
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.ShowDialog();
+            MessageBox.Show(dlg.FileName);
         
     }
-
-        static void AbrirArquivo()
-    {
-        OpenFileDialog dlg = new OpenFileDialog();
-        dlg.ShowDialog();
-        MessageBox.Show(dlg.FileName);
-    }
-
          
 
         private void salvarComoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,6 +192,23 @@ namespace DarkFalcon
 
         private void FrmMain_Shown(object sender, EventArgs e)
         {
+
+        }
+
+        private void FrmMain_Enter(object sender, EventArgs e)
+        {
+            ((Frm3D)this.MdiChildren[2]).pc.focus = true;
+        }
+
+        private void FrmMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            
+          //  ((Frm3D)this.MdiChildren[0]).pc.active = true;
+        }
+
+        private void FrmMain_RegionChanged(object sender, EventArgs e)
+        {
+            ((Frm3D)this.MdiChildren[0]).pc.active = true;
 
         }
 

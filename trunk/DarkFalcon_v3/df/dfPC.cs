@@ -43,6 +43,18 @@ namespace DarkFalcon.df
         {
             get { return _gab; }
         }
+        public int numMon
+        {
+            get { return _pl.nMon; }
+        }
+        public dfCom Mouse
+        {
+            get { return _per.Mouse; }
+        }
+        public dfCom Teclado
+        {
+            get { return _per.Teclado; }
+        }
 
         #endregion
         #region Construtres
@@ -93,16 +105,28 @@ namespace DarkFalcon.df
             
          return l;
         }
-        public List<dfCom> getVCom()
+        public List<dfCom> getSCom()
         {
             List<dfCom> l = new List<dfCom>();
-            foreach (dfCom c in GetAllCom())
-                if (c != null)
-                   l.Add(c);
+            l.Add(_mobo);
+            l.Add(_pro);
+            l.Add(_fonte);
+            l.Add(_gab);
+            l.Add(_per.Mouse);
+            l.Add(_per.Teclado);
+            return l;
+        }
+        public List<dfIObG> getMCom()
+        {
+            List<dfIObG> l = new List<dfIObG>();
+            l.Add(_mem);
+            l.Add(_da);
+            l.Add(_monitor);
+            l.Add(_pl);
             return l;
         }
 
-        public string repalce(dfCom Obj,dfCom Target)
+        public string replace(dfCom Obj,dfCom Target)
         {
                 switch (Obj.Tipo)
                 {
@@ -113,20 +137,20 @@ namespace DarkFalcon.df
                         _da.renew(_mobo.ssata, _mobo.side);
                         _monitor.renew(1);
                         _per.renew(_mobo.susb, _mobo.Tags.compat.Contains("ps2"));
-                        return Obj.Tipo;
+                        return "ok";
                     case "Processador":
                         _pro = Obj;
-                        return Obj.Tipo;
+                        return "ok";
                     case "Gabinete":
                         _gab = Obj;
-                        return Obj.Tipo;
+                        return "ok";
                     case "Fonte":
                         _fonte = Obj;
-                        return Obj.Tipo;
+                        return "ok";
                     default:
                         if (_mem.replace(Obj, Target) == "ok")
                         {
-                            return Obj.Tipo;
+                            return "ok";
 
                         }else{
                             if (Obj.Tipo == "Memoria")
@@ -135,7 +159,7 @@ namespace DarkFalcon.df
                        
                             if (_per.replace(Obj, Target) == "ok")
                             {
-                                return Obj.Tipo;
+                                return "ok";
                             }
                             else
                             {
@@ -144,7 +168,7 @@ namespace DarkFalcon.df
                             }
                         if (_monitor.replace(Obj, Target) == "ok")
                         {
-                            return Obj.Tipo;
+                            return "ok";
                         }
                         else
                         {
@@ -153,7 +177,7 @@ namespace DarkFalcon.df
                         }
                         if (_da.replace(Obj, Target) == "ok")
                         {
-                            return Obj.Tipo;
+                            return "ok";
                         }
                         else
                         {
@@ -166,7 +190,7 @@ namespace DarkFalcon.df
                             {
                                 _monitor.renew(_pl.nMon);
                             }
-                            return Obj.Tipo;
+                            return "ok";
                         }
                         else
                         {
@@ -191,7 +215,7 @@ namespace DarkFalcon.df
                         _da.renew(_mobo.ssata, _mobo.side);
                         _monitor.renew(1);
                         _per.renew(_mobo.susb, _mobo.Tags.compat.Contains("ps2"));
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -201,7 +225,7 @@ namespace DarkFalcon.df
                     if (Processador.Nome == "?")
                     {
                         _pro = c;
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -211,7 +235,7 @@ namespace DarkFalcon.df
                     if (Gabinete.Nome == "?")
                     {
                         _gab = c;
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -221,7 +245,7 @@ namespace DarkFalcon.df
                     if (Fonte.Nome == "?")
                     {
                         _fonte = c;
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -231,7 +255,7 @@ namespace DarkFalcon.df
                     string e = "";
                     if ((e = _mem.add(c)) == "ok")
                     {
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -240,7 +264,7 @@ namespace DarkFalcon.df
                     }
                     if ((e = _per.add(c)) == "ok")
                     {
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -249,7 +273,7 @@ namespace DarkFalcon.df
                     }
                     if ((e = _monitor.add(c)) == "ok")
                     {
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -258,7 +282,7 @@ namespace DarkFalcon.df
                     }
                     if ((e = _da.add(c)) == "ok")
                     {
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {
@@ -271,7 +295,7 @@ namespace DarkFalcon.df
                         {
                             _monitor.renew(_pl.nMon);
                         }
-                        return c.Tipo;
+                        return "ok";
                     }
                     else
                     {

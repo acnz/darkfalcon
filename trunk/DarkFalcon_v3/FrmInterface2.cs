@@ -75,7 +75,7 @@ namespace DarkFalcon
         private void listBoxC_SelectedIndexChanged(object sender, EventArgs e)
         {
       // Unbox the sender
-            PcView pc = ((FrmTabs)MdiParent.MdiChildren[2]).pc;
+            PcView pc = ((Frm3D)MdiParent.MdiChildren[2]).pc;
             DataSet data = frm1.getFullDataSetAtual();
             listBoxC = (ListBox)sender;
             int i = listBoxC.SelectedIndex;
@@ -109,7 +109,7 @@ namespace DarkFalcon
 
         public Bitmap PegarImagens(string path)
         {
-            PcView pc = ((FrmTabs)MdiParent.MdiChildren[2]).pc;
+            PcView pc = ((Frm3D)MdiParent.MdiChildren[2]).pc;
             return pc.getBmp("Textures\\"+path);
             
         }

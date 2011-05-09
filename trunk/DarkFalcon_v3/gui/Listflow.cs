@@ -27,24 +27,25 @@ namespace DarkFalcon.gui
         bool isSorted = false;
         dfCom[] visibleItems;
 
-        Rectangle selectionRect;
         int hoverIndex = -1;
         int selectedIndex = -1;
         dfCom selectedItem;
 
         Texture2D blackTex;
         Texture2D[] tex;
-        Texture2D[] tex3;
-        Rectangle dest;
-        Rectangle src;
+
+        Rectangle[] dest;
+        int space;
+        int _vision = 4;
+        OuterGlow outer;
+        Texture2D outerglow;
+        Rectangle drgRec;
+        Texture2D drgTex;
+        bool drawDrag=false;
+
         Rectangle sbarRec;
-        Effect reflex,skew;
+        Effect reflex;
         RenderTarget2D drawBuffer;
-        RenderTarget2D texBuffer;
-        VertexPositionTexture[] vertices = new VertexPositionTexture[4];
-        Quad quad;
-         short[] Indexes;
-        BasicEffect basicEffect;
 
         public List<dfCom> Items
         {
@@ -52,6 +53,7 @@ namespace DarkFalcon.gui
             set
             {
                 items = value;
+                updateVision(null,null);
                 //InitScrollbars();
             }
         }
@@ -72,7 +74,12 @@ namespace DarkFalcon.gui
         }
         public EventHandler OnSelect = null;
         public EventHandler OnChangeSelection = null;
+        public EventHandler DragStart = null;
+        public EventHandler DragMove = null;
+        public EventHandler DragStop = null;
         bool bMouseOver = false;
+        bool bMouseDown = false;
+        public bool isDraging = false;
 
         _Scrollbar scrollbar;
         int ScrollWidth = 0;
@@ -82,6 +89,7 @@ namespace DarkFalcon.gui
         {
             // TODO: Construct any child components here
             this.Width = width;
+            this.Height = Width / 4;
             if (items != null)
                 for (int i = 0; i < items.Length; i++)
                     this.items.Add(items[i]);
@@ -120,49 +128,51 @@ namespace DarkFalcon.gui
         {
             // TODO: Add your initialization code here
             base.Initialize(content,graphics);
-            visibleItems = new dfCom[11];
-            tex = new Texture2D[11];
-            tex3 = new Texture2D[11];
+            visibleItems = new dfCom[_vision];
+            tex = new Texture2D[_vision];
             reflex = content.Load<Effect>("Effects/reflect");
 
             blackTex = new Texture2D(graphics, 1, 1, 1, TextureUsage.None, graphics.PresentationParameters.BackBufferFormat);
             blackTex.SetData<Color>(new Color[] { Color.White });
 
-            tex[6] = content.Load<Texture2D>("Textures/Motherboard/001");
+            //SetTex();
 
-            Height = Width / 2;
-          
-            for (int i = 0; i < Math.Min(items.Count,11); i++)
+
+            for (int i = 0; i < Math.Min(items.Count, _vision); i++)
                 visibleItems[i] = items[i];
-            for (int i = 0; i < Math.Min(items.Count, 11); i++)
+            for (int i = 0; i < Math.Min(items.Count, _vision); i++)
                 tex[i] = content.Load<Texture2D>(items[i].LocalImagem2D);
 
             
             sbarRec = new Rectangle((int)(Position.X + 4), (int)(Position.Y + (4 * Height / 5)), (int)Width - 8, (int)Height / 5 -4);
-            int square = (int)((area.Height - sbarRec.Height) * 0.9f);
-            int x = (int)(area.Width / 2 - square / 2);
+            int square = (int)((area.Height - sbarRec.Height) * 0.7f);
             int y = (int)((area.Height - sbarRec.Height) / 2 - square / 2);
-            
-           // dests[0] = new Rectangle((int)(x + Position.X), (int)(y + Position.Y), square, square);
-            dest = new Rectangle(0, 0, square, square);
-            src = new Rectangle((int)(graphics.Viewport.Width / 2 - 150), (int)(graphics.Viewport.Height / 2 - 150), 300, 300);
+            space = square + (((area.Width) - (square * visibleItems.Count())) / _vision);
+            Rectangle d = new Rectangle((int)Position.X + (space - square) / 2, (int)(y + Position.Y), square, square);
+            dest = new Rectangle[_vision];
+            for (int i = 0; i < visibleItems.Count(); i++)
+            {
+
+                dest[i]=new Rectangle(d.X + space * i, d.Y, d.Width, d.Height);
+            }
+            //dest = new Rectangle(0, 0, square, square);
             area.Width = (int)Width;
             area.Height = (int)Height;
             PresentationParameters pp = Owner.gra.PresentationParameters;
-           drawBuffer = new RenderTarget2D(Owner.gra, 
-Owner.gra.Viewport.Width, Owner.gra.Viewport.Height, 1,
-SurfaceFormat.Color);
-           texBuffer = new RenderTarget2D(Owner.gra,
-300, 300, 1,
-SurfaceFormat.Color);
+           drawBuffer = new RenderTarget2D(Owner.gra,Owner.gra.Viewport.Width, Owner.gra.Viewport.Height, 1,SurfaceFormat.Color);
+
 
            scrollbar = new _Scrollbar(Owner, "scrollbar", new Vector2(sbarRec.X, sbarRec.Y+sbarRec.Height/2), _Scrollbar.Type.Horizontal, sbarRec.Width, this.area);
-
-            quad = new Quad(Owner.gra, 300, 300);
+           
             scrollbar.Initialize(content, graphics);
+            scrollbar.OnChangeValue += new EventHandler(updateVision);
+            updateVision(null,null);
+            outerglow = Texture2D.FromFile(graphics,@"gui\listflow\outerglow.png");
+            outer = new OuterGlow(outerglow,spriteBatch);
 
-
-            
+            this.DragStart += new EventHandler(drgS);
+            this.DragMove += new EventHandler(drgM);
+            this.DragStop += new EventHandler(drgT);
         }
         
         /// <summary>
@@ -184,11 +194,15 @@ SurfaceFormat.Color);
             if (hoverIndex != -1 && wasPressed)
             {
                 int previousIndex = selectedIndex;
-                selectedIndex = hoverIndex;
+                selectedIndex = scrollbar.Value + hoverIndex;
                 if (OnSelect != null)
                     OnSelect(items[selectedIndex], null);
                 if (selectedIndex != previousIndex && OnChangeSelection != null)
                     OnChangeSelection(items[selectedIndex], null);
+            }
+            if (bMouseDown && wasReleased)
+            {
+                bMouseDown = false;
             }
             if (area.Contains(mNew.X, mNew.Y))
             {
@@ -199,13 +213,18 @@ SurfaceFormat.Color);
                         OnMouseOver(this, null);
                 }
 
-                if (wasPressed && OnPress != null)
+                if (!bMouseDown && wasPressed )
                 {
+                    bMouseDown = true;
+                    if(OnPress != null)
                     OnPress(this, null);
                     Owner.focus = this;
                 }
-                else if (wasReleased && OnRelease != null)
-                    OnRelease(this, null);
+                else if (wasReleased)
+                {
+                    if (OnRelease != null)
+                        OnRelease(this, null);
+                }
             }
             else if (bMouseOver)
             {
@@ -213,62 +232,113 @@ SurfaceFormat.Color);
                 if (OnMouseOut != null)
                     OnMouseOut(this, null);
             }
-            
-            if (wtf == 10)
+
+            for (int i = 0; i < visibleItems.Count(); i++)
             {
-                x++;
-                wtf = 0;
+                if (isDraging && wasReleased)
+                {
+                    isDraging = false;
+
+                        if (DragStop != null)
+                            DragStop(new object[] { items[selectedIndex], mNew }, null);
+                    
+                }
+                if (!wasPressed && bMouseDown && (mNew.X != mOld.X || mNew.Y != mOld.Y) && isDraging)
+                {
+                    if (DragMove != null)
+                        DragMove(new object[] { items[selectedIndex], mNew }, null);
+                }
+                if (dest[i].Contains(mNew.X, mNew.Y))
+                {
+                    if (!wasPressed && bMouseDown && (mNew.X != mOld.X || mNew.Y != mOld.Y))
+                    {
+                        if (!isDraging)
+                        {
+                            if (selectedIndex != -1 && hoverIndex == selectedIndex - scrollbar.Value)
+                            {
+                                isDraging = true;
+                                if (DragStart != null)
+                                    DragStart(new object[] { items[selectedIndex], mNew }, null);
+                            }
+                        }
+                        
+                    }
+                }
+
             }
+
+                if (wtf == 10)
+                {
+                    
+                    wtf = 0;
+                }
             base.Update();
             wtf++;
+
+            if (drgalp < 0.3f)
+                flash = true;
+            else
+                if(!flash)
+                drgalp -= 0.02f;
+
+            if (flash)
+            {
+                drgalp += 0.02f;
+                if (drgalp == 1) flash = false;
+            }
+
         }
         public override void Draw()
         {
             // TODO: Add your drawing code here
             DrawBackground();
             spriteBatch.End();
-            //spriteBatch.GraphicsDevice.RenderState.ScissorTestEnable = true;
+
+            hoverIndex = -1;
             spriteBatch.GraphicsDevice.ScissorRectangle = area;
-            
-           
-            
+
             RenderReflex();
             Render();
-
-            spriteBatch.GraphicsDevice.RenderState.ScissorTestEnable = false;
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            DrawScrollbar();
             
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+            RenderOuterGlow();
+            DrawScrollbar();
              
-           // RenderText();
+           RenderText();
+           if (drawDrag)
+               DrawDrag();
         }
-        int x=0;
-        float angle = 0;
+        float drgalp = 1;
+        bool flash=false;
+        private void DrawDrag()
+        {
+            Color c = new Color(Color.White, drgalp);
+            
+            spriteBatch.Draw(drgTex, drgRec, c);
+           
+        }
+        
         private void Render()
         {
-
-            Owner.gra.SetRenderTarget(0, drawBuffer);
-            Owner.gra.Clear(Color.TransparentBlack);
-            quad.Draw(tex[6], Matrix.CreateRotationY(MathHelper.ToRadians(0.01f * 2)) * Matrix.CreateScale(.5f, 0.68f, 1f));
-  Owner.gra.SetRenderTarget(0, null);
-
-            tex3[6]= drawBuffer.GetTexture();
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            spriteBatch.Draw(tex3[6],dest,src, Color.White);
-            spriteBatch.End();
+            for (int i = 0; i < visibleItems.Count();i++ )
+            {
+                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                spriteBatch.Draw(tex[i], dest[i], Color.White);
+                spriteBatch.End();
+                if (dest[i].Contains(mNew.X, mNew.Y)) hoverIndex = i;
+            }
         }
         public void RenderReflex()
         {
-            Owner.gra.SetRenderTarget(0, texBuffer);
-            Owner.gra.Clear(Color.Black);
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
 
             reflex.Begin();
 
             reflex.CurrentTechnique.Passes[0].Begin();
-            Owner.gra.Textures[0] = tex[6];
-
-            spriteBatch.Draw(tex[6], new Rectangle(0,0, 300, 300), null, Color.White, 0f, Vector2.Zero, SpriteEffects.FlipVertically,0);
+            for (int i = 0; i < visibleItems.Count(); i++)
+            {
+                spriteBatch.Draw(tex[i], new Rectangle(dest[i].X, dest[i].Y + dest[i].Height, dest[i].Width, dest[i].Height), null, Color.White, 0f, Vector2.Zero, SpriteEffects.FlipVertically, 0);
+            }
 
             reflex.CurrentTechnique.Passes[0].End();
 
@@ -276,20 +346,20 @@ SurfaceFormat.Color);
 
             spriteBatch.End();
 
-            Owner.gra.SetRenderTarget(0, drawBuffer);
-            Owner.gra.Clear(Color.TransparentBlack);
-            Texture2D sprite = texBuffer.GetTexture();
-            quad.Draw(sprite, Matrix.CreateRotationY(MathHelper.ToRadians(0.01f * -2)) * Matrix.CreateScale(.5f, 0.68f, 1f));
-            Owner.gra.SetRenderTarget(0, null);
-            tex3[6] = drawBuffer.GetTexture();
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            spriteBatch.Draw(tex3[6], new Rectangle((int)(dest.X - dest.Width / 7), (int)(dest.Y + 2 + 5*dest.Height/7), dest.Width, dest.Height), src, Color.White);
-            spriteBatch.End();
-
         }
+        public void RenderOuterGlow()
+        {
+            int i = selectedIndex - scrollbar.Value;
+            if (i > -1 && i < visibleItems.Count())
+                outer.Draw(dest[selectedIndex-scrollbar.Value],Color.Red);
+            if (hoverIndex != -1)
+                outer.Draw(dest[hoverIndex], Color.White);
+        }
+
         private void DrawBackground()
         {
-            spriteBatch.Draw(blackTex, area, Color.Black);
+            Color c = new Color(Color.Black, 0.7f);
+            spriteBatch.Draw(blackTex, area, c);
         }
         private void RenderText()
         {
@@ -298,31 +368,62 @@ SurfaceFormat.Color);
             spriteBatch.GraphicsDevice.ScissorRectangle = new Rectangle((int)Position.X, (int)Position.Y + 3, (int)(Width), (int)(Height - 8));
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
 
-            hoverIndex = -1;
-            for (int i = scrollbar.Value; i < System.Math.Min(items.Count, scrollbar.Value + visibleItems.Count() + 1); i++)
+            if (hoverIndex != -1)
             {
-                //textOffset.X = 2f;
-               // textOffset.Y = (int)((i - scrollbar.Value) * Font.LineSpacing);
-
-               // RenderSelection(i);
-
-               // spriteBatch.DrawString(Font, items[i], textOffset + Position, Color.Black);
+                Text = items[scrollbar.Value + hoverIndex].Nome;
             }
+            else
+            {
+                if(selectedIndex != -1)
+                Text = items[selectedIndex].Nome;
+            }
+            Vector2 m =  Font.MeasureString(Text);
+
+            Vector2 Tpos = new Vector2((int)(Position.X + Width / 2 - m.X / 2), (int)sbarRec.Y);
+
+            spriteBatch.DrawString(Font, Text, Tpos, Color.White);
 
             spriteBatch.End();
             spriteBatch.GraphicsDevice.RenderState.ScissorTestEnable = false;
             spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+            Text = "";
 
         }
         private void DrawScrollbar()
         {
-            //spriteBatch.Draw(blackTex, sbarRec, Color.White);
             scrollbar.Max = (int)System.Math.Max(0, items.Count - visibleItems.Count());
             if (scrollbar.Value > scrollbar.Max)
                 scrollbar.Value = scrollbar.Max;
 
                 scrollbar.Draw();
 
+        }
+
+        public void updateVision(object sender, EventArgs e)
+        {
+            selectedIndex = -1; hoverIndex = -1;
+            visibleItems = new dfCom[Math.Min(items.Count, _vision)];
+            for (int i = 0; i < visibleItems.Count(); i++)
+            {
+                visibleItems[i] = items[i + scrollbar.Value];
+                tex[i] = Owner.con.Load<Texture2D>(visibleItems[i].LocalImagem2D);
+            }
+        }
+        public void drgS(object sender, EventArgs e)
+        {
+            drawDrag=true;
+            drgRec = new Rectangle(dest[hoverIndex].X, dest[hoverIndex].Y, dest[hoverIndex].Width, dest[hoverIndex].Height);
+            drgTex = tex[hoverIndex];
+        }
+        public void drgM(object sender, EventArgs e)
+        {
+            drawDrag = true;
+            drgRec.X = ((MouseState)((object[])sender)[1]).X;
+            drgRec.Y = ((MouseState)((object[])sender)[1]).Y;
+        }
+        public void drgT(object sender, EventArgs e)
+        {
+            drawDrag = false;
         }
     }
 }

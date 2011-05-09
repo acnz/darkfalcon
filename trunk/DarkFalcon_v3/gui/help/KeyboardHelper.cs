@@ -91,7 +91,10 @@ namespace DarkFalcon.gui.help
                 Keys.OemMinus,
                 Keys.OemQuestion,
                 Keys.OemPipe,
-                Keys.Tab
+                Keys.Oem8,
+                Keys.Tab,
+                Keys.OemClear
+
             };
 
             pressedKeys = new List<Keys>();
@@ -129,7 +132,6 @@ namespace DarkFalcon.gui.help
             if (ks.IsKeyDown(Keys.LeftAlt) || ks.IsKeyDown(Keys.RightAlt)) keybArgs.AltDown = true; else keybArgs.AltDown = false;
             //Control
             if (ks.IsKeyDown(Keys.LeftControl) || ks.IsKeyDown(Keys.RightControl)) keybArgs.ControlDown = true; else keybArgs.ControlDown = false;
-
             foreach (Keys key in inputKeys)
             {
                 if (ks.IsKeyDown(key))
