@@ -126,6 +126,8 @@ namespace DarkFalcon.gui
                 if (wasReleased)
                     justOpened = false;
             }
+            if (Owner.focus == textbox || Owner.focus == button)
+                Owner.focus = this ;
         }
 
         public override void Draw()

@@ -23,7 +23,7 @@ namespace DarkFalcon.df
         {
         }
         public dfMobo(bool nulo)
-            : base("Motherboard", "#0 #0 #0 #0 #0 #0 #0 #0")
+            : base("Motherboard", "$ps2 #5 #0 #0 #3 #0 #4 #0 #1")
         {
             smem = Convert.ToInt32(Tags.qtd[0]);
             spcie2 = Convert.ToInt32(Tags.qtd[1]);

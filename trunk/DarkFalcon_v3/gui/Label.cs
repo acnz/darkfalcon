@@ -78,31 +78,7 @@ namespace DarkFalcon.gui
                 UpdateText();
 
 
-            if (lines.Count > 0)
-                Height = Font.LineSpacing * lines.Count;
-            else
-                Height = Font.LineSpacing;
-            if (Width == 0)
-            {
-                if (lines.Count > 0)
-                    for (int i = 0; i < lines.Count; i++)
-                    {
-                        int x = (int)Font.MeasureString(lines[i]).X;
-                        if (x >= Width)
-                            Width = x;
-                    }
-                else
-                    Width = 10;
-            }
             
-            area.X = (int)Position.X;
-            area.Y = (int)Position.Y;
-            area.Width = (int)Width;
-            area.Height = (int)Height;
-
-            backgroundRect.Width = area.Width;
-            backgroundRect.Height = area.Height;
-
 
         }
 
@@ -124,24 +100,55 @@ namespace DarkFalcon.gui
                 //strLines[i] = strLines[i].Trim();
                 lines.Add(strLines[i]);                
             }
-
-            for (int i = 0; i < lines.Count; i++)
+            if (Width > 0)
             {
-                if (lines[i].Length > 0)
+                for (int i = 0; i < lines.Count; i++)
                 {
-                    for (int c = 0; c < lines[i].Length; c++)
+                    if (lines[i].Length > 0)
                     {
-                        float x = Font.MeasureString(lines[i].Substring(0, c+1)).X;
-                        if (x > Width)
+                        for (int c = 0; c < lines[i].Length; c++)
                         {
-                            string newLine = lines[i].Substring(c - 1, lines[i].Length - (c - 1));
-                            lines[i] = lines[i].Substring(0, (c - 1));
-                            lines.Insert(i + 1, newLine);
-                            break;
+                            float x = Font.MeasureString(lines[i].Substring(0, c + 1)).X;
+                            if (x > Width)
+                            {
+                                string newLine = lines[i].Substring(c - 1, lines[i].Length - (c - 1));
+                                lines[i] = lines[i].Substring(0, (c - 1));
+                                lines.Insert(i + 1, newLine);
+                                break;
+                            }
                         }
                     }
                 }
             }
+            else
+            {
+                Width = Font.MeasureString(Text).X;
+            }
+            if (lines.Count > 0)
+                Height = Font.LineSpacing * lines.Count;
+            else
+                Height = Font.LineSpacing;
+            if (Width == 0)
+            {
+                if (lines.Count > 0)
+                    for (int i = 0; i < lines.Count; i++)
+                    {
+                        int x = (int)Font.MeasureString(lines[i]).X;
+                        if (x >= Width)
+                            Width = x;
+                    }
+                else
+                    Width = 10;
+            }
+
+            area.X = (int)Position.X;
+            area.Y = (int)Position.Y;
+            area.Width = (int)Width;
+            area.Height = (int)Height;
+
+            backgroundRect.Width = area.Width;
+            backgroundRect.Height = area.Height;
+
         }
 
         public override void Update()
@@ -188,6 +195,7 @@ namespace DarkFalcon.gui
         {
             backgroundRect.X = (int)(Position.X);
             backgroundRect.Y = (int)(Position.Y);
+
             spriteBatch.Draw(pixelTex,backgroundRect, new Color(0,0,0,0.2f));
 
             if (lines.Count <= 1)

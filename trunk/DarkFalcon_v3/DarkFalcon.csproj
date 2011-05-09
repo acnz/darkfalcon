@@ -16,7 +16,8 @@
     </ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <StartupObject>DarkFalcon.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -99,11 +100,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="df\dfIObG.cs" />
     <Compile Include="gui\Checkbox.cs" />
     <Compile Include="gui\ComboBox.cs" />
+    <Compile Include="gui\MsgBox.cs" />
+    <Compile Include="gui\holder.cs" />
+    <Compile Include="gui\infoBox.cs" />
+    <Compile Include="gui\Panel.cs" />
     <Compile Include="gui\help\HScrollbar.cs" />
     <Compile Include="gui\help\KeyboardHelper.cs" />
-    <Compile Include="gui\help\Quad.cs" />
+    <Compile Include="gui\help\OuterGlow.cs" />
     <Compile Include="gui\help\Scrollbar.cs" />
     <Compile Include="gui\help\VScrollbar.cs" />
     <Compile Include="gui\hud.cs" />
@@ -165,11 +171,11 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmTabs.cs">
+    <Compile Include="Frm3D.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTabs.designer.cs">
-      <DependentUpon>FrmTabs.cs</DependentUpon>
+    <Compile Include="Frm3D.designer.cs">
+      <DependentUpon>Frm3D.cs</DependentUpon>
     </Compile>
     <Compile Include="gui\Textbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -266,8 +272,8 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTabs.resx">
-      <DependentUpon>FrmTabs.cs</DependentUpon>
+    <EmbeddedResource Include="Frm3D.resx">
+      <DependentUpon>Frm3D.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="splash.resx">
       <DependentUpon>splash.cs</DependentUpon>

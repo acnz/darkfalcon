@@ -38,6 +38,10 @@ namespace DarkFalcon.gui
         Vector2 lineOffset = Vector2.Zero;
         int visibleLines = 0;
 
+        bool acento = false;
+        string ps ="";
+        string[,] acen;
+
         bool locked = false;
         public bool Locked { get { return locked; } set { locked = value; } }
 
@@ -104,6 +108,26 @@ namespace DarkFalcon.gui
                 destRect[2] = new Rectangle(0, 0, srcRect[0].Width, srcRect[0].Height);
                 Height = texture.Height;
             }
+
+            acen= new string[17,2];
+            acen[0, 0] = "á"; acen[0, 1] = "a";
+            acen[1, 0] = "à"; acen[1, 1] = "a";
+            acen[2, 0] = "ã"; acen[2, 1] = "a";
+            acen[3, 0] = "â"; acen[3, 1] = "a";
+            acen[4, 0] = "é"; acen[4, 1] = "e";
+            acen[5, 0] = "è"; acen[5, 1] = "e";
+            acen[6, 0] = "ê"; acen[6, 1] = "e";
+            acen[7, 0] = "í"; acen[7, 1] = "i";
+            acen[8, 0] = "ì"; acen[8, 1] = "i";
+            acen[9, 0] = "î"; acen[9, 1] = "i";
+            acen[10, 0] = "ó"; acen[10, 1] = "o";
+            acen[11, 0] = "ò"; acen[11, 1] = "o";
+            acen[12, 0] = "ô"; acen[12, 1] = "o";
+            acen[13, 0] = "õ"; acen[13, 1] = "o";
+            acen[14, 0] = "ù"; acen[14, 1] = "u";
+            acen[15, 0] = "ú"; acen[15, 1] = "u";
+            acen[16, 0] = "û"; acen[16, 1] = "u";
+           
             //else
             //{
             //    visibleLines = (int)System.Math.Ceiling(Height / Font.LineSpacing);
@@ -197,9 +221,30 @@ namespace DarkFalcon.gui
             base.Dispose();
         }
         private bool volatiled = false;
-        new public string Text
+        public string plainText
         {
-            get { return base.Text; }
+            get
+            {
+                string txt = (string)base.Text.ToLower().Clone();
+                try
+                {
+                    for (int i = 0; i < 17; i++)
+                    {
+                        string a = acen[i, 0];
+                        string b = acen[i, 1];
+                        txt = txt.Replace(a,b);
+                    }
+                }
+                catch { }
+
+                return txt;
+            }
+        }
+        new string Text
+        {
+            get {
+                return base.Text;
+            }
             set
             {
                 base.Text = "";
@@ -214,6 +259,7 @@ namespace DarkFalcon.gui
         /* Need to be optimized.. */
         private void Add(string text)
         {
+            acento = false;
             if (!multiline)
             {
                 base.Text = base.Text.Insert(cursorLocation.X, text);
@@ -485,7 +531,7 @@ namespace DarkFalcon.gui
                     cursorLocation.X += 1;
                     break;
                 case Keys.OemCloseBrackets:
-                    if (args.ShiftDown) Add("}"); else Add("]");
+                    if (args.ShiftDown) Add("{"); else Add("[");
                     cursorLocation.X += 1;
                     break;
                 case Keys.OemComma:
@@ -497,15 +543,31 @@ namespace DarkFalcon.gui
                     cursorLocation.X += 1;
                     break;
                 case Keys.OemOpenBrackets:
-                    if (args.ShiftDown) Add("{"); else Add("[");
-                    cursorLocation.X += 1;
+                    if (args.ShiftDown)
+                    {
+                        if (!acento) { ps = "`"; acento = true; }
+                        else
+                        {
+                            Add("`"); cursorLocation.X += 1;
+                            
+                        }
+                    }
+                    else
+                    {
+                        if (!acento) { ps = "´"; acento = true; }
+                        else
+                        {
+                            Add("´"); cursorLocation.X += 1;
+                            
+                        }
+                    }
                     break;
                 case Keys.OemPeriod:
                     if (args.ShiftDown) Add(">"); else Add(".");
                     cursorLocation.X += 1;
                     break;
                 case Keys.OemPipe:
-                    if (args.ShiftDown) Add("|"); else Add("\\");
+                    if (args.ShiftDown) Add("}"); else Add("]");
                     cursorLocation.X += 1;
                     break;
                 case Keys.OemPlus:
@@ -513,19 +575,36 @@ namespace DarkFalcon.gui
                     cursorLocation.X += 1;
                     break;
                 case Keys.OemQuestion:
-                    if (args.ShiftDown) Add("?"); else Add("/");
-                    cursorLocation.X += 1;
-                    break;
-                case Keys.OemQuotes:
-                    if (args.ShiftDown) Add("\""); else Add("'");
-                    cursorLocation.X += 1;
-                    break;
-                case Keys.OemSemicolon:
                     if (args.ShiftDown) Add(":"); else Add(";");
                     cursorLocation.X += 1;
                     break;
+                case Keys.OemQuotes:
+                    if (args.ShiftDown){
+                        if (!acento) { ps = "^"; acento = true; }
+                        else
+                        {
+                            Add("^"); cursorLocation.X += 1;
+                            
+                        }
+                    } else {
+                        if (!acento) { ps = "~"; acento = true; }
+                        else
+                        {
+                            Add("~"); cursorLocation.X += 1;
+                            
+                        }
+                    }
+                    break;
+                case Keys.OemSemicolon:
+                    Add("ç");
+                    cursorLocation.X += 1;
+                    break;
                 case Keys.OemTilde:
-                    if (args.ShiftDown) Add("~"); else Add("`");
+                    if (args.ShiftDown) Add("\""); else Add("'");
+                    cursorLocation.X += 1;
+                    break;
+                case Keys.Oem8:
+                    if (args.ShiftDown) Add("?"); else Add("/");
                     cursorLocation.X += 1;
                     break;
                 case Keys.Subtract:
@@ -549,11 +628,126 @@ namespace DarkFalcon.gui
                     if (k.Length == 1)
                     {
                         if (args.CapsLock || args.ShiftDown)
-                            Add(k.ToUpper());
-                        else
-                            Add(k.ToLower());
+                        {
+                            if (ps == "`")
+                            {
+                                if (k == "A") { Add("À"); ps = ""; }
+                                else
+                                    if (k == "E") { Add("È"); ps = ""; }
+                                    else
+                                        if (k == "I") { Add("Ì"); ps = ""; }
+                                        else
+                                            if (k == "O") { Add("Ò"); ps = ""; }
+                                            else
+                                                if (k == "U") { Add("Ù"); ps = ""; } else Add(k.ToUpper());
 
+                               
+                            }
+                            else
+                                if (ps == "´")
+                                {
+                                    if (k == "A") { Add("Á"); ps = ""; }else
+                                    if (k == "E") { Add("É"); ps = ""; }else
+                                    if (k == "I") { Add("Í"); ps = ""; }else
+                                    if (k == "O") { Add("Ó"); ps = ""; }else
+                                    if (k == "U") { Add("Ú"); ps = ""; }else
+                                         Add(k.ToUpper());
+
+                                    
+                                }
+                                else
+                                    if (ps == "^")
+                                    {
+                                        if (k == "A") { Add("Â"); ps = ""; }
+                                        else
+                                            if (k == "E") { Add("Ê"); ps = ""; }
+                                            else
+                                                if (k == "I") { Add("Î"); ps = ""; }
+                                                else
+                                                    if (k == "O") { Add("Ô"); ps = ""; }
+                                                    else
+                                                        if (k == "U") { Add("Û"); ps = ""; }
+                                                        else
+                                                            Add(k.ToUpper());
+                                        
+                                    }
+                                    else
+                                        if (ps == "~")
+                                        {
+                                            if (k == "A") { Add("Ã"); ps = ""; }
+                                            else
+                                                if (k == "O") { Add("Õ"); ps = ""; }
+                                                else
+                                                    Add(k.ToUpper());
+                                           
+                                        }
+                                        else
+                                            Add(k.ToUpper());
+                        }
+
+                        else
+                        {
+                            if (ps == "`")
+                            {
+                                if (k == "A") { Add("à"); ps = ""; }
+                                else
+                                    if (k == "E") { Add("è"); ps = ""; }
+                                    else
+                                        if (k == "I") { Add("ì"); ps = ""; }
+                                        else
+                                            if (k == "O") { Add("ò"); ps = ""; }
+                                            else
+                                                if (k == "U") { Add("ù"); ps = ""; }
+                                                else
+                                                    Add(k.ToLower());
+
+                                
+                            }
+                            else
+                                if (ps == "´")
+                                {
+                                    if (k == "A") { Add("á"); ps = ""; }
+                                    else
+                                        if (k == "E") { Add("é"); ps = ""; }
+                                        else
+                                            if (k == "I") { Add("í"); ps = ""; }
+                                            else
+                                                if (k == "O") { Add("ó"); ps = ""; }
+                                                else
+                                                    if (k == "U") { Add("ú"); ps = ""; }
+                                                    else
+                                                        Add(k.ToLower());
+
+                                   
+                                }
+                                else
+                                    if (ps == "^")
+                                    {
+                                        if (k == "A") { Add("â"); ps = ""; }
+                                        else
+                                            if (k == "E") { Add("ê"); ps = ""; }
+                                            else
+                                                if (k == "I") { Add("î"); ps = ""; }
+                                                else
+                                                    if (k == "O") { Add("ô"); ps = ""; }
+                                                    else
+                                                        if (k == "U") { Add("û"); ps = ""; } else Add(k.ToLower());
+
+                                    }
+                                    else
+                                        if (ps == "~")
+                                        {
+                                            if (k == "A") {Add("ã");ps = "";}else
+                                                if (k == "O") { Add("õ"); ps = ""; }
+                                                else
+                                                Add(k.ToLower());
+                                            
+                                        }
+                                        else
+                                            Add(k.ToLower());
+                        }
                         cursorLocation.X += 1;
+                      
                     }
                     else if (k.Length == 2 && k.StartsWith("D"))
                     {
@@ -594,13 +788,25 @@ namespace DarkFalcon.gui
                             }
                         }
                         else
-                            Add(k.Substring(1, 1));
+                        {
+                            string letra = k.Substring(1, 1);
 
+                            Add(letra);
+
+                        }
                         cursorLocation.X += 1;
+
                     }
                     break;
             }
 
+            if (!acento)
+            {
+                if(ps != ""){
+                Add(ps);
+                cursorLocation.X += 1;
+                ps = "";}
+            }
             UpdateScrolling();
 
             bCursorVisible = true;

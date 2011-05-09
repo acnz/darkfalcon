@@ -8,7 +8,16 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Effects\reflect.xnb</Output>
-      <Time>2011-05-01T18:25:14.2372735-03:00</Time>
+      <Time>2011-05-07T19:02:54.1324468-03:00</Time>
+    </Item>
+    <Item>
+      <Source>Arial.spritefont</Source>
+      <Name>Arial</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Arial.xnb</Output>
+      <Time>2011-05-08T00:39:45.8834929-03:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

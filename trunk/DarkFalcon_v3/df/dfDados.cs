@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DarkFalcon.df
 {
-    public class dfDados : dfIOb
+    public class dfDados : dfIObG
     {
         dfCom[] _sata;
         dfCom[] _ide;
@@ -127,10 +127,17 @@ namespace DarkFalcon.df
             }}
             internal string replace(dfCom Obj, dfCom Target)
         {
-            dfCom  a = GetAll().Find(i => i == Target);
-            if (a != null)
+            dfCom[] found = new dfCom[] { };
+
+            int a = -1;
+            int index = -1;
+               a = _sata.ToList().FindIndex(i => i == Target);
+               if (a != -1) { found = _sata; index = a; }
+               a = _ide.ToList().FindIndex(i => i == Target);
+               if (a != -1){ found = _ide;index = a; }
+               if (index != -1)
             {
-                a = Obj;
+                found[index] = Obj;
                 return "ok";
             }
             else

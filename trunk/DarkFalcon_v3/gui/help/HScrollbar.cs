@@ -16,6 +16,8 @@ namespace DarkFalcon.gui
 
         Texture2D background;
         Rectangle backArea;
+        Rectangle backsrc1, backsrc2;
+
 
         int value = 0;
         public int Value
@@ -61,7 +63,7 @@ namespace DarkFalcon.gui
         new public float Width
         {
             get { return base.Width; }
-            set { base.Width = value; if (!IsDisposed) Redraw(); }
+            set { base.Width = value; }
         }
 
         public _HScrollbar(hud pai, Vector2 position, float width, Rectangle masterarea)
@@ -77,34 +79,24 @@ namespace DarkFalcon.gui
         {
             base.Initialize(content, graphics);
 
-            btLeft = new _Button(Owner,"btLeft","", Position,"hscrollbar");
+            btLeft = new _Button(Owner, "btLeft", "", new Vector2(Position.X, (int)(Position.Y - (masterArea.Height / 2)-16)), "hscrollbar");
             btLeft.OnPress = btUp_OnPress;
             btLeft.Initialize(content, graphics);
+            btLeft.Effect = SpriteEffects.FlipHorizontally;
+
+            btRight = new _Button(Owner, "btRight", "", new Vector2(Position.X + Width - 32, Position.Y - (masterArea.Height / 2) - 16), "hscrollbar");
+
+            btRight.OnPress = btDown_OnPress;
+            btRight.Initialize(Owner.con, Owner.gra);
 
             background = Texture2D.FromFile(graphics, @"gui\scrollbar\hscrollbar_back.png");
-
+            backsrc1 = new Rectangle(0,0,5,14);
+            backsrc2 = new Rectangle(6, 0, 4, 14);
             cursorTex = Texture2D.FromFile(graphics, @"gui\scrollbar\hscrollbar_cursor.png");
-            cursorLeft = new Rectangle(0, 0, 3, cursorTex.Height);
-            cursorMiddle = new Rectangle(3, 0, 1, cursorTex.Height);
-            cursorRight = new Rectangle(cursorTex.Width - 3, 0, 3, cursorTex.Height);
-            cursorMidDest = new Rectangle(0, 0, 1, cursorTex.Height);
-
-            Redraw();
-
-            
-        }
-
-        private void Redraw()
-        {
             backArea.X = (int)Position.X + 4;
             backArea.Y = (int)Position.Y + 2;
             backArea.Width = (int)Width - 8;
-            backArea.Height = 12;
-
-            btRight = new _Button(Owner,"btRight","", new Vector2(Position.X + Width - 12f, Position.Y), "hscrollbar");
-            btRight.Effect = SpriteEffects.FlipHorizontally;
-            btRight.OnPress = btDown_OnPress;
-            btRight.Initialize(Owner.con, Owner.gra);
+            backArea.Height = 14;   
         }
 
         private void btUp_OnPress(object obj, EventArgs e)
@@ -207,10 +199,10 @@ namespace DarkFalcon.gui
         {
             cursorPos.X = mNew.X - cursorOffset.X;
 
-            if (cursorPos.X < Position.X + 12)
-                cursorPos.X = Position.X + 12;
-            else if (cursorPos.X > Position.X + Width - cursorArea.Width - 9)
-                cursorPos.X = Position.X + Width - cursorArea.Width - 9;
+            if (cursorPos.X < Position.X )
+                cursorPos.X = Position.X ;
+            else if (cursorPos.X > Position.X + Width - cursorArea.Width - 8)
+                cursorPos.X = Position.X + Width - cursorArea.Width - 8;
 
             float x = cursorPos.X - backArea.X;
 
@@ -245,35 +237,29 @@ namespace DarkFalcon.gui
 
         private void DrawBackground()
         {
-            
-            spriteBatch.Draw(background, backArea, Color.White);
+            spriteBatch.Draw(background, new Rectangle(backArea.X,backArea.Y,6,backArea.Height),backsrc1, Color.White);
+            spriteBatch.Draw(background, new Rectangle(backArea.X+6, backArea.Y, backArea.Width-12, backArea.Height),backsrc2, Color.White);
+            spriteBatch.Draw(background, new Rectangle(backArea.X+backArea.Width-6, backArea.Y, 6, backArea.Height), backsrc1, Color.White, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
         }
 
         private void DrawCursor()
         {
-            cursorArea.Width = System.Math.Max(20, backArea.Width/4);
-            cursorArea.Height = 8;
+            cursorArea.Width = 51;
+            cursorArea.Height = 18;
 
             cursorPos.Y = Position.Y;
             if (!isScrolling)
             {
                 if (!inverted)
-                    cursorPos.X = backArea.X + (Width - 21 - cursorArea.Width) * ((float)value / (float)max);
+                    cursorPos.X = backArea.X + (Width - 8 - cursorArea.Width) * ((float)value / (float)max);
                 else
-                    cursorPos.X = backArea.X + (Width - 21 - cursorArea.Width) * ((float)(max - value) / (float)max);
+                    cursorPos.X = backArea.X + (Width - 8 - cursorArea.Width) * ((float)(max - value) / (float)max);
             }
 
             cursorArea.X = (int)(cursorPos.X);
             cursorArea.Y = (int)(cursorPos.Y);
 
-            spriteBatch.Draw(cursorTex, cursorPos, cursorLeft, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-
-            cursorMidDest.X = (int)cursorPos.X + 3;
-            cursorMidDest.Y = (int)cursorPos.Y;
-            cursorMidDest.Width = cursorArea.Width - 6;
-            spriteBatch.Draw(cursorTex, cursorMidDest, cursorMiddle, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
-
-            spriteBatch.Draw(cursorTex, cursorPos + new Vector2(cursorMidDest.Width, 0f), cursorRight, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(cursorTex, cursorPos, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
     }
 }

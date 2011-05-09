@@ -1,8 +1,4 @@
-﻿/*
-xWinForms © 2007-2009
-Eric Grossinger - ericgrossinger@gmail.com
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;

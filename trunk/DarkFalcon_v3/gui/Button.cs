@@ -38,7 +38,7 @@ namespace DarkFalcon.gui
         bool bMouseOver = false;
         bool bMouseDown = false;
 
-        public SpriteEffects Effect { get; set;  }
+        public SpriteEffects Effect;
 
         #endregion
 
@@ -192,12 +192,14 @@ namespace DarkFalcon.gui
 
                 if (!bMouseDown && wasPressed)
                 {
+                    Owner.focus = this;
                     bMouseDown = true;
                     if (OnPress != null)
                     {
                         OnPress(this, null);
-                        Owner.focus = this;
+                        
                     }
+                    
                 }
                 else if (bMouseDown && wasReleased)
                 {

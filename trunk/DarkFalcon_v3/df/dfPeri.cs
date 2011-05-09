@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DarkFalcon.df
 {
-    public class dfPeri : dfIOb
+    public class dfPeri : dfIObG
     {
         private dfCom[] _periu;
         private dfCom[] _perip;
@@ -14,13 +14,13 @@ namespace DarkFalcon.df
             _periu = new dfCom[QtdUsb];
             for (int i = 0; i < QtdUsb; i++)
             {
-                add(new dfCom("?","$usb"));
+                _periu[i] = (new dfCom("?", "$usb", true));
             }
             if(hasPS2)
             {
                 _perip = new dfCom[2];
-                add(new dfCom("Teclado", "$ps2"));
-                add(new dfCom("Mouse","$ps2"));
+                _perip[0] = new dfCom("Teclado", "$ps2",true);
+                _perip[1] = new dfCom("Mouse", "$ps2", true);
 
             }
         }
@@ -56,7 +56,7 @@ namespace DarkFalcon.df
                                 }
                                 else
                                 {
-                                    result = "Não há mais slots para Teclado Disponíveis!(Max: 1)";
+                                    result = "Você já escolheu um Teclado!(Max: 1)";
                                 }
                             }
                             else
@@ -73,7 +73,7 @@ namespace DarkFalcon.df
                                 }
                                 else
                                 {
-                                    result = "Não há mais slots para Teclado Disponíveis!(Max: 1)";
+                                    result = "Você já escolheu um  Mouse!(Max: 1)";
                                 }
                             }
                             else
@@ -149,10 +149,16 @@ namespace DarkFalcon.df
             }}
             internal string replace(dfCom Obj, dfCom Target)
         {
-            dfCom  a = GetAll().Find(i => i == Target);
-            if (a != null)
+            dfCom[] found = new dfCom[] { };
+            int a = -1;
+            int index = -1;
+            a = _perip.ToList().FindIndex(i => i == Target);
+            if (a != -1) {found = _perip;index = a; }
+            a = _periu.ToList().FindIndex(i => i == Target);
+            if (a != -1) { found = _periu; index = a; }
+            if (index != -1)
             {
-                a = Obj;
+                found[index] = Obj;
                 return "ok";
             }
             else

@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DarkFalcon.df;
+using System.Data.OleDb;
 
 namespace DarkFalcon
 {
-    public partial class FrmTabs : Form
+    public partial class Frm3D : Form
     {
         public PcView pc;
         String TabName = "";
@@ -18,8 +19,10 @@ namespace DarkFalcon
         int prevIndex = 0;
         public List<dfCom[]> ListaTabs = new List<dfCom[]>();
         public List<bool> ListaSalvo = new List<bool>();
+        DataSet ds1, ds2;
+        OleDbDataAdapter da;
         
-        public FrmTabs()
+        public Frm3D()
         {
             InitializeComponent();
 
@@ -46,6 +49,8 @@ namespace DarkFalcon
             dfCom[] novo = new dfCom[4];
             ListaTabs.Add(novo);
             ListaSalvo.Add(false);
+            da = new OleDbDataAdapter();
+            ds1 = new DataSet();
         }
 
         public void NovaAba()
@@ -243,6 +248,87 @@ namespace DarkFalcon
         private void FrmTabs_Deactivate(object sender, EventArgs e)
         {
             pc.focus = false;
+        }
+
+        private void FrmTabs_Enter(object sender, EventArgs e)
+        {
+            pc.focus = true;
+        }
+
+        private void FrmTabs_Leave(object sender, EventArgs e)
+        {
+            pc.focus = false;
+        }
+
+        public List<dfCom> freeSearch(string args)
+        {
+            List<dfCom> list = new List<dfCom>();
+            try
+            {
+
+                OleDbConnection cn = new OleDbConnection();
+                DataTable schemaTable;
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb"; 
+                cn.Open();
+
+                //Retrieve schema information about tables.
+                //Because tables include tables, views, and other objects,
+                //restrict to just TABLE in the Object array of restrictions.
+                schemaTable = cn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables,
+                              new Object[] { null, null, null, "TABLE" });
+                string[] tables = new string[schemaTable.Rows.Count];
+                //List the table name from each row in the schema table.
+                for (int i = 0; i < schemaTable.Rows.Count; i++)
+                {
+                    tables[i] = schemaTable.Rows[i].ItemArray[2].ToString();
+                }
+
+                //Explicitly close - don't wait on garbage collection.
+                cn.Close();
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+                
+                for (int i = 0; i < tables.Count(); i++)
+                {
+                    if (tables[i].Contains("tab"))
+                    {
+                        try
+                        {
+                            string Tipo = tables[i].Substring(tables[i].LastIndexOf("tab") + 3);
+                            ds1.Reset();
+                            if (Tipo.ToLower().Contains(args))
+                                da.SelectCommand.CommandText = "select * from " + tables[i];
+                            else
+                            da.SelectCommand.CommandText = "select * from " + tables[i] + "  where nome LIKE '%" + args + "%'";
+                            da.Fill(ds1, tables[i]);
+                            
+                            
+                            DataTable t = ds1.Tables[0];
+                            for (int j = 0; j < t.Rows.Count; j++)
+                                if (Tipo != "Outros")
+                                {
+                                    list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), Tipo, float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString()));
+                                }
+                                else
+                                {
+                                    list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), t.Rows[j][2].ToString(), float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString(),true));
+                                }
+                        }
+                        catch (OleDbException)
+                        {
+                            MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        }
+                    }
+                }
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<dfCom> { };
         }
 
     }

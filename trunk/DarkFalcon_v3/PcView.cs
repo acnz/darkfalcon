@@ -43,14 +43,14 @@ namespace DarkFalcon
         List<_Control> listaHUD = new List<_Control>();
         public List<_Control> listaMenu = new List<_Control>();
         public List<_Checkbox> groupM = new List<_Checkbox>();
-
+        public bool active = true; 
         private IntPtr drawSurface;
-        FrmTabs fm;
+        Frm3D fm;
         private int MouseWheel;
         public MouseState prevMouse;
         UserActivityHook actHook;
 
-         public PcView(IntPtr drawSurface, FrmTabs frm)
+         public PcView(IntPtr drawSurface, Frm3D frm)
         {
             graphics = new GraphicsDeviceManager(this);
             actHook = new UserActivityHook();
@@ -108,7 +108,7 @@ namespace DarkFalcon
              e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
          }
 
-         public void resize(FrmTabs frm)
+         public void resize(Frm3D frm)
          {
              graphics.PreferredBackBufferWidth = fm.PicPcView.Width;
              graphics.PreferredBackBufferHeight = fm.PicPcView.Height;
@@ -124,9 +124,10 @@ namespace DarkFalcon
 
          public void FixPosition()
          {
-             User32.SetWindowPos((uint)this.Window.Handle, 0, fm.MdiParent.Location.X + fm.Location.X+10, fm.MdiParent.Location.Y + fm.Location.Y+52,
+             User32.SetWindowPos((uint)this.Window.Handle, 0, fm.MdiParent.Location.X + fm.Location.X + 10, fm.MdiParent.Location.Y + fm.Location.Y + 52,
  graphics.PreferredBackBufferWidth,
  graphics.PreferredBackBufferHeight, 0);
+             
 
          }
 
@@ -169,7 +170,7 @@ namespace DarkFalcon
             spriteBatch = new SpriteBatch(GraphicsDevice);
             this.cam = new CameraTP(GraphicsDevice, lista3D);
             font = Content.Load<SpriteFont>("Arial");
-            hudf = Content.Load<SpriteFont>("hudf");
+            hudf = Content.Load<SpriteFont>("hudfont");
             background = Content.Load<Texture2D>("Textures//aurora");
             white = Content.Load<Texture2D>("Textures//white");
             this.monitor = new _3DObject("monitorc", cam, this.Content, Vector3.Zero, Vector3.Zero, 3f);
@@ -182,51 +183,82 @@ namespace DarkFalcon
 
         void createHUD()
         {
+            _Listflow lf1 = new _Listflow(_hud, "lf1", new Vector2(5, 5), (4 * graphics.GraphicsDevice.Viewport.Width / 5)-10, new dfCom[] { });
+            _Panel pPesquisa = new _Panel(_hud, "pPesquisa", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, 100), 100, graphics.GraphicsDevice.Viewport.Height / 4 - 2.5f, new _Panel.Anchor[] { _Panel.Anchor.D, _Panel.Anchor.C });
             
-            _Menubar mbMenu = new _Menubar(_hud);
-            _Label lab1 = new _Label(_hud, "lab1", new Vector2(300, 40), "Label1234", 50, _Label.Align.Left);
-            _Textbox tb1 = new _Textbox(_hud, "tb1", new Vector2(400, 40), "textBox1234", 50);
-            _Button but1 = new _Button(_hud, "b1","wow", new Vector2(110, 40));
-            _Button but2 = new _Button(_hud, "b2", "teste", new Rectangle(10, 40, 20, 200), "default");
-            _ComboBox cb1 = new _ComboBox(_hud,"cb1", new Vector2(500, 50),150, new string[] { "gogo", "toto","coco","fofo","lolo","hoho", "toto","coco","fofo","lolo","hoho", "toto","coco","fofo","lolo","hoho"});
-            _Listbox lb1 = new _Listbox(_hud, "lb1", new Vector2(150, 180), 300, 80, new string[] { "gogo", "toto", "toto","coco","fofo","lolo","hoho", "yoydddddddddddddddddddddddddo"});
-           _Listflow lf1 = new _Listflow(_hud, "lf1", new Vector2(100, 300), 500, new dfCom[] { });
-            tb1.OnMouseOut = new EventHandler(but1_out);
-            tb1.OnPress = new EventHandler(but1_press);
-            tb1.OnMouseOver = new EventHandler(but1_in);
-            tb1.OnRelease = new EventHandler(but1_release);
-            but2.OnMouseOut = new EventHandler(but1_out);
-            but2.OnPress = new EventHandler(but1_press);
-            but2.OnMouseOver = new EventHandler(but1_in);
-            but2.OnRelease = new EventHandler(but1_release);
-            _hud.add(but1);
-            _hud.add(but2);
-            _hud.add(lab1);
-           _hud.add(tb1);
-            _hud.add(lb1);
-            _hud.add(cb1);
+            float px = pPesquisa.Position.X;
+            float py = pPesquisa.Position.Y;
+            float pw = pPesquisa.area.Width;
+            float ph = pPesquisa.area.Height;
+
+            _Panel pFiltros = new _Panel(_hud, "pFiltros", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, py + ph + 2.5f), 100, 2*graphics.GraphicsDevice.Viewport.Height / 4 - 2.5f, new _Panel.Anchor[] { _Panel.Anchor.D });
+
+            float fx = pFiltros.Position.X;
+            float fy = pFiltros.Position.Y;
+            float fw = pFiltros.area.Width;
+            float fh = pFiltros.area.Height;
+
+            _Panel pTags = new _Panel(_hud, "pTags", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, fy + fh + 2.5f), 100, graphics.GraphicsDevice.Viewport.Height / 4 - 5, new _Panel.Anchor[] { _Panel.Anchor.B, _Panel.Anchor.D });
+            float tx = pTags.Position.X;
+            float ty = pTags.Position.Y;
+            float tw = pTags.area.Width;
+            float th = pTags.area.Height;
+
+            _Textbox tbSearch = new _Textbox(_hud, "tbSearch", new Vector2(px + 10, py + 70), "Digite sua Pesquisa...", (int)(pw-20));
+            _Button butSearch = new _Button(_hud, "butSearch", "Pesquisar", new Rectangle((int)(px + 80), (int)(py + 110), 40, 20), "default");
+
+            
+            _ComboBox cb1 = new _ComboBox(_hud, "cb1", new Vector2(fx + 10, fy + 100), 150, new string[] { });
+            _Label labcb1 = new _Label(_hud, "labcb1", new Vector2(cb1.Position.X, cb1.Position.Y - 20), "Tipo", _Label.Align.Left);
+            _ComboBox cb2 = new _ComboBox(_hud, "cb2", new Vector2(fx + 10, fy + 170), 150, new string[] { });
+            _Label labcb2 = new _Label(_hud, "labcb2", new Vector2(cb2.Position.X, cb2.Position.Y - 20), "Fabricante", _Label.Align.Left);
+            _ComboBox cb3 = new _ComboBox(_hud, "cb3", new Vector2(fx + 10, fy + 240), 150, new string[] { });
+            _Label labcb3 = new _Label(_hud, "labcb3", new Vector2(cb3.Position.X, cb3.Position.Y - 20), "Filtro", _Label.Align.Left);
+
+
+            _Listbox lbError = new _Listbox(_hud, "lbError", new Vector2(5, 5 * graphics.GraphicsDevice.Viewport.Height / 6), (int)pTags.X - 10, graphics.GraphicsDevice.Viewport.Height / 6-5, new string[] { });
+            _Panel pHolder = new _Panel(_hud, "pHolder", new Vector2(5, lf1.Y + lf1.Height + 5), (int)pTags.X - 10, lbError.Y - 10 - (lf1.Y + lf1.Height), new _Panel.Anchor[] { }, 0.4f);
+            _Holder Holder = new _Holder(_hud, "Holder", pHolder, lbError, lf1, _pc);
+
+            
+
             _hud.add(lf1);
+            _hud.add(pPesquisa);
+            _hud.add(pFiltros);
+            _hud.add(pTags);
+            _hud.add(lbError);
+            _hud.add(pHolder);
+            _hud.add(Holder);
+
+            _hud.add(tbSearch);
+            _hud.add(butSearch);
+
+            _hud.add(cb1);
+            _hud.add(labcb1);
+            _hud.add(cb2);
+            _hud.add(labcb2);
+            _hud.add(cb3);
+            _hud.add(labcb3);
+
+            tbSearch.OnRelease = new EventHandler(tbSearch_release);
+            butSearch.OnRelease = new EventHandler(butSearch_release);
 
         }
 
         #region events
 
-        public void but1_out(object sender, EventArgs e)
+        public void tbSearch_release(object sender, EventArgs e)
         {
             Console.WriteLine(((_Control)sender).Name + " out");
         }
-        public void but1_press(object sender, EventArgs e)
+        public void butSearch_release(object sender, EventArgs e)
         {
             Console.WriteLine(((_Control)sender).Name + " pressed");
+            if (_hud["tbSearch"].Text != "Digite sua Pesquisa...")
+                _hud.lF.Items = fm.freeSearch(((_Textbox)_hud["tbSearch"]).plainText);
+
         }
-        public void but1_in(object sender, EventArgs e)
-        {
-            Console.WriteLine(((_Control)sender).Name + " in");
-        }
-        public void but1_release(object sender, EventArgs e)
-        {
-            Console.WriteLine(((_Control)sender).Name + " released");
-        }
+
 
         #endregion
 
@@ -273,48 +305,51 @@ namespace DarkFalcon
         float alpha = 0;
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            Viewport vp = GraphicsDevice.Viewport;
-            //  Note the order of the parameters! Projection first.
-            //m3d=GraphicsDevice.Viewport.Unproject(new Vector3(Mouse.GetState().X, Mouse.GetState().Y, -10 ), cam.projectionMatrix, cam.viewMatrix, Matrix.Identity);
-            if(Out == null)
-            Out += "null";
-
-            spriteBatch.Begin(SpriteBlendMode.None, SpriteSortMode.BackToFront, SaveStateMode.SaveState);
-            spriteBatch.Draw(background, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), null, Color.White, 0, Vector2.Zero, 0, 1.0f);
-            spriteBatch.End();
-
-            
-            foreach (_3DObject ob in lista3D)
+            graphics.GraphicsDevice.Clear(Color.Black);
+            if (active)
             {
-                ob.Draw();
-            }
+                Viewport vp = GraphicsDevice.Viewport;
+                //  Note the order of the parameters! Projection first.
+                //m3d=GraphicsDevice.Viewport.Unproject(new Vector3(Mouse.GetState().X, Mouse.GetState().Y, -10 ), cam.projectionMatrix, cam.viewMatrix, Matrix.Identity);
+                if (Out == null)
+                    Out += "null";
 
-
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));
-            spriteBatch.End();
-
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            _hud.Draw();
-            spriteBatch.End();
-
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-            //spriteBatch.DrawString(font, Out, new Vector2(0, graphics.PreferredBackBufferHeight - 40), Color.White);
-            spriteBatch.End();
-
-            if (noTabs)
-            {
-                Console.Out.WriteLine("no pc");
-                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-                spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
-                spriteBatch.DrawString(font, "Nenhum Computador esta aberto!", new Vector2(graphics.PreferredBackBufferWidth / 2 - font.MeasureString("Nenhum Computador esta aberto!").X/2, graphics.PreferredBackBufferHeight / 2 - font.MeasureString("Nenhum Computador esta aberto!").Y/2), Color.Black);
+                spriteBatch.Begin(SpriteBlendMode.None, SpriteSortMode.BackToFront, SaveStateMode.SaveState);
+                spriteBatch.Draw(background, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), null, Color.White, 0, Vector2.Zero, 0, 1.0f);
                 spriteBatch.End();
+
+
+                foreach (_3DObject ob in lista3D)
+                {
+                    ob.Draw();
+                }
+
+
+                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));
+                spriteBatch.End();
+
+                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                _hud.Draw();
+                spriteBatch.End();
+
+                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                //spriteBatch.DrawString(font, Out, new Vector2(0, graphics.PreferredBackBufferHeight - 40), Color.White);
+                spriteBatch.End();
+
+                if (noTabs)
+                {
+                    Console.Out.WriteLine("no pc");
+                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+                    spriteBatch.DrawString(font, "Nenhum Computador esta aberto!", new Vector2(graphics.PreferredBackBufferWidth / 2 - font.MeasureString("Nenhum Computador esta aberto!").X / 2, graphics.PreferredBackBufferHeight / 2 - font.MeasureString("Nenhum Computador esta aberto!").Y / 2), Color.Black);
+                    spriteBatch.End();
+                }
+
+                base.Draw(gameTime);
+
             }
-
-            base.Draw(gameTime);
+            active = true;
         }
-
     }
 }
