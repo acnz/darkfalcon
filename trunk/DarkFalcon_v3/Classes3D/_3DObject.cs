@@ -59,7 +59,7 @@ namespace DarkFalcon
         }
         public void Load()
         {
-            _model = content.Load<Model>("Models/"+model);
+            _model = content.Load<Model>("Models/" + model);
             boundingSphere = GetBoundingSphereFromModel(this);
             // Allocate the transform matrix array.
             boneTransforms = new Matrix[_model.Bones.Count];
@@ -175,7 +175,7 @@ namespace DarkFalcon
         private void SetEffectLights(BasicEffect effect, bool[] lights)
         {
             effect.Alpha = 1.0f;
-            //effect.DiffuseColor = new Vector3(0.75f, 0.75f, 0.75f);
+            effect.DiffuseColor = new Vector3(0.75f, 0.75f, 0.75f);
             effect.SpecularColor = new Vector3(0.25f, 0.25f, 0.25f);
             effect.SpecularPower = 5.0f;
             effect.AmbientLightColor = new Vector3(0.75f, 0.75f, 0.75f);
@@ -233,15 +233,14 @@ namespace DarkFalcon
             {
                 foreach (BasicEffect ef in mesh.Effects)
                 {
+                    if(ef.Texture != null)
+                        ef.TextureEnabled = true;
                     ef.EnableDefaultLighting();
-                    //ef.PreferPerPixelLighting = true;
-                    ef.TextureEnabled = false;
                     ef.World = rotation * Matrix.CreateScale(_scale) * Matrix.CreateTranslation(_position) * modelTransforms[mesh.ParentBone.Index];
                     ef.Projection = cam.projectionMatrix;
                     ef.View = cam.viewMatrix;
                     ef.Alpha = 0.5f;
-                    //SetEffectLights(ef, Lights);
-                    //SetEffectPerPixelLightingEnabled(ef);
+
                 }
                 mesh.Draw();
             }

@@ -149,7 +149,7 @@ namespace DarkFalcon
             base.Initialize();
 
             lista3D.Add(monitor);
-            lista3D.Add(gabinete);
+            //lista3D.Add(gabinete);
 
             _pc = new dfPC(true);
             cam.ResetCamera();
@@ -181,7 +181,7 @@ namespace DarkFalcon
             hudf = Content.Load<SpriteFont>("hudfont");
             background = Content.Load<Texture2D>("Textures//aurora");
             white = Content.Load<Texture2D>("Textures//white");
-            this.monitor = new _3DObject("monitorc", cam, this.Content, Vector3.Zero, Vector3.Zero, 3f);
+            this.monitor = new _3DObject("gabpronto", cam, this.Content, new Vector3(100,50, 0), Vector3.Zero, 2f);
             this.gabinete = new _3DObject("Monitor/2/2", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 30f);
            // cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
             
@@ -271,9 +271,14 @@ namespace DarkFalcon
             _Button bNstep = new _Button(_hud2, "bNstep", "", new Vector2(graphics.GraphicsDevice.Viewport.Width - 183, 10), "nextstep");
             _Button bPstep = new _Button(_hud2, "bPstep", "", new Vector2(10, 10), "prevstep");
 
-            _hud2.add(pTeste);
+            _Listflow lf2 = new _Listflow(_hud2, "lf2", new Vector2(5, bPstep.Y + 43), graphics.GraphicsDevice.Viewport.Width - 10,graphics.GraphicsDevice.Viewport.Height/4,_Listflow.DragStyle.Rotate3D, new dfCom[] { new dfCom(true), new dfCom(true), new dfCom(true),new dfCom(true),new dfCom(true) });
+
+            
+            //_hud2.add(pTeste);
             _hud2.add(bNstep);
             _hud2.add(bPstep);
+            _hud2.add(lf2);
+            
 
             bNstep.OnRelease = new EventHandler(bNstep_release);
             bPstep.OnRelease = new EventHandler(bPstep_release);

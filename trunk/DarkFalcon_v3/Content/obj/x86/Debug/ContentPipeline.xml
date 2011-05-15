@@ -68,27 +68,27 @@
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2008-10-10T16:42:32-03:00</Value>
+        <Value>2009-05-14T11:13:52-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2008-10-10T16:43:28-03:00</Value>
+        <Value>2009-05-14T11:13:52-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2008-10-10T16:43:18-03:00</Value>
+        <Value>2009-05-14T11:13:52-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2008-10-10T16:48:18-03:00</Value>
+        <Value>2009-05-14T11:13:52-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2008-10-10T16:48:50-03:00</Value>
+        <Value>2009-05-14T11:13:52-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2010-11-14T14:02:32.6520194-02:00</Value>
+        <Value>2011-05-15T11:17:24.7493342-03:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
