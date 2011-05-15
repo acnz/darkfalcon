@@ -69,9 +69,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Leitor\" />
-    <Folder Include="Models\Motherboard\" />
-    <Folder Include="Models\PlaVideo\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v3.0\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

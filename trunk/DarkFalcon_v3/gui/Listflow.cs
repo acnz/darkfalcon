@@ -33,6 +33,15 @@ namespace DarkFalcon.gui
         Texture2D blackTex;
         Texture2D[] tex;
 
+        public enum DragStyle 
+        { 
+        Normal,Rotate3D
+        }
+
+        DragStyle ds;
+
+        _3DObject mod;
+
         Rectangle[] dest;
         int space;
         int _vision = 4;
@@ -91,6 +100,19 @@ namespace DarkFalcon.gui
             if (items != null)
                 for (int i = 0; i < items.Length; i++)
                     this.items.Add(items[i]);
+            ds = DragStyle.Normal;
+        }
+        public _Listflow(hud pai, string name, Vector2 position, int width,int height,DragStyle DragS, dfCom[] items)
+            : base(pai, name, position)
+        {
+            // TODO: Construct any child components here
+            this.Width = width;
+            this.Height = height;
+            if (items != null)
+                for (int i = 0; i < items.Length; i++)
+                    this.items.Add(items[i]);
+
+            ds = DragS;
         }
         public dfCom this[int index]
         {
@@ -129,6 +151,8 @@ namespace DarkFalcon.gui
             visibleItems = new dfCom[_vision];
             tex = new Texture2D[_vision];
             reflex = content.Load<Effect>("Effects/reflect");
+
+            
 
             blackTex = new Texture2D(graphics, 1, 1, 1, TextureUsage.None, graphics.PresentationParameters.BackBufferFormat);
             blackTex.SetData<Color>(new Color[] { Color.White });
@@ -310,9 +334,21 @@ namespace DarkFalcon.gui
         bool flash=false;
         private void DrawDrag()
         {
-            Color c = new Color(Color.White, drgalp);
-            
-            spriteBatch.Draw(drgTex, drgRec, c);
+            if (ds == DragStyle.Normal)
+            {
+                Color c = new Color(Color.White, drgalp);
+
+                spriteBatch.Draw(drgTex, drgRec, c);
+            }
+            else
+            {
+                spriteBatch.End();
+
+                Owner.gra.SetRenderTarget(0, drawBuffer);
+
+
+                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+            }
            
         }
         
@@ -417,6 +453,7 @@ namespace DarkFalcon.gui
         {
             drawDrag=true;
             drgRec = new Rectangle(dest[hoverIndex].X, dest[hoverIndex].Y, dest[hoverIndex].Width, dest[hoverIndex].Height);
+            if(ds == DragStyle.Normal)
             drgTex = tex[hoverIndex];
         }
         public void drgM(object sender, EventArgs e)
