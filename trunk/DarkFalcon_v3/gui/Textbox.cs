@@ -61,6 +61,7 @@ namespace DarkFalcon.gui
 
         bool bCursorVisible = true;
         System.Timers.Timer timer = new System.Timers.Timer(500);
+        bool bMouseOver = false;
 
         public _Textbox(hud pai,string name, Vector2 position, int width)
             : base(pai,name, position)
@@ -183,13 +184,13 @@ namespace DarkFalcon.gui
         private void InitScrollbars(ContentManager content, GraphicsDevice graphics)
         {
             if (scrollbar == Scrollbars.Vertical)
-                vscrollbar = new _Scrollbar(Owner,"vscrollbar", Position + new Vector2(Width - 2, 1), _Scrollbar.Type.Vertical, (int)Height - 2,this.area);
+                vscrollbar = new _Scrollbar(Owner,"vscrollbar", Position + new Vector2(Width - 2, 1), _Scrollbar.Type.Vertical, (int)Height - 2,this);
             else if(scrollbar == Scrollbars.Horizontal)
-                hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 2), _Scrollbar.Type.Horizontal, (int)Width - 2, this.area);
+                hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 2), _Scrollbar.Type.Horizontal, (int)Width - 2, this);
             else if (scrollbar == Scrollbars.Both)
             {
-                vscrollbar = new _Scrollbar(Owner, "vscrollbar", Position + new Vector2(Width - 13, 1), _Scrollbar.Type.Vertical, (int)Height - 14, this.area);
-                hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 14, this.area);
+                vscrollbar = new _Scrollbar(Owner, "vscrollbar", Position + new Vector2(Width - 13, 1), _Scrollbar.Type.Vertical, (int)Height - 14, this);
+                hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 14, this);
             }
 
             if (vscrollbar != null)
@@ -240,19 +241,23 @@ namespace DarkFalcon.gui
                 return txt;
             }
         }
-        new string Text
+        public new string Text
         {
             get {
                 return base.Text;
             }
             set
             {
+               
                 base.Text = "";
                 line.Clear();
                 if (volatiled)
                     base.Text = value;
                 else
+                {
+                    cursorLocation.X = 0;
                     Add(value);
+                }
             }
         }
 
@@ -313,7 +318,7 @@ namespace DarkFalcon.gui
 
             Keys key = (Keys)obj;
             KeyboardEventsArgs args = (KeyboardEventsArgs)e;
-
+            #region keys
             switch (key)
             {
                 case Keys.Left:
@@ -799,6 +804,7 @@ namespace DarkFalcon.gui
                     }
                     break;
             }
+            #endregion
 
             if (!acento)
             {
@@ -861,7 +867,29 @@ namespace DarkFalcon.gui
         public override void Update()
         {
             base.Update();
+            if (area.Contains(mNew.X, mNew.Y))
+            {
+                if (!bMouseOver)
+                {
+                    bMouseOver = true;
+                    if (OnMouseOver != null)
+                        OnMouseOver(this, null);
+                }
 
+                if (wasPressed && OnPress != null)
+                {
+                    OnPress(this, null);
+                    Owner.focus = this;
+                }
+                else if (wasReleased && OnRelease != null)
+                    OnRelease(this, null);
+            }
+            else if (bMouseOver)
+            {
+                bMouseOver = false;
+                if (OnMouseOut != null)
+                    OnMouseOut(this, null);
+            }
             // TODO: Add your update logic here
             CheckFocus();
 
@@ -878,6 +906,9 @@ namespace DarkFalcon.gui
                 //UpdateScrolling();
                 UpdateScrollbars();
             }
+
+            if (Owner.focus == vscrollbar)
+                Owner.focus = this;
         }
 
         private void UpdateScrollbars()

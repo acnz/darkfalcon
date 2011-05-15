@@ -17,6 +17,7 @@ namespace DarkFalcon.df
         private dfCom _pro;
         private dfCom _gab;
         private dfCom _fonte;
+        public EventHandler onChange = null;
      #endregion
         #region Publicos
         public dfMobo Motherboard
@@ -30,6 +31,27 @@ namespace DarkFalcon.df
         public dfMem Memoria
         {
             get { return _mem; }
+        }
+        public dfDados Dados
+        {
+            get { return _da; }
+        }
+        public dfPlaca Placas
+        {
+            get { return _pl; }
+        }
+        public dfCom PlaVideo
+        {
+            get
+            { return _pl.PlaVideo; }
+        }
+        public dfMon Monitor
+        {
+            get { return _monitor; }
+        }
+        public dfCom Mon
+        {
+            get { return _monitor.Mons[0]; }
         }
         public dfCom Fonte
         {
@@ -128,6 +150,7 @@ namespace DarkFalcon.df
 
         public string replace(dfCom Obj,dfCom Target)
         {
+
                 switch (Obj.Tipo)
                 {
                     case "Motherboard":
@@ -137,19 +160,30 @@ namespace DarkFalcon.df
                         _da.renew(_mobo.ssata, _mobo.side);
                         _monitor.renew(1);
                         _per.renew(_mobo.susb, _mobo.Tags.compat.Contains("ps2"));
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     case "Processador":
                         _pro = Obj;
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     case "Gabinete":
+
                         _gab = Obj;
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     case "Fonte":
                         _fonte = Obj;
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     default:
                         if (_mem.replace(Obj, Target) == "ok")
                         {
+                            if (onChange != null)
+                                onChange(this, null); 
                             return "ok";
 
                         }else{
@@ -159,6 +193,8 @@ namespace DarkFalcon.df
                        
                             if (_per.replace(Obj, Target) == "ok")
                             {
+                                if (onChange != null)
+                                    onChange(this, null); 
                                 return "ok";
                             }
                             else
@@ -168,6 +204,8 @@ namespace DarkFalcon.df
                             }
                         if (_monitor.replace(Obj, Target) == "ok")
                         {
+                            if (onChange != null)
+                                onChange(this, null); 
                             return "ok";
                         }
                         else
@@ -177,6 +215,8 @@ namespace DarkFalcon.df
                         }
                         if (_da.replace(Obj, Target) == "ok")
                         {
+                            if (onChange != null)
+                                onChange(this, null); 
                             return "ok";
                         }
                         else
@@ -186,10 +226,13 @@ namespace DarkFalcon.df
                         }
                         if (_pl.replace(Obj, Target) == "ok")
                         {
-                            if (Obj.Tipo == "PlaVideo")
-                            {
+                            if(_pl.PlaVideo != null)
                                 _monitor.renew(_pl.nMon);
-                            }
+                            else
+                                _monitor.renew(1);
+
+                            if (onChange != null)
+                                onChange(this, null); 
                             return "ok";
                         }
                         else
@@ -200,7 +243,7 @@ namespace DarkFalcon.df
                         return ("Não é um Componente aceito.");
                 }
 
-            
+
         }
         public string add(dfCom c)
         {
@@ -215,6 +258,8 @@ namespace DarkFalcon.df
                         _da.renew(_mobo.ssata, _mobo.side);
                         _monitor.renew(1);
                         _per.renew(_mobo.susb, _mobo.Tags.compat.Contains("ps2"));
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -225,6 +270,8 @@ namespace DarkFalcon.df
                     if (Processador.Nome == "?")
                     {
                         _pro = c;
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -235,6 +282,8 @@ namespace DarkFalcon.df
                     if (Gabinete.Nome == "?")
                     {
                         _gab = c;
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -245,6 +294,8 @@ namespace DarkFalcon.df
                     if (Fonte.Nome == "?")
                     {
                         _fonte = c;
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -255,6 +306,8 @@ namespace DarkFalcon.df
                     string e = "";
                     if ((e = _mem.add(c)) == "ok")
                     {
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -264,6 +317,8 @@ namespace DarkFalcon.df
                     }
                     if ((e = _per.add(c)) == "ok")
                     {
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -273,6 +328,8 @@ namespace DarkFalcon.df
                     }
                     if ((e = _monitor.add(c)) == "ok")
                     {
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -282,6 +339,8 @@ namespace DarkFalcon.df
                     }
                     if ((e = _da.add(c)) == "ok")
                     {
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else
@@ -295,6 +354,8 @@ namespace DarkFalcon.df
                         {
                             _monitor.renew(_pl.nMon);
                         }
+                        if (onChange != null)
+                            onChange(this, null); 
                         return "ok";
                     }
                     else

@@ -44,7 +44,7 @@ namespace DarkFalcon.gui
 
 
         public string Name { get { return name; } set { name = value; } }
-        public Vector2 Position { get { return position; } set { position = value; } }
+        public Vector2 Position { get { return position; } set { position = value; area.X = (int)value.X; area.Y = (int)value.Y; } }
         public Vector2 Size
         {
             get { return size; }
@@ -82,8 +82,17 @@ namespace DarkFalcon.gui
                 area.Height = (int)value;
             }
         }
-        public float X { get { return position.X; } set { position.X = value; } }
-        public float Y { get { return position.Y; } set { position.Y = value; } }
+        public float X
+        {
+            get { return position.X; }
+            set
+            {
+                position.X = value;
+                area.X = (int)value;
+
+            }
+        }
+        public float Y { get { return position.Y; } set { position.Y = value; area.Y = (int)value; } }
 
         EventHandler onMouseOver;
         EventHandler onMouseOut;

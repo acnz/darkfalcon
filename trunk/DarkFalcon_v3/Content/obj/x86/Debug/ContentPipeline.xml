@@ -11,13 +11,49 @@
       <Time>2011-05-07T19:02:54.1324468-03:00</Time>
     </Item>
     <Item>
-      <Source>Arial.spritefont</Source>
-      <Name>Arial</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
+      <Source>Textures\Leitor\2.jpg</Source>
+      <Name>Textures\Leitor\2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Arial.xnb</Output>
-      <Time>2011-05-08T00:39:45.8834929-03:00</Time>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Leitor\2.xnb</Output>
+      <Time>2011-05-09T19:53:26.6176329-03:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\1.jpg</Source>
+      <Name>Textures\Motherboard\1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\1.xnb</Output>
+      <Time>2011-05-09T19:53:26.6216331-03:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Motherboard\2.jpg</Source>
+      <Name>Textures\Motherboard\2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\2.xnb</Output>
+      <Time>2011-05-09T19:53:26.6236332-03:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\PlaVideo\1.jpg</Source>
+      <Name>Textures\PlaVideo\1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\PlaVideo\1.xnb</Output>
+      <Time>2011-05-09T19:53:26.6246333-03:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\PlaVideo\2.jpg</Source>
+      <Name>Textures\PlaVideo\2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\PlaVideo\2.xnb</Output>
+      <Time>2011-05-09T19:53:26.6336338-03:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

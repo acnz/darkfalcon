@@ -17,6 +17,8 @@ namespace DarkFalcon.gui
         Vector2 drawPos = Vector2.Zero;
         Rectangle backgroundRect = Rectangle.Empty;
         Align alignment = Align.Left;
+
+        Color fc;
         public Align Alignment
         {
             get { return alignment; }
@@ -59,13 +61,22 @@ namespace DarkFalcon.gui
             this.Text = text;
             this.alignment = alignment;
             this.Width = width;
+            fc = Color.White;
         }
         public _Label(hud pai, string name, Vector2 position, string text, Align alignment)
             : base(pai, name, position)
         {
             this.Text = text;
             this.alignment = alignment;
+            fc = Color.White;
             
+        }
+        public _Label(hud pai, string name, Vector2 position, string text, Align alignment,Color c)
+            : base(pai, name, position)
+        {
+            this.Text = text;
+            this.alignment = alignment;
+            fc = c;
         }
 
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)
@@ -211,7 +222,7 @@ namespace DarkFalcon.gui
                 }
 
                 drawPos = new Vector2((int)(Position.X + textOffset.X), (int)(Position.Y));
-                spriteBatch.DrawString(Font, Text, drawPos, Color.White);
+                spriteBatch.DrawString(Font, Text, drawPos, fc);
                 
             }
             else

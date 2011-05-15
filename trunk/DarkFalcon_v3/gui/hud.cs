@@ -19,6 +19,21 @@ namespace DarkFalcon.gui
         public _Control focus;
         public _InfoBox info;
         public _MsgBox msgb;
+        Vector2 _pos = Vector2.Zero;
+        bool on = true;
+        bool off = false;
+        RenderTarget2D rt;
+        Texture2D st;
+        public Vector2 Position
+        {
+            get { return _pos; }
+            set
+            {
+                _pos = value;
+                if (_pos == Vector2.Zero) on = true; else on = false;
+                if (_pos.X <= -area.Width || _pos.X >= gra.Viewport.Width) off = true; else off = false;
+            }
+        }
 
         public _Listflow lF
         {
@@ -70,31 +85,62 @@ namespace DarkFalcon.gui
             info.Initialize(content, graphics);
             msgb = new _MsgBox(this, "msgb");
             msgb.Initialize(content, graphics);
+            rt = new RenderTarget2D(graphics, graphics.Viewport.Width, graphics.Viewport.Height, 0, SurfaceFormat.Color, RenderTargetUsage.PlatformContents);
         }
         public void Update()
         {
-            if (!msgb.isShow)
+            if (on)
             {
-                foreach (_Control c in _controls)
-                    c.Update();
+                if (!msgb.isShow)
+                {
+                    foreach (_Control c in _controls)
+                        c.Update();
 
-                info.Update();
-            }
-            else
-            {
-                msgb.Update();
+                    info.Update();
+                }
+                else
+                {
+                    msgb.Update();
+                }
             }
         }
         public void Draw()
         {
-            foreach (_Control c in _controls)
-                if (c != focus)
-                c.Draw();
-            if (focus != null)
-            focus.Draw();
-            info.Draw();
-            if (msgb.isShow)
-            msgb.Draw();
+            if (!off)
+            {
+                if (on)
+                {
+                    foreach (_Control c in _controls)
+                        if (c != focus)
+                            c.Draw();
+                    if (focus != null)
+                        focus.Draw();
+                    info.Draw();
+                    if (msgb.isShow)
+                        msgb.Draw();
+                }
+                else
+                {
+                    Game.spriteBatch.End();
+                    gra.SetRenderTarget(0, rt);
+                    gra.Clear(Color.TransparentBlack);
+                    Game.spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+
+                    foreach (_Control c in _controls)
+                        if (c != focus)
+                            c.Draw();
+                    if (focus != null)
+                        focus.Draw();
+                    info.Draw();
+                    if (msgb.isShow)
+                        msgb.Draw();
+                    Game.spriteBatch.End();
+                    gra.SetRenderTarget(0, null);
+                    st = rt.GetTexture();
+                    Game.spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    Game.spriteBatch.Draw(st, _pos, Color.White);
+                }
+            }
         }
 
     }

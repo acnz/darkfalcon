@@ -53,4 +53,8 @@ C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\XNATweener.dll
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Effects\reflect.xnb
 C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\obj\x86\Debug\DarkFalcon.Frm3D.resources
-C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Arial.xnb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Leitor\2.xnb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\1.xnb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\2.xnb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\PlaVideo\1.xnb
+C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\PlaVideo\2.xnb

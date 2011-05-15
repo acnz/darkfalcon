@@ -122,15 +122,16 @@ namespace DarkFalcon.gui
             }
         }
 
-        public _Scrollbar(hud pai,string name, Vector2 position, Type type, float size,Rectangle ma) : base(pai)
+        public _Scrollbar(hud pai, string name, Vector2 position, Type type, float size, _Control master)
+            : base(pai)
         {
             this.Name = name;
             this.type = type;
 
             if (type == Type.Horizontal)
-            hscrollbar = new _HScrollbar(pai, position, size, ma);            
+                hscrollbar = new _HScrollbar(pai, position, size, master);            
             else if (type == Type.Vertical)
-                vscrollbar = new _VScrollbar(pai, position, size, ma);
+                vscrollbar = new _VScrollbar(pai, position, size, master);
         }
 
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)

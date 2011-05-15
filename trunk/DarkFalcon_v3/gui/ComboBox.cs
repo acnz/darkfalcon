@@ -27,6 +27,12 @@ namespace DarkFalcon.gui
         bool justOpened = false;
 
         string[] items;
+
+        public void Clear()
+        {
+            listbox.Clear();
+            textbox.Text = "";
+        }
         public _ComboBox(hud pai,string name, Vector2 position, int width, string[] items)
             : base(pai,name, position)
         {
@@ -126,7 +132,7 @@ namespace DarkFalcon.gui
                 if (wasReleased)
                     justOpened = false;
             }
-            if (Owner.focus == textbox || Owner.focus == button)
+            if (Owner.focus == textbox || Owner.focus == button ||Owner.focus == listbox)
                 Owner.focus = this ;
         }
 

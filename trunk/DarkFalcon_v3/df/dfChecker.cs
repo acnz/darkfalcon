@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DarkFalcon.df
 {
-    class dfChecker
+    public class dfChecker
     {
-        dfChecker() { }
+        public dfChecker() { }
         
         public string v(dfCom a,dfCom b){
             string result = "";
@@ -54,7 +54,7 @@ namespace DarkFalcon.df
                 }
                 else
                 {
-                    result = "Nenhum problema de compatibilidade";
+                    result = "ok";
                 }
                 return result;
         }

@@ -103,6 +103,7 @@
     <Compile Include="df\dfIObG.cs" />
     <Compile Include="gui\Checkbox.cs" />
     <Compile Include="gui\ComboBox.cs" />
+    <Compile Include="gui\tagcloud.cs" />
     <Compile Include="gui\MsgBox.cs" />
     <Compile Include="gui\holder.cs" />
     <Compile Include="gui\infoBox.cs" />
@@ -120,7 +121,6 @@
     <Compile Include="gui\Menubar.cs" />
     <Compile Include="gui\Control.cs" />
     <Compile Include="gui\Button.cs" />
-    <Compile Include="gui\Imagebox.cs" />
     <Compile Include="Classes3D\CameraTP.cs" />
     <Compile Include="Classes3D\User32.cs" />
     <Compile Include="Classes3D\_3DObject.cs" />

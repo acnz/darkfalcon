@@ -19,7 +19,7 @@ namespace DarkFalcon
         int prevIndex = 0;
         public List<dfCom[]> ListaTabs = new List<dfCom[]>();
         public List<bool> ListaSalvo = new List<bool>();
-        DataSet ds1, ds2;
+        DataSet ds1;
         OleDbDataAdapter da;
         
         public Frm3D()
@@ -330,6 +330,279 @@ namespace DarkFalcon
                 MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             } return new List<dfCom> { };
         }
+        public List<dfCom> tagSearch(string args)
+        {
+            List<dfCom> list = new List<dfCom>();
+            try
+            {
 
+                OleDbConnection cn = new OleDbConnection();
+                DataTable schemaTable;
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
+                cn.Open();
+
+                //Retrieve schema information about tables.
+                //Because tables include tables, views, and other objects,
+                //restrict to just TABLE in the Object array of restrictions.
+                schemaTable = cn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables,
+                              new Object[] { null, null, null, "TABLE" });
+                string[] tables = new string[schemaTable.Rows.Count];
+                //List the table name from each row in the schema table.
+                for (int i = 0; i < schemaTable.Rows.Count; i++)
+                {
+                    tables[i] = schemaTable.Rows[i].ItemArray[2].ToString();
+                }
+
+                //Explicitly close - don't wait on garbage collection.
+                cn.Close();
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+
+                for (int i = 0; i < tables.Count(); i++)
+                {
+                    if (tables[i].Contains("tab"))
+                    {
+                        try
+                        {
+                            string Tipo = tables[i].Substring(tables[i].LastIndexOf("tab") + 3);
+                            ds1.Reset();
+                                da.SelectCommand.CommandText = "select * from " + tables[i] + "  where tags LIKE '%" + args + "%'";
+                            da.Fill(ds1, tables[i]);
+
+
+                            DataTable t = ds1.Tables[0];
+                            for (int j = 0; j < t.Rows.Count; j++)
+                                if (Tipo != "Outros")
+                                {
+                                    list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), Tipo, float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString()));
+                                }
+                                else
+                                {
+                                    list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), t.Rows[j][2].ToString(), float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString(), true));
+                                }
+                        }
+                        catch (OleDbException)
+                        {
+                            MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        }
+                    }
+                }
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<dfCom> { };
+        }
+        public List<dfCom> cbSearch(string args)
+        {
+            List<dfCom> list = new List<dfCom>();
+            try
+            {
+
+                OleDbConnection cn = new OleDbConnection();
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
+                cn.Open();
+
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+
+
+
+                string str1 = args.Replace("Placa de ", "Pla");
+
+                ds1.Reset();
+                da.SelectCommand.CommandText = "select * from tab" + str1;
+                da.Fill(ds1, "tab" + str1);
+
+                string Tipo = str1;
+                DataTable t = ds1.Tables[0];
+                for (int j = 0; j < t.Rows.Count; j++)
+                    if (Tipo != "Outros")
+                    {
+                        list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), Tipo, float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString()));
+                    }
+                    else
+                    {
+                        list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), t.Rows[j][2].ToString(), float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString(), true));
+                    }
+
+
+
+
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<dfCom> { };
+        }
+        public List<dfCom> cbSearch(string args1, string args2)
+        {
+            List<dfCom> list = new List<dfCom>();
+            try
+            {
+
+                OleDbConnection cn = new OleDbConnection();
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
+                cn.Open();
+
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+
+
+
+                string str1 = args1.Replace("Placa de ", "Pla");
+                string str2 = args2;
+
+                ds1.Reset();
+                da.SelectCommand.CommandText = "select * from tab" + str1 + " where f1 = '" + str2 + "'";
+                da.Fill(ds1, "tab" + str1);
+
+                string Tipo = str1;
+                DataTable t = ds1.Tables[0];
+                for (int j = 0; j < t.Rows.Count; j++)
+                    if (Tipo != "Outros")
+                    {
+                        list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), Tipo, float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString()));
+                    }
+                    else
+                    {
+                        list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), t.Rows[j][2].ToString(), float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString(), true));
+                    }
+
+
+
+
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<dfCom> { };
+        }
+        public List<dfCom> cbSearch(string args1, string args2,string args3)
+        {
+            List<dfCom> list = new List<dfCom>();
+            try
+            {
+
+                OleDbConnection cn = new OleDbConnection();
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
+                cn.Open();
+
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+
+
+
+                string str1 = args1.Replace("Placa de ", "Pla");
+                string str2 = args2;
+                string str3 = args3;
+
+                ds1.Reset();
+                da.SelectCommand.CommandText = "select * from tab" + str1 + " where f1 = '" + str2 + "' and f2 = '"+str3+"'";
+                da.Fill(ds1, "tab" + str1);
+
+                string Tipo = str1;
+                DataTable t = ds1.Tables[0];
+                for (int j = 0; j < t.Rows.Count; j++)
+                    if (Tipo != "Outros")
+                    {
+                        list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), Tipo, float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString()));
+                    }
+                    else
+                    {
+                        list.Add(new dfCom(t.Rows[j][0].ToString(), t.Rows[j][1].ToString(), t.Rows[j][2].ToString(), float.Parse(t.Rows[j][6].ToString()), t.Rows[j][4].ToString(), true));
+                    }
+
+
+
+
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<dfCom> { };
+        }
+
+        public List<string> cb1Search2(string args)
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                string str = args.Replace("Placa de ", "Pla");
+                OleDbConnection cn = new OleDbConnection();
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
+                cn.Open();
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+
+                ds1.Reset();
+                da.SelectCommand.CommandText = "select f1 from tab" + str + " group by f1";
+                da.Fill(ds1, "tab" + str );
+
+                for (int i = 0; i < ds1.Tables[0].Rows.Count; i++)
+                {
+
+                    list.Add(ds1.Tables[0].Rows[i][0].ToString());
+                }
+
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<string> { };
+        }
+        public List<string> cb2Search2(string args1,string args2)
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                string str1 = args1.Replace("Placa de ", "Pla");
+                string str2 = args2;
+                OleDbConnection cn = new OleDbConnection();
+
+                cn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Properties.Settings.Default.CRoot + "Base.mdb";
+                cn.Open();
+                da.SelectCommand = new OleDbCommand();
+                da.SelectCommand.Connection = cn;
+
+                ds1.Reset();
+                da.SelectCommand.CommandText = "select f2 from tab" + str1 + " where f1 = '" + str2 + "' group by f2";
+                da.Fill(ds1, "tab" + str1);
+
+                for (int i = 0; i < ds1.Tables[0].Rows.Count; i++)
+                {
+
+                    list.Add(ds1.Tables[0].Rows[i][0].ToString());
+                }
+
+                return list;
+
+
+            }
+            catch (OleDbException)
+            {
+                MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            } return new List<string> { };
+        }
     }
 }

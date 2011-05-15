@@ -100,15 +100,24 @@ namespace DarkFalcon.df
                 tl.Add(_sata[i]);
             }
             _sata = new dfCom[Qtd];
-            for (int i = 0; i < lQtd; i++)
+            if (lQtd <= Qtd)
             {
-                _sata[i] = tl[i];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _sata[i] = tl[i];
+                }
+                for (int i = lQtd; i < Qtd; i++)
+                {
+                    _sata[i] = new dfCom("HD");
+                }
             }
-            for (int i = lQtd; i < Qtd; i++)
+            else
             {
-                _sata[i] = new dfCom("HD");
+                for (int i = 0; i < Qtd; i++)
+                {
+                    _sata[i] = tl[i];
+                }
             }
-
 
             lQtd = _ide.Count();
             tl = new List<dfCom>();
@@ -117,14 +126,25 @@ namespace DarkFalcon.df
                 tl.Add(_ide[i]);
             }
             _ide = new dfCom[Qtd2];
-            for (int i = 0; i < lQtd; i++)
+            if (lQtd <= Qtd2)
             {
-                _ide[i] = tl[i];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _ide[i] = tl[i];
+                }
+                for (int i = lQtd; i < Qtd2; i++)
+                {
+                    _ide[i] = new dfCom("Leitor");
+                }
             }
-            for (int i = lQtd; i < Qtd2; i++)
+            else
             {
-                _ide[i] = new dfCom("Leitor");
-            }}
+                for (int i = 0; i < Qtd2; i++)
+                {
+                    _ide[i] = tl[i];
+                }
+            }
+        }
             internal string replace(dfCom Obj, dfCom Target)
         {
             dfCom[] found = new dfCom[] { };

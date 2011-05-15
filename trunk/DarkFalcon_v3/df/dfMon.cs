@@ -55,14 +55,25 @@ namespace DarkFalcon.df
                 tl.Add(_mons[i]);
             } 
             _mons = new dfCom[Qtd];
-            for (int i = 0; i < lQtd; i++)
+            if (lQtd <= Qtd)
             {
-                _mons[i] = tl[i];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _mons[i] = tl[i];
+                }
+                for (int i = lQtd; i < Qtd; i++)
+                {
+                    _mons[i] = new dfCom("Monitor");
+                }
             }
-            for (int i = lQtd; i < Qtd; i++)
+            else
             {
-                _mons[i] = new dfCom("Monitor");
-            }}
+                for (int i = 0; i < Qtd; i++)
+                {
+                    _mons[i] = tl[i];
+                }
+            }
+        }
             internal string replace(dfCom Obj, dfCom Target)
         {
             int a = -1;
