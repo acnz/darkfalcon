@@ -23,7 +23,7 @@ namespace DarkFalcon.gui
         #region Fields
 
         Vector2 origin = Vector2.Zero;
-        float alpha;
+        new float alpha;
 
 
         bool bMouseOver = false;

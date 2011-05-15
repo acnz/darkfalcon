@@ -125,13 +125,23 @@ namespace DarkFalcon.df
                 tl.Add(_periu[i]);
             }
             _periu = new dfCom[Qtd];
-            for (int i = 0; i < lQtd; i++)
+            if (lQtd <= Qtd)
             {
-                _periu[i] = tl[i];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _periu[i] = tl[i];
+                }
+                for (int i = lQtd; i < Qtd; i++)
+                {
+                    _periu[i] = new dfCom("?", "$usb");
+                }
             }
-            for (int i = lQtd; i < Qtd; i++)
+            else
             {
-                _periu[i] = new dfCom("?", "$usb");
+                for (int i = 0; i < Qtd; i++)
+                {
+                    _periu[i] = tl[i];
+                }
             }
             if (p_2)
             {

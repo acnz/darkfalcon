@@ -97,7 +97,7 @@ namespace DarkFalcon
             try
             {
                 ((Frm3D)this.MdiChildren[0]).FixPosition();
-                ((Frm3D)this.MdiChildren[0]).pc.active = false;
+                ((Frm3D)this.MdiChildren[0]).pc.nmv = false;
                 wasMoving = true;
             }
             catch (Exception exc)
@@ -128,7 +128,8 @@ namespace DarkFalcon
 
         private void FrmMain_Activated(object sender, EventArgs e)
         {
-        
+            Console.Out.WriteLine("active");
+            ((Frm3D)this.MdiChildren[0]).pc.focus = true;
         }
 
         private void FrmMain_SizeChanged(object sender, EventArgs e)
@@ -137,6 +138,7 @@ namespace DarkFalcon
 
             if (desk <= 1024)
             {
+                if (this.WindowState != FormWindowState.Minimized)
                 this.WindowState = FormWindowState.Maximized;
             }
             else
@@ -197,19 +199,25 @@ namespace DarkFalcon
 
         private void FrmMain_Enter(object sender, EventArgs e)
         {
-            ((Frm3D)this.MdiChildren[2]).pc.focus = true;
+           // ((Frm3D)this.MdiChildren[2]).pc.focus = true;
         }
 
         private void FrmMain_MouseUp(object sender, MouseEventArgs e)
         {
             
-          //  ((Frm3D)this.MdiChildren[0]).pc.active = true;
+          //  
         }
 
         private void FrmMain_RegionChanged(object sender, EventArgs e)
         {
-            ((Frm3D)this.MdiChildren[0]).pc.active = true;
+            //((Frm3D)this.MdiChildren[0]).pc.active = true;
 
+        }
+
+        private void FrmMain_Deactivate(object sender, EventArgs e)
+        {
+            Console.Out.WriteLine("deactive");
+            ((Frm3D)this.MdiChildren[0]).pc.focus = false;
         }
 
     }

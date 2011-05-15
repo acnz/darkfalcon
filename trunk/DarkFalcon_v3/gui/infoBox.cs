@@ -104,7 +104,7 @@ namespace DarkFalcon.gui
             int vScrollbarHeight = 0;
                 vScrollbarHeight = (int)Height - 35;
 
-                scr = new _Scrollbar(Owner, "scr", Position + new Vector2(Width - 13, 30), _Scrollbar.Type.Vertical, vScrollbarHeight, this.lab.area);
+                scr = new _Scrollbar(Owner, "scr", Position + new Vector2(Width - 13, 30), _Scrollbar.Type.Vertical, vScrollbarHeight, this.lab);
             scr.Owner = this.Owner;
             scr.Initialize(content, graphics);
 

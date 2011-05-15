@@ -223,6 +223,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DarkFalcon v3";
             this.TransparencyKey = System.Drawing.Color.Lime;
+            this.Deactivate += new System.EventHandler(this.FrmMain_Deactivate);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.RegionChanged += new System.EventHandler(this.FrmMain_RegionChanged);
             this.ResizeBegin += new System.EventHandler(this.FrmMain_ResizeBegin);

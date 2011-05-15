@@ -57,6 +57,7 @@ namespace DarkFalcon.gui
         _Listflow lf;
         _Listbox lout;
         dfPC pc;
+        dfChecker ch;
         OuterGlow o;
         Texture2D outerglow;
 
@@ -154,6 +155,8 @@ namespace DarkFalcon.gui
             SetCompat();
             outerglow = Texture2D.FromFile(graphics, @"gui\listflow\outerglow.png");
             o = new OuterGlow(outerglow, spriteBatch);
+
+            ch = new dfChecker();
         }
 
         public override void Dispose()
@@ -372,7 +375,7 @@ namespace DarkFalcon.gui
                 Owner.info.Add(output);
                 SetTex();
             }
-            
+            SetCompat(); 
         }
 
         /// <summary>
@@ -613,12 +616,75 @@ namespace DarkFalcon.gui
             }
             else
             {
-                List<dfCom> list = pc.GetAllCom();
+                lout.Clear();
+                string m = "";
+                if (pc.Processador.Nome == "?") arrowsc[0] = t;
+                else if ((m = ch.v(pc.Processador, pc.Motherboard)) == "ok") arrowsc[0] = g;
+                else { lout.Add(m); arrowsc[0] = r; }
+                m = "";
+                if (pc.Fonte.Nome == "?") arrowsc[1] = t;
+                else if ((m = ch.v(pc.Fonte, pc.Motherboard)) == "ok") arrowsc[1] = g; else { lout.Add(m); arrowsc[1] = r; }
+                m = "";
+                if (pc.Gabinete.Nome == "?") arrowsc[2] = t;
+                else if ((m = ch.v(pc.Gabinete, pc.Motherboard)) == "ok") arrowsc[2] = g; else { lout.Add(m); arrowsc[2] = r; }
+                m = "";
+                if (pc.Mouse.Nome == "?") arrowsc[3] = t;
+                else if ((m = ch.v(pc.Mouse, pc.Motherboard)) == "ok") arrowsc[3] = g; else { lout.Add(m); arrowsc[3] = r; }
+                m = "";
+                if (pc.Teclado.Nome == "?") arrowsc[4] = t;
+                else if ((m = ch.v(pc.Teclado, pc.Motherboard)) == "ok") arrowsc[4] = g; else { lout.Add(m); arrowsc[4] = r; }
+                m = "";
+                bool red = false;
+                bool color = false;
+                foreach (dfCom d in pc.Memoria.GetAll())
+                {
+                    m = "";
+                    if (d.Nome == "?") { if (!color) arrowsc[5] = t; }
+                    else if ((m = ch.v(d, pc.Motherboard)) == "ok") { if (!red) { arrowsc[5] = g; color = true; } }
+                    else { lout.Add(m); arrowsc[5] = r; red = true; color = true; }
+                }
+                red = false;
+                color = false;
+                foreach (dfCom d in pc.Dados.GetAll())
+                {
+                    m = "";
+                    if (d.Nome == "?") { if (!color)  arrowsc[6] = t; }
+                    else if ((m = ch.v(d, pc.Motherboard)) == "ok") { if (!red){ arrowsc[6] = g; color = true; }}
+                    else { lout.Add(m); arrowsc[6] = r; red = true;color = true;  }
+                }
+                red = false;
+                color = false;
+                foreach (dfCom d in pc.Placas.GetAll())
+                {
+                    m = "";
+                    if (d.Nome == "?") { if (!color)  arrowsc[7] = t; }
+                    else if ((m = ch.v(d, pc.Motherboard)) == "ok") { if (!red){ arrowsc[7] = g; color = true; }}
+                    else { lout.Add(m); arrowsc[7] = r; red = true; color = true; }
+                }
+                if (pc.numMon == 0)
+                {
+                    m = "";
+                    if (pc.Mon.Nome == "?") arrowsc[8] = t;
+                    else if ((m = ch.v(pc.Mon, pc.Motherboard)) == "ok") { if (!red) arrowsc[8] = g; }
+                    else { lout.Add(m); arrowsc[8] = r; }
+                    arrowsc[9] = t;
+
+                }
+                else {
+                    red = false;
+                    color = false;
+                    foreach (dfCom d in pc.Monitor.GetAll())
+                    {
+                        m = "";
+                        if (d.Nome == "?") { if (!color)  arrowsc[9] = t; }
+                        else if ((m = ch.v(d, pc.PlaVideo)) == "ok") { if (!red) { arrowsc[9] = g; color = true; } }
+                        else { lout.Add(m); arrowsc[9] = r; red = true; color = true; }
+                    }
+                    arrowsc[8] = t;
+                }
+
             }
-            if (pc.numMon == 0)
-            {
-                arrowsc[9] = t;
-            }
+
         }
         public void GetDrop(object sender, EventArgs e)
         {
@@ -657,7 +723,7 @@ namespace DarkFalcon.gui
                 SetTex();
                 if (r == "ok") r = d.Tipo + " \"" + d.Nome + "\" foi adicionado com sucesso!";
 
-
+                if(r != "")
                 Owner.info.Add(r);
             }
             else
@@ -731,7 +797,7 @@ namespace DarkFalcon.gui
                                                     r = d.Nome + " não é um Leitor";
                                         }
                                         SetTex();
-
+                                        if (r != "")
                                         Owner.info.Add(r);
                                     }
                             }
@@ -755,7 +821,7 @@ namespace DarkFalcon.gui
                 Owner.info.Add(output);
                 SetTex();
             }
-
+            SetCompat();
         }
     }
 }

@@ -38,17 +38,19 @@ namespace DarkFalcon
 
         dfPC _pc;
 
-        hud _hud;
+        hud _hud1,_hud2;
         public SpriteFont hudf;
         List<_Control> listaHUD = new List<_Control>();
         public List<_Control> listaMenu = new List<_Control>();
         public List<_Checkbox> groupM = new List<_Checkbox>();
-        public bool active = true; 
+        public bool nmv = true; 
         private IntPtr drawSurface;
         Frm3D fm;
         private int MouseWheel;
         public MouseState prevMouse;
         UserActivityHook actHook;
+
+        int _step = 1, _tstep = 1;
 
          public PcView(IntPtr drawSurface, Frm3D frm)
         {
@@ -152,10 +154,16 @@ namespace DarkFalcon
             _pc = new dfPC(true);
             cam.ResetCamera();
 
-            _hud = new hud(this);
-            _hud.Initialize(Content, graphics.GraphicsDevice);
+            _hud1 = new hud(this);
+            _hud1.Initialize(Content, graphics.GraphicsDevice);
+            _hud2 = new hud(this);
+            _hud2.Initialize(Content, graphics.GraphicsDevice);
 
-            createHUD();
+            _hud2.Position = new Vector2(graphics.GraphicsDevice.Viewport.Width, 0);
+
+            createHUD1();
+            createHUD2();
+
 
 
         }
@@ -181,85 +189,154 @@ namespace DarkFalcon
             // TODO: use this.Content to load your game content here
         }
 
-        void createHUD()
+        void createHUD1()
         {
-            _Listflow lf1 = new _Listflow(_hud, "lf1", new Vector2(5, 5), (4 * graphics.GraphicsDevice.Viewport.Width / 5)-10, new dfCom[] { });
-            _Panel pPesquisa = new _Panel(_hud, "pPesquisa", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, 100), 100, graphics.GraphicsDevice.Viewport.Height / 4 - 2.5f, new _Panel.Anchor[] { _Panel.Anchor.D, _Panel.Anchor.C });
+            _Listflow lf1 = new _Listflow(_hud1, "lf1", new Vector2(5, 5), (4 * graphics.GraphicsDevice.Viewport.Width / 5)-10, new dfCom[] { });
+            _Panel pPesquisa = new _Panel(_hud1, "pPesquisa", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, 100), 100, graphics.GraphicsDevice.Viewport.Height / 4 - 2.5f, new _Panel.Anchor[] { _Panel.Anchor.D, _Panel.Anchor.C });
             
             float px = pPesquisa.Position.X;
             float py = pPesquisa.Position.Y;
             float pw = pPesquisa.area.Width;
             float ph = pPesquisa.area.Height;
 
-            _Panel pFiltros = new _Panel(_hud, "pFiltros", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, py + ph + 2.5f), 100, 2*graphics.GraphicsDevice.Viewport.Height / 4 - 2.5f, new _Panel.Anchor[] { _Panel.Anchor.D });
+            _Panel pFiltros = new _Panel(_hud1, "pFiltros", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, py + ph + 2.5f), 100, 2*graphics.GraphicsDevice.Viewport.Height / 4 - 2.5f, new _Panel.Anchor[] { _Panel.Anchor.D });
 
             float fx = pFiltros.Position.X;
             float fy = pFiltros.Position.Y;
             float fw = pFiltros.area.Width;
             float fh = pFiltros.area.Height;
 
-            _Panel pTags = new _Panel(_hud, "pTags", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, fy + fh + 2.5f), 100, graphics.GraphicsDevice.Viewport.Height / 4 - 5, new _Panel.Anchor[] { _Panel.Anchor.B, _Panel.Anchor.D });
+            _Panel pTags = new _Panel(_hud1, "pTags", new Vector2(4 * graphics.GraphicsDevice.Viewport.Width / 5, fy + fh + 2.5f), 100, graphics.GraphicsDevice.Viewport.Height / 4 - 5, new _Panel.Anchor[] { _Panel.Anchor.B, _Panel.Anchor.D });
             float tx = pTags.Position.X;
             float ty = pTags.Position.Y;
             float tw = pTags.area.Width;
             float th = pTags.area.Height;
 
-            _Textbox tbSearch = new _Textbox(_hud, "tbSearch", new Vector2(px + 10, py + 70), "Digite sua Pesquisa...", (int)(pw-20));
-            _Button butSearch = new _Button(_hud, "butSearch", "Pesquisar", new Rectangle((int)(px + 80), (int)(py + 110), 40, 20), "default");
+            
+            _Textbox tbSearch = new _Textbox(_hud1, "tbSearch", new Vector2(px + 10, py + 70), "Digite sua Pesquisa...", (int)(pw-20));
+            _Button butSearch = new _Button(_hud1, "butSearch", "Pesquisar", new Rectangle((int)(px + 80), (int)(py + 110), 40, 20), "default");
 
             
-            _ComboBox cb1 = new _ComboBox(_hud, "cb1", new Vector2(fx + 10, fy + 100), 150, new string[] { });
-            _Label labcb1 = new _Label(_hud, "labcb1", new Vector2(cb1.Position.X, cb1.Position.Y - 20), "Tipo", _Label.Align.Left);
-            _ComboBox cb2 = new _ComboBox(_hud, "cb2", new Vector2(fx + 10, fy + 170), 150, new string[] { });
-            _Label labcb2 = new _Label(_hud, "labcb2", new Vector2(cb2.Position.X, cb2.Position.Y - 20), "Fabricante", _Label.Align.Left);
-            _ComboBox cb3 = new _ComboBox(_hud, "cb3", new Vector2(fx + 10, fy + 240), 150, new string[] { });
-            _Label labcb3 = new _Label(_hud, "labcb3", new Vector2(cb3.Position.X, cb3.Position.Y - 20), "Filtro", _Label.Align.Left);
+            _ComboBox cb1 = new _ComboBox(_hud1, "cb1", new Vector2(fx + 10, fy + 100), 150, new string[] { "Motherboard" , "Processador","Memoria","HD","Gabinete","Monitor","Leitor","Fonte","Placa de Video","Outros"});
+            _Label labcb1 = new _Label(_hud1, "labcb1", new Vector2(cb1.Position.X, cb1.Position.Y - 20), "Tipo", _Label.Align.Left);
+            _ComboBox cb2 = new _ComboBox(_hud1, "cb2", new Vector2(fx + 10, fy + 170), 150, new string[] { });
+            _Label labcb2 = new _Label(_hud1, "labcb2", new Vector2(cb2.Position.X, cb2.Position.Y - 20), "Fabricante", _Label.Align.Left);
+            _ComboBox cb3 = new _ComboBox(_hud1, "cb3", new Vector2(fx + 10, fy + 240), 150, new string[] { });
+            _Label labcb3 = new _Label(_hud1, "labcb3", new Vector2(cb3.Position.X, cb3.Position.Y - 20), "Filtro", _Label.Align.Left);
 
-
-            _Listbox lbError = new _Listbox(_hud, "lbError", new Vector2(5, 5 * graphics.GraphicsDevice.Viewport.Height / 6), (int)pTags.X - 10, graphics.GraphicsDevice.Viewport.Height / 6-5, new string[] { });
-            _Panel pHolder = new _Panel(_hud, "pHolder", new Vector2(5, lf1.Y + lf1.Height + 5), (int)pTags.X - 10, lbError.Y - 10 - (lf1.Y + lf1.Height), new _Panel.Anchor[] { }, 0.4f);
-            _Holder Holder = new _Holder(_hud, "Holder", pHolder, lbError, lf1, _pc);
+            _tagcloud tc = new _tagcloud(_hud1, "tc", new Vector2(tx, ty), tw, th, _pc);
 
             
+            _Listbox lbError = new _Listbox(_hud1, "lbError", new Vector2(5, 5 * graphics.GraphicsDevice.Viewport.Height / 6), (int)pTags.X - 10, graphics.GraphicsDevice.Viewport.Height / 6-5, new string[] { });
+            _Panel pHolder = new _Panel(_hud1, "pHolder", new Vector2(5, lf1.Y + lf1.Height + 5), (int)pTags.X - 10, lbError.Y - 10 - (lf1.Y + lf1.Height), new _Panel.Anchor[] { }, 0.4f);
+            _Holder Holder = new _Holder(_hud1, "Holder", pHolder, lbError, lf1, _pc);
+            _Button bNstep = new _Button(_hud1, "bNstep", "", new Vector2(graphics.GraphicsDevice.Viewport.Width - 183, 10), "nextstep");
+            
 
-            _hud.add(lf1);
-            _hud.add(pPesquisa);
-            _hud.add(pFiltros);
-            _hud.add(pTags);
-            _hud.add(lbError);
-            _hud.add(pHolder);
-            _hud.add(Holder);
+            
+            _hud1.add(pPesquisa);
+            _hud1.add(pFiltros);
+            _hud1.add(pTags);
+            _hud1.add(lbError);
+            _hud1.add(pHolder);
+            _hud1.add(Holder);
 
-            _hud.add(tbSearch);
-            _hud.add(butSearch);
+            _hud1.add(tbSearch);
+            _hud1.add(butSearch);
 
-            _hud.add(cb1);
-            _hud.add(labcb1);
-            _hud.add(cb2);
-            _hud.add(labcb2);
-            _hud.add(cb3);
-            _hud.add(labcb3);
+            _hud1.add(cb1);
+            _hud1.add(labcb1);
+            _hud1.add(cb2);
+            _hud1.add(labcb2);
+            _hud1.add(cb3);
+            _hud1.add(labcb3);
+
+            _hud1.add(tc);
+
+            _hud1.add(lf1);
+            _hud1.add(bNstep);
 
             tbSearch.OnRelease = new EventHandler(tbSearch_release);
+            butSearch.OnRelease = new EventHandler(lf1.newSearch);
             butSearch.OnRelease = new EventHandler(butSearch_release);
+            cb1.OnSelectionChanged += new EventHandler(cb1_change);
+            cb2.OnSelectionChanged += new EventHandler(cb2_change);
+            cb3.OnSelectionChanged += new EventHandler(cb3_change);
+            tc.onSelect += new EventHandler(tc_click);
+            bNstep.OnRelease = new EventHandler(bNstep_release);
+        }
+        void createHUD2()
+        {
+            _Panel pTeste = new _Panel(_hud2, "pTeste", new Vector2(100, 100), 100, 100, new _Panel.Anchor[] { _Panel.Anchor.D, _Panel.Anchor.E, _Panel.Anchor.C, _Panel.Anchor.B });
+            _Button bNstep = new _Button(_hud2, "bNstep", "", new Vector2(graphics.GraphicsDevice.Viewport.Width - 183, 10), "nextstep");
+            _Button bPstep = new _Button(_hud2, "bPstep", "", new Vector2(10, 10), "prevstep");
 
+            _hud2.add(pTeste);
+            _hud2.add(bNstep);
+            _hud2.add(bPstep);
+
+            bNstep.OnRelease = new EventHandler(bNstep_release);
+            bPstep.OnRelease = new EventHandler(bPstep_release);
         }
 
         #region events
 
         public void tbSearch_release(object sender, EventArgs e)
         {
-            Console.WriteLine(((_Control)sender).Name + " out");
+            if (_hud1["tbSearch"].Text == "Digite sua Pesquisa...")
+            {
+                ((_Textbox)_hud1["tbSearch"]).Text = "";
+            }
+
         }
         public void butSearch_release(object sender, EventArgs e)
         {
-            Console.WriteLine(((_Control)sender).Name + " pressed");
-            if (_hud["tbSearch"].Text != "Digite sua Pesquisa...")
-                _hud.lF.Items = fm.freeSearch(((_Textbox)_hud["tbSearch"]).plainText);
+            if (_hud1["tbSearch"].Text != "Digite sua Pesquisa...")
+                _hud1.lF.Items = fm.freeSearch(((_Textbox)_hud1["tbSearch"]).plainText);
 
         }
 
+        private void cb1_change(object sender, EventArgs e)
+        {
+            ((_ComboBox)_hud1["cb2"]).Clear();
+            ((_ComboBox)_hud1["cb3"]).Clear();
+            ((_ComboBox)_hud1["cb2"]).Items = fm.cb1Search2((string)sender);
+            _hud1.lF.Items = fm.cbSearch((string)sender);
+        }
 
+        private void cb2_change(object sender, EventArgs e)
+        {
+            string s1 = ((_ComboBox)_hud1["cb1"]).Text;
+            ((_ComboBox)_hud1["cb3"]).Clear();
+            ((_ComboBox)_hud1["cb3"]).Items = fm.cb2Search2(s1, (string)sender);
+            _hud1.lF.Items = fm.cbSearch(s1,(string)sender);
+        }
+
+        private void cb3_change(object sender, EventArgs e)
+        {
+            string s1 = ((_ComboBox)_hud1["cb1"]).Text;
+            string s2 = ((_ComboBox)_hud1["cb2"]).Text;
+            _hud1.lF.Items = fm.cbSearch(s1, s2, (string)sender);
+        }
+
+        private void tc_click(object sender, EventArgs e)
+        {
+            string s = (string)sender;
+            _hud1.lF.Items = fm.tagSearch(s);
+        
+        }
+        public void bNstep_release(object sender, EventArgs e)
+        {
+            if(_step < 3)
+                _tstep += 1;
+
+        }
+        public void bPstep_release(object sender, EventArgs e)
+        {
+            if (_step > 1)
+                _tstep -= 1;
+
+        }
         #endregion
 
         /// <summary>
@@ -276,24 +353,56 @@ namespace DarkFalcon
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        int x = 0; 
         protected override void Update(GameTime gameTime)
         {
-            if (!focus) MouseWheel =0;
-            cam.Update(Matrix.CreateTranslation(monitor.Position+new Vector3(5,0,-10)), MouseWheel);
-            MouseWheel = 0;
-
-            _hud.Update();
-            
-
-
-            foreach (_3DObject ob in lista3D)
+            if (focus)
             {
-                ob.Update();
-            }
-          
+                if (MouseWheel > 0)
+                    Console.Out.WriteLine("foi");
+                cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
+                MouseWheel = 0;
 
-            base.Update(gameTime);
-            prevMouse = Mouse.GetState();
+                if (_hud1.focus != _hud1["tbSearch"] && _hud1["tbSearch"].Text == "")
+                    _hud1["tbSearch"].Text = "Digite sua Pesquisa...";
+
+                _hud1.Update();
+                _hud2.Update();
+
+                if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) && _hud1.focus == _hud1["tbSearch"])
+                {
+                    butSearch_release(null, null);
+                }
+
+                foreach (_3DObject ob in lista3D)
+                {
+                    ob.Update();
+                }
+                if (_tstep != _step)
+                {
+                    if (_step == 1)
+                    {
+                        if (_tstep == 2)
+                        {
+                            if (_hud1.Position.X > -_hud1.area.Width) _hud1.Position -= new Vector2(30, 0); else _step = _tstep;
+                            if (_hud2.Position.X - 30 > 0) { _hud2.Position -= new Vector2(30, 0); } else _hud2.Position = Vector2.Zero;
+                        }
+                    }
+                    if (_step == 2)
+                    {
+                        if (_tstep == 1)
+                        {
+                            if (_hud1.Position.X + 30 < 0) _hud1.Position += new Vector2(30, 0);else _hud1.Position = Vector2.Zero;
+                            if (_hud2.Position.X < _hud2.area.Width) { _hud2.Position += new Vector2(30, 0); } else _step = _tstep;
+                        }
+                    }
+                    x++;
+                }
+                else x = 0;
+                base.Update(gameTime);
+                prevMouse = Mouse.GetState();
+
+            }
         }
 
         /// <summary>
@@ -305,51 +414,58 @@ namespace DarkFalcon
         float alpha = 0;
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.Black);
-            if (active)
+            
+            if (nmv)
             {
-                Viewport vp = GraphicsDevice.Viewport;
-                //  Note the order of the parameters! Projection first.
-                //m3d=GraphicsDevice.Viewport.Unproject(new Vector3(Mouse.GetState().X, Mouse.GetState().Y, -10 ), cam.projectionMatrix, cam.viewMatrix, Matrix.Identity);
-                if (Out == null)
-                    Out += "null";
-
-                spriteBatch.Begin(SpriteBlendMode.None, SpriteSortMode.BackToFront, SaveStateMode.SaveState);
-                spriteBatch.Draw(background, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), null, Color.White, 0, Vector2.Zero, 0, 1.0f);
-                spriteBatch.End();
-
-
-                foreach (_3DObject ob in lista3D)
+                if (focus)
                 {
-                    ob.Draw();
-                }
+                    graphics.GraphicsDevice.Clear(Color.Black);
+                    Viewport vp = GraphicsDevice.Viewport;
+                    //  Note the order of the parameters! Projection first.
+                    //m3d=GraphicsDevice.Viewport.Unproject(new Vector3(Mouse.GetState().X, Mouse.GetState().Y, -10 ), cam.projectionMatrix, cam.viewMatrix, Matrix.Identity);
+                    if (Out == null)
+                        Out += "null";
 
-
-                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-                spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));
-                spriteBatch.End();
-
-                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-                _hud.Draw();
-                spriteBatch.End();
-
-                spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-                //spriteBatch.DrawString(font, Out, new Vector2(0, graphics.PreferredBackBufferHeight - 40), Color.White);
-                spriteBatch.End();
-
-                if (noTabs)
-                {
-                    Console.Out.WriteLine("no pc");
-                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
-                    spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
-                    spriteBatch.DrawString(font, "Nenhum Computador esta aberto!", new Vector2(graphics.PreferredBackBufferWidth / 2 - font.MeasureString("Nenhum Computador esta aberto!").X / 2, graphics.PreferredBackBufferHeight / 2 - font.MeasureString("Nenhum Computador esta aberto!").Y / 2), Color.Black);
+                    spriteBatch.Begin(SpriteBlendMode.None, SpriteSortMode.BackToFront, SaveStateMode.SaveState);
+                    spriteBatch.Draw(background, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), null, Color.White, 0, Vector2.Zero, 0, 1.0f);
                     spriteBatch.End();
-                }
 
-                base.Draw(gameTime);
+
+                    foreach (_3DObject ob in lista3D)
+                    {
+                        ob.Draw();
+                    }
+
+
+                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));
+                    spriteBatch.End();
+
+                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    _hud1.Draw();
+                    spriteBatch.End();
+                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    _hud2.Draw();
+                    spriteBatch.End();
+
+                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    //spriteBatch.DrawString(font, Out, new Vector2(0, graphics.PreferredBackBufferHeight - 40), Color.White);
+                    spriteBatch.End();
+
+                    if (noTabs)
+                    {
+                        Console.Out.WriteLine("no pc");
+                        spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                        spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+                        spriteBatch.DrawString(font, "Nenhum Computador esta aberto!", new Vector2(graphics.PreferredBackBufferWidth / 2 - font.MeasureString("Nenhum Computador esta aberto!").X / 2, graphics.PreferredBackBufferHeight / 2 - font.MeasureString("Nenhum Computador esta aberto!").Y / 2), Color.Black);
+                        spriteBatch.End();
+                    }
+
+                    base.Draw(gameTime);
+                }
 
             }
-            active = true;
+            nmv = true;
         }
     }
 }

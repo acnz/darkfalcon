@@ -55,8 +55,9 @@ namespace DarkFalcon.gui
         public bool Inverted { get { return inverted; } set { inverted = value; } }
 
         Texture2D cursorTex;
-        Rectangle cursorArea, cursorLeft, cursorRight, cursorMiddle, cursorMidDest, masterArea;
+        Rectangle cursorArea,masterArea;
         Vector2 cursorPos, cursorOffset;
+        _Control Master;
 
         public EventHandler OnChangeValue = null;
 
@@ -66,13 +67,14 @@ namespace DarkFalcon.gui
             set { base.Width = value; }
         }
 
-        public _HScrollbar(hud pai, Vector2 position, float width, Rectangle masterarea)
+        public _HScrollbar(hud pai, Vector2 position, float width, _Control master)
             : base(pai)
         {
             this.Position = position;
             this.Width = width;
             this.Height = 12;
-            this.masterArea = masterarea;
+            this.masterArea = master.area;
+            Master = master;
         }
 
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)
@@ -172,6 +174,7 @@ namespace DarkFalcon.gui
                     {
                         isAutoScrolling = true;
                     }
+                    Owner.focus = Master;
                 }
             }
 

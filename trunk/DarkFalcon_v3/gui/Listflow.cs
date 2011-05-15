@@ -29,7 +29,6 @@ namespace DarkFalcon.gui
 
         int hoverIndex = -1;
         int selectedIndex = -1;
-        dfCom selectedItem;
 
         Texture2D blackTex;
         Texture2D[] tex;
@@ -82,7 +81,6 @@ namespace DarkFalcon.gui
         public bool isDraging = false;
 
         _Scrollbar scrollbar;
-        int ScrollWidth = 0;
 
         public _Listflow(hud pai, string name, Vector2 position, int width, dfCom[] items)
             : base(pai,name,position)
@@ -162,7 +160,7 @@ namespace DarkFalcon.gui
            drawBuffer = new RenderTarget2D(Owner.gra,Owner.gra.Viewport.Width, Owner.gra.Viewport.Height, 1,SurfaceFormat.Color);
 
 
-           scrollbar = new _Scrollbar(Owner, "scrollbar", new Vector2(sbarRec.X, sbarRec.Y+sbarRec.Height/2), _Scrollbar.Type.Horizontal, sbarRec.Width, this.area);
+           scrollbar = new _Scrollbar(Owner, "scrollbar", new Vector2(sbarRec.X, sbarRec.Y+sbarRec.Height/2), _Scrollbar.Type.Horizontal, sbarRec.Width, this);
            
             scrollbar.Initialize(content, graphics);
             scrollbar.OnChangeValue += new EventHandler(updateVision);
@@ -403,11 +401,17 @@ namespace DarkFalcon.gui
         {
             selectedIndex = -1; hoverIndex = -1;
             visibleItems = new dfCom[Math.Min(items.Count, _vision)];
+
             for (int i = 0; i < visibleItems.Count(); i++)
             {
                 visibleItems[i] = items[i + scrollbar.Value];
                 tex[i] = Owner.con.Load<Texture2D>(visibleItems[i].LocalImagem2D);
             }
+        }
+
+        public void newSearch(object sender, EventArgs e)
+        {
+            scrollbar.Value = 0;
         }
         public void drgS(object sender, EventArgs e)
         {

@@ -56,6 +56,7 @@ namespace DarkFalcon.gui
         Texture2D cursorTex;
         Rectangle cursorArea, cursorTop, cursorBottom, cursorMiddle, cursorMidDest,masterArea;
         Vector2 cursorPos, cursorOffset;
+        _Control Master;
 
         public EventHandler OnChangeValue = null;
 
@@ -65,11 +66,12 @@ namespace DarkFalcon.gui
             set { base.Height = value; }
         }
 
-        public _VScrollbar(hud pai,Vector2 position, float height,Rectangle masterarea):base(pai)
+        public _VScrollbar(hud pai,Vector2 position, float height,_Control master):base(pai)
         {
             this.Position = position;
             this.Height = height;
-            masterArea = masterarea;
+            masterArea = master.area;
+            Master = master;
         }
 
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)
@@ -88,6 +90,10 @@ namespace DarkFalcon.gui
             backArea.Y = (int)Position.Y + 2;
             backArea.Width = 4;
             backArea.Height = (int)Height - 8;
+            area.X = (int)Position.X;
+            area.Y = (int)Position.Y;
+            area.Width = (int)Width;
+            area.Height = (int)Height;
         }
 
 
@@ -102,9 +108,12 @@ namespace DarkFalcon.gui
         public override void Update()
         {
             base.Update();
+            if (area.Contains(mNew.X, mNew.Y))
+                Console.Out.WriteLine(" cae");
 
             if (a1 && a2)
             {
+                Owner.focus = Master;
                 if (wasPressed)
                 {
                     if (cursorArea.Contains(mNew.X, mNew.Y))
@@ -116,6 +125,7 @@ namespace DarkFalcon.gui
                     {
                         isAutoScrolling = true;
                     }
+
                 }
             }
 

@@ -104,6 +104,8 @@ namespace DarkFalcon.gui
         public void Clear()
         {
             items.Clear();
+            SelectedIndex = -1;
+            hoverIndex = -1;
         }
 
         public override void Initialize(ContentManager content, GraphicsDevice graphics)
@@ -179,9 +181,9 @@ namespace DarkFalcon.gui
             if (!HorizontalScrollbar)
             {
                 if (items.Count > visibleItems)
-                    hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 14, this.area);
+                    hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 14, this);
                 else
-                    hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 2, this.area);
+                    hscrollbar = new _Scrollbar(Owner, "hscrollbar", Position + new Vector2(1, Height - 13), _Scrollbar.Type.Horizontal, (int)Width - 2, this);
 
                 hscrollbar.Owner = this.Owner;
                 hscrollbar.Initialize(content, graphics);
@@ -194,7 +196,7 @@ namespace DarkFalcon.gui
             else
                 vScrollbarHeight = (int)Height - 2;
 
-            vscrollbar = new _Scrollbar(Owner, "vscrollbar", Position + new Vector2(Width - 13, 1), _Scrollbar.Type.Vertical, vScrollbarHeight, this.area);
+            vscrollbar = new _Scrollbar(Owner, "vscrollbar", Position + new Vector2(Width - 13, 1), _Scrollbar.Type.Vertical, vScrollbarHeight, this);
             vscrollbar.Owner = this.Owner;
             vscrollbar.Initialize(content, graphics);
             //vscrollbar.Visible = false;
@@ -260,7 +262,8 @@ namespace DarkFalcon.gui
                     if (OnMouseOut != null)
                         OnMouseOut(this, null);
                 }
-            
+                if (Owner.focus == vscrollbar)
+                    Owner.focus = this;
         }
 
         private void UpdateHScrollbar()

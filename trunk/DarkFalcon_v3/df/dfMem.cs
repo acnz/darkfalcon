@@ -56,13 +56,23 @@ namespace DarkFalcon.df
                 tl.Add(_mems[i]);
             }
             _mems = new dfCom[Qtd];
-            for (int i = 0; i < lQtd; i++)
+            if (lQtd <= Qtd)
             {
-                _mems[i] = tl[i];
+                for (int i = 0; i < lQtd; i++)
+                {
+                    _mems[i] = tl[i];
+                }
+                for (int i = lQtd; i < Qtd; i++)
+                {
+                    _mems[i] = new dfCom("Memoria");
+                }
             }
-            for (int i = lQtd; i < Qtd; i++)
+            else
             {
-                _mems[i] = new dfCom("Memoria");
+                for (int i = 0; i < Qtd; i++)
+                {
+                    _mems[i] = tl[i];
+                }
             }
         }
 
