@@ -97,23 +97,23 @@ namespace DarkFalcon.gui
             arrows = new Texture2D[10];
             arrowsc = new Color[10];
 
-            back = Texture2D.FromFile(graphics, @"gui\holder\background.png");
-            label = Texture2D.FromFile(graphics, @"gui\holder\label.png");
-            arrows[0] = Texture2D.FromFile(graphics, @"gui\holder\mobopro.png");
-            arrows[1] = Texture2D.FromFile(graphics, @"gui\holder\mobofonte.png");
-            arrows[2] = Texture2D.FromFile(graphics, @"gui\holder\mobogab.png");
-            arrows[3] = Texture2D.FromFile(graphics, @"gui\holder\mobomouse.png");
-            arrows[4] = Texture2D.FromFile(graphics, @"gui\holder\moboteclado.png");
-            arrows[5] = Texture2D.FromFile(graphics, @"gui\holder\mobomemo.png");
-            arrows[6] = Texture2D.FromFile(graphics, @"gui\holder\moboperi.png");
-            arrows[7] = Texture2D.FromFile(graphics, @"gui\holder\mobopla.png");
-            arrows[8] = Texture2D.FromFile(graphics, @"gui\holder\mobomon.png");
-            arrows[9] = Texture2D.FromFile(graphics, @"gui\holder\plavmon.png");
+            back = Texture2D.FromFile(graphics, @"guisrc\holder\background.png");
+            label = Texture2D.FromFile(graphics, @"guisrc\holder\label.png");
+            arrows[0] = Texture2D.FromFile(graphics, @"guisrc\holder\mobopro.png");
+            arrows[1] = Texture2D.FromFile(graphics, @"guisrc\holder\mobofonte.png");
+            arrows[2] = Texture2D.FromFile(graphics, @"guisrc\holder\mobogab.png");
+            arrows[3] = Texture2D.FromFile(graphics, @"guisrc\holder\mobomouse.png");
+            arrows[4] = Texture2D.FromFile(graphics, @"guisrc\holder\moboteclado.png");
+            arrows[5] = Texture2D.FromFile(graphics, @"guisrc\holder\mobomemo.png");
+            arrows[6] = Texture2D.FromFile(graphics, @"guisrc\holder\moboperi.png");
+            arrows[7] = Texture2D.FromFile(graphics, @"guisrc\holder\mobopla.png");
+            arrows[8] = Texture2D.FromFile(graphics, @"guisrc\holder\mobomon.png");
+            arrows[9] = Texture2D.FromFile(graphics, @"guisrc\holder\plavmon.png");
 
-            grid4 = Texture2D.FromFile(graphics, @"gui\holder\zoomgrid4.png");
-            grid9 = Texture2D.FromFile(graphics, @"gui\holder\zoomgrid9.png");
-            grid = Texture2D.FromFile(graphics, @"gui\holder\zoom.png");
-            dropbox = Texture2D.FromFile(graphics, @"gui\holder\dropbox.png");
+            grid4 = Texture2D.FromFile(graphics, @"guisrc\holder\zoomgrid4.png");
+            grid9 = Texture2D.FromFile(graphics, @"guisrc\holder\zoomgrid9.png");
+            grid = Texture2D.FromFile(graphics, @"guisrc\holder\zoom.png");
+            dropbox = Texture2D.FromFile(graphics, @"guisrc\holder\dropbox.png");
 
             texBuffer = new RenderTarget2D(Owner.gra, 300, 300, 0, SurfaceFormat.Color,RenderTargetUsage.PlatformContents);
             tex = new Texture2D[10];
@@ -153,7 +153,7 @@ namespace DarkFalcon.gui
                     lf.DragStop += new EventHandler(GetDrop);
 
             SetCompat();
-            outerglow = Texture2D.FromFile(graphics, @"gui\listflow\outerglow.png");
+            outerglow = Texture2D.FromFile(graphics, @"guisrc\listflow\outerglow.png");
             o = new OuterGlow(outerglow, spriteBatch);
 
             ch = new dfChecker();
@@ -453,9 +453,9 @@ namespace DarkFalcon.gui
                     Owner.gra.SetRenderTarget(0, null);
                     try
                     {
-                        texBuffer.GetTexture().Save(@"gui\holder\"+g.ToString()+".png",ImageFileFormat.Png);
-                        tex[findType(g)] = Texture2D.FromFile(Owner.gra, @"gui\holder\" + g.ToString() + ".png");
-                        File.Delete(@"gui\holder\" + g.ToString() + ".png");
+                        texBuffer.GetTexture().Save(@"guisrc\holder\"+g.ToString()+".png",ImageFileFormat.Png);
+                        tex[findType(g)] = Texture2D.FromFile(Owner.gra, @"guisrc\holder\" + g.ToString() + ".png");
+                        File.Delete(@"guisrc\holder\" + g.ToString() + ".png");
                     }
                     catch { }
                 
@@ -486,9 +486,9 @@ namespace DarkFalcon.gui
                     Owner.gra.SetRenderTarget(0, null);
                     try
                     {
-                        texBuffer.GetTexture().Save(@"gui\holder\" + g.ToString() + ".png", ImageFileFormat.Png);
-                        tex[findType(g)] = Texture2D.FromFile(Owner.gra, @"gui\holder\" + g.ToString() + ".png");
-                        File.Delete(@"gui\holder\" + g.ToString() + ".png");
+                        texBuffer.GetTexture().Save(@"guisrc\holder\" + g.ToString() + ".png", ImageFileFormat.Png);
+                        tex[findType(g)] = Texture2D.FromFile(Owner.gra, @"guisrc\holder\" + g.ToString() + ".png");
+                        File.Delete(@"guisrc\holder\" + g.ToString() + ".png");
 
                     }
                     catch { }
@@ -619,20 +619,20 @@ namespace DarkFalcon.gui
                 lout.Clear();
                 string m = "";
                 if (pc.Processador.Nome == "?") arrowsc[0] = t;
-                else if ((m = ch.v(pc.Processador, pc.Motherboard)) == "ok") arrowsc[0] = g;
+                else if ((m = ch.verificar(pc.Processador, pc.Motherboard)) == "ok") arrowsc[0] = g;
                 else { lout.Add(m); arrowsc[0] = r; }
                 m = "";
                 if (pc.Fonte.Nome == "?") arrowsc[1] = t;
-                else if ((m = ch.v(pc.Fonte, pc.Motherboard)) == "ok") arrowsc[1] = g; else { lout.Add(m); arrowsc[1] = r; }
+                else if ((m = ch.verificar(pc.Fonte, pc.Motherboard)) == "ok") arrowsc[1] = g; else { lout.Add(m); arrowsc[1] = r; }
                 m = "";
                 if (pc.Gabinete.Nome == "?") arrowsc[2] = t;
-                else if ((m = ch.v(pc.Gabinete, pc.Motherboard)) == "ok") arrowsc[2] = g; else { lout.Add(m); arrowsc[2] = r; }
+                else if ((m = ch.verificar(pc.Gabinete, pc.Motherboard)) == "ok") arrowsc[2] = g; else { lout.Add(m); arrowsc[2] = r; }
                 m = "";
                 if (pc.Mouse.Nome == "?") arrowsc[3] = t;
-                else if ((m = ch.v(pc.Mouse, pc.Motherboard)) == "ok") arrowsc[3] = g; else { lout.Add(m); arrowsc[3] = r; }
+                else if ((m = ch.verificar(pc.Mouse, pc.Motherboard)) == "ok") arrowsc[3] = g; else { lout.Add(m); arrowsc[3] = r; }
                 m = "";
                 if (pc.Teclado.Nome == "?") arrowsc[4] = t;
-                else if ((m = ch.v(pc.Teclado, pc.Motherboard)) == "ok") arrowsc[4] = g; else { lout.Add(m); arrowsc[4] = r; }
+                else if ((m = ch.verificar(pc.Teclado, pc.Motherboard)) == "ok") arrowsc[4] = g; else { lout.Add(m); arrowsc[4] = r; }
                 m = "";
                 bool red = false;
                 bool color = false;
@@ -640,7 +640,7 @@ namespace DarkFalcon.gui
                 {
                     m = "";
                     if (d.Nome == "?") { if (!color) arrowsc[5] = t; }
-                    else if ((m = ch.v(d, pc.Motherboard)) == "ok") { if (!red) { arrowsc[5] = g; color = true; } }
+                    else if ((m = ch.verificar(d, pc.Motherboard)) == "ok") { if (!red) { arrowsc[5] = g; color = true; } }
                     else { lout.Add(m); arrowsc[5] = r; red = true; color = true; }
                 }
                 red = false;
@@ -649,7 +649,7 @@ namespace DarkFalcon.gui
                 {
                     m = "";
                     if (d.Nome == "?") { if (!color)  arrowsc[6] = t; }
-                    else if ((m = ch.v(d, pc.Motherboard)) == "ok") { if (!red){ arrowsc[6] = g; color = true; }}
+                    else if ((m = ch.verificar(d, pc.Motherboard)) == "ok") { if (!red){ arrowsc[6] = g; color = true; }}
                     else { lout.Add(m); arrowsc[6] = r; red = true;color = true;  }
                 }
                 red = false;
@@ -658,14 +658,14 @@ namespace DarkFalcon.gui
                 {
                     m = "";
                     if (d.Nome == "?") { if (!color)  arrowsc[7] = t; }
-                    else if ((m = ch.v(d, pc.Motherboard)) == "ok") { if (!red){ arrowsc[7] = g; color = true; }}
+                    else if ((m = ch.verificar(d, pc.Motherboard)) == "ok") { if (!red){ arrowsc[7] = g; color = true; }}
                     else { lout.Add(m); arrowsc[7] = r; red = true; color = true; }
                 }
                 if (pc.numMon == 0)
                 {
                     m = "";
                     if (pc.Mon.Nome == "?") arrowsc[8] = t;
-                    else if ((m = ch.v(pc.Mon, pc.Motherboard)) == "ok") { if (!red) arrowsc[8] = g; }
+                    else if ((m = ch.verificar(pc.Mon, pc.Motherboard)) == "ok") { if (!red) arrowsc[8] = g; }
                     else { lout.Add(m); arrowsc[8] = r; }
                     arrowsc[9] = t;
 
@@ -677,7 +677,7 @@ namespace DarkFalcon.gui
                     {
                         m = "";
                         if (d.Nome == "?") { if (!color)  arrowsc[9] = t; }
-                        else if ((m = ch.v(d, pc.PlaVideo)) == "ok") { if (!red) { arrowsc[9] = g; color = true; } }
+                        else if ((m = ch.verificar(d, pc.PlaVideo)) == "ok") { if (!red) { arrowsc[9] = g; color = true; } }
                         else { lout.Add(m); arrowsc[9] = r; red = true; color = true; }
                     }
                     arrowsc[8] = t;

@@ -91,10 +91,10 @@ namespace DarkFalcon.gui
             btRight.OnPress = btDown_OnPress;
             btRight.Initialize(Owner.con, Owner.gra);
 
-            background = Texture2D.FromFile(graphics, @"gui\scrollbar\hscrollbar_back.png");
+            background = Texture2D.FromFile(graphics, @"guisrc\scrollbar\hscrollbar_back.png");
             backsrc1 = new Rectangle(0,0,5,14);
             backsrc2 = new Rectangle(6, 0, 4, 14);
-            cursorTex = Texture2D.FromFile(graphics, @"gui\scrollbar\hscrollbar_cursor.png");
+            cursorTex = Texture2D.FromFile(graphics, @"guisrc\scrollbar\hscrollbar_cursor.png");
             backArea.X = (int)Position.X + 4;
             backArea.Y = (int)Position.Y + 2;
             backArea.Width = (int)Width - 8;

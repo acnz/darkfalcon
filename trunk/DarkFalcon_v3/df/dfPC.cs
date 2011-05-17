@@ -57,9 +57,13 @@ namespace DarkFalcon.df
         {
             get { return _fonte; }
         }
-        public dfCom HD
+        public dfCom MasterHD
         {
             get { return _da.MasterHD; }
+        }
+        public dfCom MasterMem
+        {
+            get { return _mem.MasterMem; }
         }
         public dfCom Gabinete
         {
@@ -127,6 +131,12 @@ namespace DarkFalcon.df
             
          return l;
         }
+        public List<dfCom> GetValCom()
+        {
+            List<dfCom> l = GetAllCom();
+            l.RemoveAll(item => item.Nome =="?");
+            return l;
+        }
         public List<dfCom> getSCom()
         {
             List<dfCom> l = new List<dfCom>();
@@ -136,6 +146,19 @@ namespace DarkFalcon.df
             l.Add(_gab);
             l.Add(_per.Mouse);
             l.Add(_per.Teclado);
+            return l;
+        }
+        public List<dfCom> getReqCom()
+        {
+            List<dfCom> l = new List<dfCom>();
+            l.Add(_mobo);
+            l.Add(_pro);
+            l.Add(_fonte);
+            l.Add(_gab);
+            l.Add(_per.Mouse);
+            l.Add(_per.Teclado);
+            l.Add(MasterHD);
+            l.Add(MasterMem);
             return l;
         }
         public List<dfIObG> getMCom()
@@ -226,7 +249,7 @@ namespace DarkFalcon.df
                         }
                         if (_pl.replace(Obj, Target) == "ok")
                         {
-                            if(_pl.PlaVideo != null)
+                            if(_pl.PlaVideo.Nome != "?")
                                 _monitor.renew(_pl.nMon);
                             else
                                 _monitor.renew(1);
@@ -367,6 +390,28 @@ namespace DarkFalcon.df
             }
         }
 
+        public string canRun()
+        {
+            string r = "ok";
+            bool f=true;
+            foreach (dfCom d in getReqCom())
+            {
+                if (d.Nome == "?")
+                {
+                    if (f)
+                    {
+                        r = "Atenção seu computador não ira ligar pois não possui: \n - " +d.Tipo + ";\n";
+                        f = false;
+                    }
+                    else
+                    {
+                        r += " - "+d.Tipo + ";\n";
+                    }
+                }
+            }
+            
+            return r;
+        }
         #endregion 
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using DarkFalcon.df;
 using DarkFalcon.gui.help;
+using DarkFalcon.c3d;
 
 
 namespace DarkFalcon.gui
@@ -40,7 +41,8 @@ namespace DarkFalcon.gui
 
         DragStyle ds;
 
-        _3DObject mod;
+        _3DdfCom mod;
+        _3DCamera cam;
 
         Rectangle[] dest;
         int space;
@@ -152,7 +154,7 @@ namespace DarkFalcon.gui
             tex = new Texture2D[_vision];
             reflex = content.Load<Effect>("Effects/reflect");
 
-            
+            this.cam = new _3DCamera(Owner.gra);
 
             blackTex = new Texture2D(graphics, 1, 1, 1, TextureUsage.None, graphics.PresentationParameters.BackBufferFormat);
             blackTex.SetData<Color>(new Color[] { Color.White });
@@ -189,7 +191,7 @@ namespace DarkFalcon.gui
             scrollbar.Initialize(content, graphics);
             scrollbar.OnChangeValue += new EventHandler(updateVision);
             updateVision(null,null);
-            outerglow = Texture2D.FromFile(graphics,@"gui\listflow\outerglow.png");
+            outerglow = Texture2D.FromFile(graphics,@"guisrc\listflow\outerglow.png");
             outer = new OuterGlow(outerglow,spriteBatch);
 
             this.DragStart += new EventHandler(drgS);
@@ -308,7 +310,8 @@ namespace DarkFalcon.gui
                 drgalp += 0.02f;
                 if (drgalp == 1) flash = false;
             }
-
+            rot += 1f;
+            cam.Update(Matrix.CreateTranslation(new Vector3(0, 0, 0)));
         }
         public override void Draw()
         {
@@ -331,6 +334,7 @@ namespace DarkFalcon.gui
                DrawDrag();
         }
         float drgalp = 1;
+        float rot = 0;
         bool flash=false;
         private void DrawDrag()
         {
@@ -345,9 +349,17 @@ namespace DarkFalcon.gui
                 spriteBatch.End();
 
                 Owner.gra.SetRenderTarget(0, drawBuffer);
+                Owner.gra.Clear(Color.TransparentBlack);
+                mod.Scale = 10f;
+                mod.Rotation = new Vector3(0,(rot),0);
 
+                mod.Draw();
+
+                Owner.gra.SetRenderTarget(0, null);
+                drgTex = drawBuffer.GetTexture();
 
                 spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                spriteBatch.Draw(drgTex,new Vector2(mNew.X-Owner.gra.Viewport.Width/2,mNew.Y-Owner.gra.Viewport.Height/2), Color.White);
             }
            
         }
@@ -445,7 +457,7 @@ namespace DarkFalcon.gui
             }
         }
 
-        public void newSearch(object sender, EventArgs e)
+        public void newSearch()
         {
             scrollbar.Value = 0;
         }
@@ -455,6 +467,12 @@ namespace DarkFalcon.gui
             drgRec = new Rectangle(dest[hoverIndex].X, dest[hoverIndex].Y, dest[hoverIndex].Width, dest[hoverIndex].Height);
             if(ds == DragStyle.Normal)
             drgTex = tex[hoverIndex];
+            else if (ds == DragStyle.Rotate3D)
+            {
+                dfCom ob = (dfCom)((object[])sender)[0];
+                mod = new _3DdfCom(ob, cam, Owner.con);
+            }
+
         }
         public void drgM(object sender, EventArgs e)
         {

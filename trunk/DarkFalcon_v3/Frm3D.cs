@@ -51,6 +51,7 @@ namespace DarkFalcon
             ListaSalvo.Add(false);
             da = new OleDbDataAdapter();
             ds1 = new DataSet();
+
         }
 
         public void NovaAba()
@@ -538,7 +539,10 @@ namespace DarkFalcon
                 MessageBox.Show("Erro no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             } return new List<dfCom> { };
         }
-
+        public void t_MouseWheel(object sender,EventArgs e)
+        {
+            Console.WriteLine("cu");
+        }
         public List<string> cb1Search2(string args)
         {
             List<string> list = new List<string>();

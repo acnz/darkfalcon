@@ -15,8 +15,6 @@ namespace DarkFalcon
     {
         public bool CanClose = false;
         public bool wasMoving = false;
-        Frm3D frm1;
-        //FrmAssistente frmAss;
         
         Size s;
         DialogResult res;
@@ -34,10 +32,6 @@ namespace DarkFalcon
 
             s = this.Size;
 
-
-            frm1 = (Frm3D)this.MdiChildren[0];
-            //frmI2.getInter1(this.frmI1);
-
         }
 
 
@@ -48,12 +42,11 @@ namespace DarkFalcon
 
         public bool Salvar(string nome, dfCom[] pc)
         {
-            Thread newThread = new Thread(new ThreadStart(SalvarArquivo));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
+            SaveFileDialog dlg = new SaveFileDialog();
+            res = dlg.ShowDialog();
             //res = MessageBox.Show("Salvar?", "Demonstração ", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-            Console.Out.WriteLine(res);
+            MessageBox.Show("A função Salvar ainda esta indisponivel!");
 
                 if (res == DialogResult.OK)
                 {
@@ -128,8 +121,11 @@ namespace DarkFalcon
 
         private void FrmMain_Activated(object sender, EventArgs e)
         {
-            Console.Out.WriteLine("active");
-            ((Frm3D)this.MdiChildren[0]).pc.focus = true;
+            try
+            {
+                ((Frm3D)this.MdiChildren[0]).pc.focus = true;
+            }
+            catch (Exception) { }
         }
 
         private void FrmMain_SizeChanged(object sender, EventArgs e)
@@ -147,7 +143,6 @@ namespace DarkFalcon
             }
             //try
             //{
-                s = this.Size;
             //    FrmTabs frmTabs = (FrmTabs)this.MdiChildren[2];
 
             //    frmI1.Size = new Size(frmI1.Size.Width, s.Height - 66);
@@ -186,8 +181,7 @@ namespace DarkFalcon
 
         void SalvarArquivo()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
-           res=dlg.ShowDialog();
+
          
             
         }
@@ -216,8 +210,12 @@ namespace DarkFalcon
 
         private void FrmMain_Deactivate(object sender, EventArgs e)
         {
-            Console.Out.WriteLine("deactive");
-            ((Frm3D)this.MdiChildren[0]).pc.focus = false;
+            try
+            {
+                Console.Out.WriteLine("deactive");
+                ((Frm3D)this.MdiChildren[0]).pc.focus = false;
+            }
+            catch (Exception) { }
         }
 
     }

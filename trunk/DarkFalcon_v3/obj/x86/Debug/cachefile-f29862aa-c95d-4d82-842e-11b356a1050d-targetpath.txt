@@ -1,6 +1,0 @@
-Content\Effects\reflect.xnb
-Content\Textures\Leitor\2.xnb
-Content\Textures\Motherboard\1.xnb
-Content\Textures\Motherboard\2.xnb
-Content\Textures\PlaVideo\1.xnb
-Content\Textures\PlaVideo\2.xnb

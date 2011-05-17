@@ -9,9 +9,9 @@ namespace DarkFalcon.df
     {
         public dfChecker() { }
         
-        public string v(dfCom a,dfCom b){
+        public string verificar(dfCom a,dfCom b){
             string result = "";
-            bool isC = v(a, b,true);
+            bool isC = verificar(a, b,true);
                 if (!isC)
                 {
                     result = a.Tipo + " \"" +a.Nome+ "\" é incompatível com "+b.Tipo + " \"" +b.Nome+ "\"";
@@ -58,7 +58,7 @@ namespace DarkFalcon.df
                 }
                 return result;
         }
-        public bool v(dfCom a, dfCom b,bool retBoolean)
+        public bool verificar(dfCom a, dfCom b,bool retBoolean)
         {
             if (retBoolean)
             {
