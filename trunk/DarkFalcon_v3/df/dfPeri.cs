@@ -14,7 +14,7 @@ namespace DarkFalcon.df
             _periu = new dfCom[QtdUsb];
             for (int i = 0; i < QtdUsb; i++)
             {
-                _periu[i] = (new dfCom("?", "$usb", true));
+                _periu[i] = (new dfCom("x", "$usb", true));
             }
             if(hasPS2)
             {
@@ -133,7 +133,7 @@ namespace DarkFalcon.df
                 }
                 for (int i = lQtd; i < Qtd; i++)
                 {
-                    _periu[i] = new dfCom("?", "$usb");
+                    _periu[i] = new dfCom("x", "$usb");
                 }
             }
             else

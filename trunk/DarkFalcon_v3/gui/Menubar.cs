@@ -18,7 +18,7 @@ namespace DarkFalcon.gui
         }
         public override void Draw()
         {
-            Texture2D mb1 = Game.Content.Load<Texture2D>("Textures//Gui//mb1");
+            Texture2D mb1 = Game.Content.Load<Texture2D>("Textures//guisrc//mb1");
             Game.spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
             //for (int i = 0; i < Rectangle.Width; i++)
             //{

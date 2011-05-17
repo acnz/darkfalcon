@@ -76,8 +76,8 @@ namespace DarkFalcon.gui
         {
             // TODO: load your content here
             base.Initialize(content, graphics);
-            texture = Texture2D.FromFile(graphics, @"gui\infobox\base.png");
-            tail = Texture2D.FromFile(graphics, @"gui\infobox\tail.png");
+            texture = Texture2D.FromFile(graphics, @"guisrc\infobox\base.png");
+            tail = Texture2D.FromFile(graphics, @"guisrc\infobox\tail.png");
 
             pixel = new Texture2D(graphics, 1, 1, 1, TextureUsage.None, graphics.PresentationParameters.BackBufferFormat);
             pixel.SetData<Color>(new Color[] { Color.White });

@@ -39,7 +39,7 @@ namespace DarkFalcon.gui
         public override void Initialize(ContentManager content, GraphicsDevice graphics)
         {
             base.Initialize(content, graphics);
-            texture = Texture2D.FromFile(graphics, @"gui\infobox\base.png");
+            texture = Texture2D.FromFile(graphics, @"guisrc\infobox\base.png");
             pixel = new Texture2D(graphics, 1, 1, 1, TextureUsage.None, graphics.PresentationParameters.BackBufferFormat);
             pixel.SetData<Color>(new Color[] { Color.White });
 

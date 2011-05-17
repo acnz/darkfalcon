@@ -23,7 +23,7 @@ namespace DarkFalcon.gui
         #region Fields
         Texture2D texture;
         Texture2D[] textures;
-        string texturePath = @"gui\button\";
+        string texturePath = @"guisrc\button\";
         bool ct = false;
 
 

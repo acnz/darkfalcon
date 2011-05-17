@@ -91,7 +91,7 @@ namespace DarkFalcon.gui
             base.Initialize(content, graphics);
             // TODO: load your content here
             if (texture == null)
-                texture = Texture2D.FromFile(graphics, @"gui\textbox\base.png");
+                texture = Texture2D.FromFile(graphics, @"guisrc\textbox\base.png");
             if (cursorFont == null)
                 cursorFont = Font;
 

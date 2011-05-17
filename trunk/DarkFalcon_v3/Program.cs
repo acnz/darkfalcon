@@ -18,9 +18,8 @@ namespace DarkFalcon
         static void Main(string[] args)
         {
             splash sp = new splash();
-            sp.StartPosition = FormStartPosition.Manual;
+            sp.StartPosition = FormStartPosition.CenterScreen;
             sp.Show();
-            sp.Location = new Point(1000, 800);
             
             frmMain.IsMdiContainer = true;
             frmMain.Show();

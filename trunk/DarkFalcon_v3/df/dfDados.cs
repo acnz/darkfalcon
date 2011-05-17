@@ -9,7 +9,14 @@ namespace DarkFalcon.df
     {
         dfCom[] _sata;
         dfCom[] _ide;
-        public dfCom MasterHD{get;set;}
+        public dfCom MasterHD
+        {
+            get
+            {
+                dfCom  d = GetAll().Find(i => i.Nome != "?" && i.Tipo == "HD");
+                if (d != null) return d; else return new dfCom("HD");
+            }
+        }
 
         public dfDados(dfCom hd0,int Qtdsata, int Qtdide)
             {

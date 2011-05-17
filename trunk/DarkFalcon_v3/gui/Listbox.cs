@@ -112,7 +112,7 @@ namespace DarkFalcon.gui
         {
             // TODO: load your content here
             base.Initialize(content, graphics);
-            texture = Texture2D.FromFile(graphics, @"gui\textbox\base.png");
+            texture = Texture2D.FromFile(graphics, @"guisrc\textbox\base.png");
 
             pixel = new Texture2D(graphics, 1, 1, 1, TextureUsage.None, graphics.PresentationParameters.BackBufferFormat);
             pixel.SetData<Color>(new Color[] { Color.White });

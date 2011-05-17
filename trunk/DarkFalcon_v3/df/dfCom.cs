@@ -54,6 +54,13 @@ namespace DarkFalcon.df
             /// </summary>
             set { _image3d = value; }
         }
+        public string Default3D
+        {
+            get { return (LocalImagem3D.Substring(0,LocalImagem3D.Length-ID.Length)+"0"); }
+            /// <summary>
+            /// Digite somente o local(o nome da imagem é incluido automaticamente)
+            /// </summary>
+        }
         #endregion
 #region Inicializadores
 

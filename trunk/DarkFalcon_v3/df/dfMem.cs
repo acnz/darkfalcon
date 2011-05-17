@@ -8,6 +8,14 @@ namespace DarkFalcon.df
     public class dfMem : dfIObG
     {
         dfCom[] _mems;
+        public dfCom MasterMem
+        {
+            get
+            {
+                dfCom d = GetAll().Find(i => i.Nome != "?" && i.Tipo == "Memoria");
+                if (d != null) return d; else return new dfCom("Memoria");
+            }
+        }
         public dfMem(int Qtd)
         {
             _mems = new dfCom[Qtd];

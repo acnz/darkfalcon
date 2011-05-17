@@ -14,6 +14,7 @@ using gma.System.Windows;
 using System.Windows.Forms;
 using DarkFalcon.df;
 using DarkFalcon.gui;
+using System.IO;
 
 namespace DarkFalcon
 {
@@ -29,16 +30,12 @@ namespace DarkFalcon
         public bool noTabs;
         Texture2D white;
         private string Out;
-        CameraTP cam;
         public bool focus;
 
-        List<_3DObject> lista3D = new List<_3DObject>();
-        _3DObject monitor;
-        _3DObject gabinete;
 
         dfPC _pc;
 
-        hud _hud1,_hud2;
+        hud _hud1,_hud2,_hud3;
         public SpriteFont hudf;
         List<_Control> listaHUD = new List<_Control>();
         public List<_Control> listaMenu = new List<_Control>();
@@ -46,17 +43,14 @@ namespace DarkFalcon
         public bool nmv = true; 
         private IntPtr drawSurface;
         Frm3D fm;
-        private int MouseWheel;
+        public EventHandler onMWchange = null;
         public MouseState prevMouse;
-        UserActivityHook actHook;
 
         int _step = 1, _tstep = 1;
 
          public PcView(IntPtr drawSurface, Frm3D frm)
         {
             graphics = new GraphicsDeviceManager(this);
-            actHook = new UserActivityHook();
-            actHook.Start();
             string dir = Properties.Settings.Default.CRoot + "Data";
             Content.RootDirectory = dir;
             fm = frm;
@@ -65,9 +59,14 @@ namespace DarkFalcon
             graphics.PreferredBackBufferHeight = fm.PicPcView.Height;
             graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(graphics_PreparingDeviceSettings);
             System.Windows.Forms.Control.FromHandle((this.Window.Handle)).VisibleChanged += new EventHandler(PcView_VisibleChanged);
-            actHook.OnMouseActivity += new MouseEventHandler(MouseMoved);
+            frm.MouseWheel += new MouseEventHandler(MouseWheel_Value); 
             Mouse.WindowHandle = this.Window.Handle;
         }
+         public void MouseWheel_Value(object sender, MouseEventArgs e)
+         {
+             if (onMWchange != null)
+                 onMWchange(e.Delta, null);
+         }
          public System.Drawing.Bitmap getBmp(string img)
          {
 
@@ -99,10 +98,6 @@ namespace DarkFalcon
              //bmp.Save(@"c:\workbench\smile.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
              return bmp;
 
-         }
-         public void MouseMoved(object sender, MouseEventArgs e)
-         {
-             MouseWheel = e.Delta;
          }
          void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
          {
@@ -148,21 +143,20 @@ namespace DarkFalcon
             FixPosition();
             base.Initialize();
 
-            lista3D.Add(monitor);
-            //lista3D.Add(gabinete);
-
             _pc = new dfPC(true);
-            cam.ResetCamera();
 
             _hud1 = new hud(this);
             _hud1.Initialize(Content, graphics.GraphicsDevice);
             _hud2 = new hud(this);
             _hud2.Initialize(Content, graphics.GraphicsDevice);
-
+            _hud3 = new hud(this);
+            _hud3.Initialize(Content, graphics.GraphicsDevice);
             _hud2.Position = new Vector2(graphics.GraphicsDevice.Viewport.Width, 0);
+            _hud3.Position = new Vector2(graphics.GraphicsDevice.Viewport.Width, 0);
 
             createHUD1();
             createHUD2();
+            createHUD3();
 
 
 
@@ -176,13 +170,13 @@ namespace DarkFalcon
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            this.cam = new CameraTP(GraphicsDevice, lista3D);
+
             font = Content.Load<SpriteFont>("Arial");
-            hudf = Content.Load<SpriteFont>("hudfont");
-            background = Content.Load<Texture2D>("Textures//aurora");
-            white = Content.Load<Texture2D>("Textures//white");
-            this.monitor = new _3DObject("gabpronto", cam, this.Content, new Vector3(100,50, 0), Vector3.Zero, 2f);
-            this.gabinete = new _3DObject("Monitor/2/2", cam, this.Content, new Vector3(15, 0, 5), Vector3.Zero, 30f);
+            hudf = Content.Load<SpriteFont>("hudf");
+            background = Texture2D.FromFile(graphics.GraphicsDevice,"guisrc//background.jpg");
+            white = new Texture2D(graphics.GraphicsDevice, 1, 1, 1, TextureUsage.None, graphics.GraphicsDevice.PresentationParameters.BackBufferFormat);
+            white.SetData<Color>(new Color[] { Color.White });
+
            // cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
             
           
@@ -257,13 +251,12 @@ namespace DarkFalcon
             _hud1.add(bNstep);
 
             tbSearch.OnRelease = new EventHandler(tbSearch_release);
-            butSearch.OnRelease = new EventHandler(lf1.newSearch);
             butSearch.OnRelease = new EventHandler(butSearch_release);
             cb1.OnSelectionChanged += new EventHandler(cb1_change);
             cb2.OnSelectionChanged += new EventHandler(cb2_change);
             cb3.OnSelectionChanged += new EventHandler(cb3_change);
             tc.onSelect += new EventHandler(tc_click);
-            bNstep.OnRelease = new EventHandler(bNstep_release);
+            bNstep.OnRelease = new EventHandler(Ver_step1);
         }
         void createHUD2()
         {
@@ -272,20 +265,69 @@ namespace DarkFalcon
             _Button bPstep = new _Button(_hud2, "bPstep", "", new Vector2(10, 10), "prevstep");
 
             _Listflow lf2 = new _Listflow(_hud2, "lf2", new Vector2(5, bPstep.Y + 43), graphics.GraphicsDevice.Viewport.Width - 10,graphics.GraphicsDevice.Viewport.Height/4,_Listflow.DragStyle.Rotate3D, new dfCom[] { new dfCom(true), new dfCom(true), new dfCom(true),new dfCom(true),new dfCom(true) });
+            _Table3D table = new _Table3D(_hud2, "table", _pc,lf2);
 
             
-            //_hud2.add(pTeste);
             _hud2.add(bNstep);
-            _hud2.add(bPstep);
+           _hud2.add(bPstep);
             _hud2.add(lf2);
-            
+            _hud2.add(table);
 
-            bNstep.OnRelease = new EventHandler(bNstep_release);
+            onMWchange += new EventHandler(table.Mwv);
+            bNstep.OnRelease = new EventHandler(Ver_step2);
+            bPstep.OnRelease = new EventHandler(bPstep_release);
+        }
+
+        void createHUD3()
+        {
+            _Panel pTeste = new _Panel(_hud3, "pTeste", new Vector2(100, 100), 100, 100, new _Panel.Anchor[] { _Panel.Anchor.D, _Panel.Anchor.E, _Panel.Anchor.C, _Panel.Anchor.B });
+            _Button bRel = new _Button(_hud3, "bRel", "Gerara Relatório", 10, (int)(graphics.GraphicsDevice.Viewport.Height - 250), 200, 100, "default");
+            _Button bPstep = new _Button(_hud3, "bPstep", "", new Vector2(10, 10), "prevstep");
+            _Table3D table = new _Table3D(_hud3, "table", _pc, true);
+
+            _hud3.add(pTeste);
+            _hud3.add(bRel);
+            _hud3.add(bPstep);
+            _hud3.add(table);
+
+
+            onMWchange += new EventHandler(table.Mwv);
+            bRel.OnRelease = new EventHandler(bRel_release);
             bPstep.OnRelease = new EventHandler(bPstep_release);
         }
 
         #region events
 
+        public void bRel_release(object sender, EventArgs e)
+        {
+            string arq = "Relatorio_do_PC("+DateTime.Now.ToBinary()+").txt";
+            FileStream relater = File.Create(arq);
+            List<dfCom> l = _pc.GetValCom();
+            using (StreamWriter writer = new StreamWriter(relater))
+            {
+                writer.WriteLine("Modo: Relatório Provisório");
+                writer.WriteLine("------------------------------------------------------------------------------------");
+                writer.WriteLine(" ");
+
+                foreach (dfCom d in l)
+                {
+                    writer.WriteLine(d.Tipo+" :");
+                    writer.WriteLine("Nome :" + d.Nome);
+                    writer.WriteLine("Preço :" + d.Preco);
+                    writer.WriteLine("Informações: ");
+                    writer.WriteLine("          ");
+                    foreach (string inf in d.Tags.info)
+                    {
+                        writer.Write(inf+"   ");
+                    }
+                    writer.WriteLine("------------------------------------------------------------------------------------");
+                    writer.WriteLine(" ");
+                }
+
+                writer.WriteLine("Gerado Automaticamente Por: DarkFalcon® Voando Mais Alto!");
+            }
+            _hud3.info.Add("Relatório Gerado (na pasta do executavel) Com o nome \""+arq+"\"");
+        }
         public void tbSearch_release(object sender, EventArgs e)
         {
             if (_hud1["tbSearch"].Text == "Digite sua Pesquisa...")
@@ -296,6 +338,7 @@ namespace DarkFalcon
         }
         public void butSearch_release(object sender, EventArgs e)
         {
+            _hud1.lF.newSearch();
             if (_hud1["tbSearch"].Text != "Digite sua Pesquisa...")
                 _hud1.lF.Items = fm.freeSearch(((_Textbox)_hud1["tbSearch"]).plainText);
 
@@ -303,6 +346,7 @@ namespace DarkFalcon
 
         private void cb1_change(object sender, EventArgs e)
         {
+            _hud1.lF.newSearch();
             ((_ComboBox)_hud1["cb2"]).Clear();
             ((_ComboBox)_hud1["cb3"]).Clear();
             ((_ComboBox)_hud1["cb2"]).Items = fm.cb1Search2((string)sender);
@@ -311,6 +355,7 @@ namespace DarkFalcon
 
         private void cb2_change(object sender, EventArgs e)
         {
+            _hud1.lF.newSearch();
             string s1 = ((_ComboBox)_hud1["cb1"]).Text;
             ((_ComboBox)_hud1["cb3"]).Clear();
             ((_ComboBox)_hud1["cb3"]).Items = fm.cb2Search2(s1, (string)sender);
@@ -319,6 +364,7 @@ namespace DarkFalcon
 
         private void cb3_change(object sender, EventArgs e)
         {
+            _hud1.lF.newSearch();
             string s1 = ((_ComboBox)_hud1["cb1"]).Text;
             string s2 = ((_ComboBox)_hud1["cb2"]).Text;
             _hud1.lF.Items = fm.cbSearch(s1, s2, (string)sender);
@@ -326,14 +372,27 @@ namespace DarkFalcon
 
         private void tc_click(object sender, EventArgs e)
         {
+            _hud1.lF.newSearch();
             string s = (string)sender;
             _hud1.lF.Items = fm.tagSearch(s);
         
         }
         public void bNstep_release(object sender, EventArgs e)
         {
-            if(_step < 3)
-                _tstep += 1;
+            if (sender.GetType() == typeof(string))
+            {
+                if ((string)sender == "yes")
+                {
+                    if (_step < 3)
+                        _tstep += 1;
+                }
+            }
+            else
+            {
+                if (_step < 3)
+                    _tstep += 1;
+            }
+
 
         }
         public void bPstep_release(object sender, EventArgs e)
@@ -341,6 +400,41 @@ namespace DarkFalcon
             if (_step > 1)
                 _tstep -= 1;
 
+        }
+        public void Ver_step1(object sender, EventArgs e)
+        {
+            _hud2.lF.Items = _pc.GetValCom();
+            string v = _pc.canRun();
+            if(((_Listbox)_hud1["lbError"]).Items.Count > 0)
+                if (v == "ok") { v = "Atenção seu computador não ira ligar pois: \n - Possui algumas Incompatibilidades;"; } else { v += "- Possui algumas Incompatibilidades;"; }
+            if (v == "ok")
+            {
+                bNstep_release("yes", null);
+            }
+            else
+            {
+                _hud1.info.Add(v);
+                _hud1.msgb.Show(new EventHandler(bNstep_release), "Seu computador ainda não é Funcional! \n Deseja continuar mesmo assim?", _MsgBox.Type.YesNo);
+            }
+        }
+        public void Ver_step2(object sender, EventArgs e)
+        {
+            validate_pc3();
+            bNstep_release("yes", null);
+        }
+        public void validate_pc3()
+        {
+            string v = _pc.canRun();
+            if (((_Listbox)_hud1["lbError"]).Items.Count > 0)
+                if (v == "ok") { v = "Atenção seu computador não ira ligar pois: \n - Possui algumas Incompatibilidades;"; } else { v += "- Possui algumas Incompatibilidades;"; }
+            if (v == "ok")
+            {
+                _hud3.info.Add("Parabéns! \n Seu computador está Perfeitamente Funcional!");
+            }
+            else
+            {
+                _hud3.info.Add(v);
+            }
         }
         #endregion
 
@@ -358,31 +452,26 @@ namespace DarkFalcon
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        int x = 0; 
+        float x = 0; 
         protected override void Update(GameTime gameTime)
         {
+
             if (focus)
             {
-                if (MouseWheel > 0)
-                    Console.Out.WriteLine("foi");
-                cam.Update(Matrix.CreateTranslation(monitor.Position + new Vector3(5, 0, -10)), MouseWheel);
-                MouseWheel = 0;
 
                 if (_hud1.focus != _hud1["tbSearch"] && _hud1["tbSearch"].Text == "")
                     _hud1["tbSearch"].Text = "Digite sua Pesquisa...";
 
                 _hud1.Update();
                 _hud2.Update();
+                _hud3.Update();
 
                 if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) && _hud1.focus == _hud1["tbSearch"])
                 {
                     butSearch_release(null, null);
+                    
                 }
-
-                foreach (_3DObject ob in lista3D)
-                {
-                    ob.Update();
-                }
+                
                 if (_tstep != _step)
                 {
                     if (_step == 1)
@@ -397,8 +486,21 @@ namespace DarkFalcon
                     {
                         if (_tstep == 1)
                         {
-                            if (_hud1.Position.X + 30 < 0) _hud1.Position += new Vector2(30, 0);else _hud1.Position = Vector2.Zero;
+                            if (_hud1.Position.X + 30 < 0) _hud1.Position += new Vector2(30, 0); else { _hud1.Position = Vector2.Zero;}
                             if (_hud2.Position.X < _hud2.area.Width) { _hud2.Position += new Vector2(30, 0); } else _step = _tstep;
+                        }
+                        if (_tstep == 3)
+                        {
+                            if (_hud2.Position.X > -_hud2.area.Width) _hud2.Position -= new Vector2(30, 0); else _step = _tstep;
+                            if (_hud3.Position.X - 30 > 0) { _hud3.Position -= new Vector2(30, 0); } else { _hud3.Position = Vector2.Zero; }
+                        }
+                    }
+                    if (_step == 3)
+                    {
+                        if (_tstep == 2)
+                        {
+                            if (_hud2.Position.X + 30 < 0) _hud2.Position += new Vector2(30, 0); else { _hud2.Position = Vector2.Zero; }
+                            if (_hud3.Position.X < _hud3.area.Width) { _hud3.Position += new Vector2(30, 0); } else _step = _tstep;
                         }
                     }
                     x++;
@@ -435,13 +537,6 @@ namespace DarkFalcon
                     spriteBatch.Draw(background, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), null, Color.White, 0, Vector2.Zero, 0, 1.0f);
                     spriteBatch.End();
 
-
-                    foreach (_3DObject ob in lista3D)
-                    {
-                        ob.Draw();
-                    }
-
-
                     spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
                     spriteBatch.Draw(white, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), new Color(0, 0, 0, alpha));
                     spriteBatch.End();
@@ -451,6 +546,9 @@ namespace DarkFalcon
                     spriteBatch.End();
                     spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
                     _hud2.Draw();
+                    spriteBatch.End(); 
+                    spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);
+                    _hud3.Draw();
                     spriteBatch.End();
 
                     spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Immediate, SaveStateMode.SaveState);

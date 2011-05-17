@@ -1,60 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
-    <Item>
-      <Source>Effects\reflect.fx</Source>
-      <Name>Effects\reflect</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Effects\reflect.xnb</Output>
-      <Time>2011-05-07T19:02:54.1324468-03:00</Time>
-    </Item>
-    <Item>
-      <Source>Textures\Leitor\2.jpg</Source>
-      <Name>Textures\Leitor\2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Leitor\2.xnb</Output>
-      <Time>2011-05-09T19:53:26.6176329-03:00</Time>
-    </Item>
-    <Item>
-      <Source>Textures\Motherboard\1.jpg</Source>
-      <Name>Textures\Motherboard\1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\1.xnb</Output>
-      <Time>2011-05-09T19:53:26.6216331-03:00</Time>
-    </Item>
-    <Item>
-      <Source>Textures\Motherboard\2.jpg</Source>
-      <Name>Textures\Motherboard\2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\Motherboard\2.xnb</Output>
-      <Time>2011-05-09T19:53:26.6236332-03:00</Time>
-    </Item>
-    <Item>
-      <Source>Textures\PlaVideo\1.jpg</Source>
-      <Name>Textures\PlaVideo\1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\PlaVideo\1.xnb</Output>
-      <Time>2011-05-09T19:53:26.6246333-03:00</Time>
-    </Item>
-    <Item>
-      <Source>Textures\PlaVideo\2.jpg</Source>
-      <Name>Textures\PlaVideo\2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\André\Desktop\darkfalcon\trunk\DarkFalcon_v3\bin\x86\Debug\Content\Textures\PlaVideo\2.xnb</Output>
-      <Time>2011-05-09T19:53:26.6336338-03:00</Time>
-    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
@@ -67,28 +13,8 @@
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-03:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-03:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-03:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2009-05-14T11:13:52-03:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2009-05-14T11:13:52-03:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-05-15T11:17:24.7493342-03:00</Value>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2011-05-15T11:17:25.2773644-03:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

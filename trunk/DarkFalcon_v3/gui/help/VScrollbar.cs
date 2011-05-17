@@ -77,11 +77,11 @@ namespace DarkFalcon.gui
         public override void Initialize(Microsoft.Xna.Framework.Content.ContentManager content, GraphicsDevice graphics)
         {
             base.Initialize(content, graphics);
-            background = Texture2D.FromFile(graphics, @"gui\scrollbar\vscrollbar_back.png");
+            background = Texture2D.FromFile(graphics, @"guisrc\scrollbar\vscrollbar_back.png");
 
             Size = new Vector2(12, Height);
 
-            cursorTex = Texture2D.FromFile(graphics, @"gui\scrollbar\vscrollbar_cursor.png");
+            cursorTex = Texture2D.FromFile(graphics, @"guisrc\scrollbar\vscrollbar_cursor.png");
             cursorTop = new Rectangle(0, 0, cursorTex.Width, 3);
             cursorMiddle = new Rectangle(0, 3, cursorTex.Width, 1);
             cursorBottom = new Rectangle(0, cursorTex.Height - 3, cursorTex.Width, 3);
